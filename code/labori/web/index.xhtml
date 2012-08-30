@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  >
+	<h:head>
+		<title>Sistema Gerenciador de Currículos</title>
+	</h:head>
+	<h:body>
+		<h:form>
+			<h:panelGrid columns="3">
+
+				<h:inputHidden value="true">
+					<f:validator validatorId="senhaValidador" />
+					<f:attribute name="senha" value="#{senha}" />
+					<f:attribute name="senhaConfirm" value="#{senhaConfirm}" />
+				</h:inputHidden>
+
+				<h:outputLabel for="nome">Nome</h:outputLabel>
+				<h:inputText id="nome" value="#{cadastroMB.usuario.nome}" required="true">
+					<f:ajax event="blur" render="nomeMensagem" />
+				</h:inputText>
+				<h:message id="nomeMensagem" for="nome" />
+
+				<h:outputLabel for="login">Login</h:outputLabel>
+				<h:inputText id="login" value="#{cadastroMB.usuario.login}" required="true">
+					<f:ajax event="blur" render="loginMensagem" />
+				</h:inputText>
+				<h:message id="loginMensagem" for="login" />
+
+				<h:outputLabel for="senha">Senha</h:outputLabel>
+				<h:inputSecret id="senha" value="#{cadastroMB.usuario.senha}" required="true" redisplay="true">
+					<f:ajax event="blur" render="senhaMensagem" />
+				</h:inputSecret>
+				<h:message id="senhaMensagem" for="senha" />
+
+				<h:outputLabel for="senhaConfirm">Confirme a Senha</h:outputLabel>
+				<h:inputSecret id="senhaConfirm" value="#{cadastroMB.usuario.senha}" required="true" redisplay="true">
+					<f:ajax event="blur" render="senhaConfirmMensagem" />
+				</h:inputSecret>
+				<h:message id="senhaConfirmMensagem" for="senhaConfirm" />
+
+				<h:panelGroup />
+				<h:commandButton value="Criar Conta" action="#{cadastroMB.criarConta}">
+					<f:ajax execute="@form" render="@form" />
+				</h:commandButton>
+				<h:messages globalOnly="true" layout="table" />
+			</h:panelGrid>
+		</h:form>
+	</h:body>
+</html>
+
