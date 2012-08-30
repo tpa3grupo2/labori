@@ -1,5 +1,5 @@
 package main;
-
+//teste git rony 15:27 30/8/2012
 import entity.Usuario;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
