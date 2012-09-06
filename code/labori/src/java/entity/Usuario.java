@@ -1,18 +1,16 @@
 package entity;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Usuario implements Serializable {
 
+	@SequenceGenerator(name = "Emp_Gen", allocationSize = 1)
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "Emp_Gen")
 	private Long id;
-	@Column(unique=true)
+	@Column(unique = true)
 	private String nome;
 	private String login;
 	private String senha;
