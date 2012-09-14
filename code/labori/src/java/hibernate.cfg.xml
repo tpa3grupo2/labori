@@ -4,7 +4,7 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
     <property name="hibernate.connection.driver_class">org.apache.derby.jdbc.ClientDriver</property>
-    <property name="hibernate.connection.url">jdbc:derby://localhost:1527/projetodb</property>
+    <property name="hibernate.connection.url">jdbc:derby://localhost:1527/labori</property>
     <property name="hibernate.connection.username">admin</property>
     <property name="hibernate.connection.password">admin</property>
     <property name="hibernate.show_sql">true</property>

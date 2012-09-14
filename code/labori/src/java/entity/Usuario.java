@@ -4,16 +4,20 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"id", "email"}))
 public class Usuario implements Serializable {
 
-	@SequenceGenerator(name = "Emp_Gen", allocationSize = 1)
-	@Id
-	@GeneratedValue(generator = "Emp_Gen")
+	
+        @Id
+        @GeneratedValue(generator = "Emp_Gen")
+        @SequenceGenerator(name = "Emp_Gen", allocationSize = 1)
 	private Long id;
-	@Column(unique = true)
-	private String nome;
-	private String login;
-	private String senha;
+	@Column(length=64)
+        private String nome;
+	@Column(unique=true, length=64)
+        private String email;
+	@Column(length=32)
+        private String senha;
 
 	public String getNome() {
 		return nome;
@@ -31,12 +35,12 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getSenha() {
