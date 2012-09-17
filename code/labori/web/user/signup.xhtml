@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">Cadastro de currículo : labori</ui:define>
+        <ui:define name="body">
+            <h1>Cadastro de currículo</h1>
+            <div class="row">
+                <div class="span8">
+                    <h:form action="/user/signup-step2.xhtml" method="post" class="form-horizontal">
+                        <legend>Login e senha</legend>
+                        <div class="control-group">
+                            <h:outputLabel for="email" value="Email" styleClass="control-label" />
+                            <div class="controls">
+                                <h:inputText id="email" value="#{cadastroMB.usuario.nome}" required="true" maxlength="64" placeholder="email" styleClass="input-xlarge" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Senha</label>
+                            <div class="controls">
+                                <input type="password" id="inputPassword" placeholder="senha"  class="input-small" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Repita a senha</label>
+                            <div class="controls">
+                                <input type="password" id="inputPassword" placeholder="senha" class="input-small" />
+                            </div>
+                        </div>
+
+                        <legend>Dados pessoais</legend>
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Nome completo</label>
+                            <div class="controls">
+                                <input type="text" id="inputPassword" placeholder="senha" class="input-xlarge" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Telefone</label>
+                            <div class="controls">
+                                <input type="text" id="inputPassword" placeholder="senha" class="input-medium" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Estado</label>
+                            <div class="controls">
+                                <input type="text" id="inputPassword" placeholder="senha" class="input-medium" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Cidade</label>
+                            <div class="controls">
+                                <input type="text" id="inputPassword" placeholder="senha" class="input-xlarge" />
+                            </div>
+                        </div>
+                        <div class="control-group error">
+                            <label class="control-label" for="inputPassword">Endereço completo</label>
+                            <div class="controls">
+                                <input type="text" id="inputPassword" placeholder="endereço com complemento, se houver" class="input-xlarge" />
+                                <span class="help-inline">Please correct the error</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">CEP</label>
+                            <div class="controls">
+                                <input type="text" id="inputPassword" placeholder="seu CEP" class="input-small" />
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Salvar e continuar &#187;</button>
+                        </div>
+                    </h:form>
+                </div>
+                <div class="span4">
+                    <div class="well">
+                        <h4>Antes do cadastro...</h4>
+                        <p>Se você já se cadastrou anteriormente no <strong>labori</strong>, não se cadastre novamente, <a href="">acesse sua conta por aqui</a>.</p>
+                        <hr />
+                        <p>Todos os campos do formulário são essenciais para o correto cadastramento em nosso sistema, por isso o preenchimento de todos os campos é obrigatório antes de continuar.</p>
+                        <hr />
+                        <p>É conveniente ter em mão os dados relevantes de sua formação e histórico profissional, pois você fornecerá informações para compor um currículo completo.</p>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,47 @@
+.header-background {
+
+    border-top:4px solid #4679b8;
+
+}
+
+#header h1 {
+    margin:0.5em 0;
+}
+
+.login-form {
+    text-align:right;
+    margin-top:0.5em;
+}
+
+.menu-background {
+    background:#eee;
+    border-bottom:1px solid #D1D1D1;
+}
+
+#main-menu li {
+    display:inline-block;
+    padding-top:10px;
+}
+
+#main-menu li a {
+    padding:10px 20px;
+}
+
+#main-menu li a.first {
+    padding-left:0;
+}
+
+section {
+    padding-top:1.5em;
+}
+
+footer {
+    border-top:4px solid #4679b8;
+    padding-top:20px;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+footer li {
+    font-size:85%;
+}
