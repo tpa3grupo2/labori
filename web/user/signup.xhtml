@@ -10,12 +10,17 @@
             <h1>Cadastro de currículo</h1>
             <div class="row">
                 <div class="span8">
-                    <h:form action="/user/signup-step2.xhtml" method="post" class="form-horizontal">
+                    <h:form styleClass="form-horizontal">
                         <legend>Login e senha</legend>
                         <div class="control-group">
                             <h:outputLabel for="email" value="Email" styleClass="control-label" />
                             <div class="controls">
-                                <h:inputText id="email" value="#{cadastroMB.usuario.nome}" required="true" maxlength="64" placeholder="email" styleClass="input-xlarge" />
+                                <h:inputText id="email" value="#{cadastroMB.usuario.nome}" required="true" maxlength="64" placeholder="email" styleClass="input-xlarge">
+                                    <f:ajax event="blur" render="emailMessage" />
+                                    <f:validator validatorId="validator.Email"/>
+                                    <f:validator validatorId="validator.CheckExistingUser"/>
+                                </h:inputText>
+                                <h:message id="emailMessage" for="email" styleClass="help-inline error" />
                             </div>
                         </div>
                         <div class="control-group">
