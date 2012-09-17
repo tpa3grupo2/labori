@@ -6,5 +6,5 @@
 *.jar
 *.war
 *.ear
-/code/labori/build/
-/code/labori/dist/
+/build/
+/dist/
