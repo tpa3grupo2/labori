@@ -1,8 +1,8 @@
 package mb;
 
 import dao.IDAO;
-import dao.impl.UsuarioDAOImpl;
-import entity.Usuario;
+import dao.impl.UserDAOImpl;
+import entity.UserLabori;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -14,16 +14,16 @@ import javax.faces.context.FacesContext;
 public class CadastroMB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Usuario usuario;
+	private UserLabori usuario;
 
 	public CadastroMB() {
-		this.usuario = new Usuario();
+		this.usuario = new UserLabori();
 	}
 
 	public void criarConta() {
 		try {
 			
-			IDAO dao = new UsuarioDAOImpl();
+			IDAO dao = new UserDAOImpl();
 			
 			dao.create(usuario);
 
@@ -36,11 +36,11 @@ public class CadastroMB implements Serializable {
 		}
 	}
 
-	public Usuario getUsuario() {
+	public UserLabori getUser() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUser(UserLabori usuario) {
 		this.usuario = usuario;
 	}
 }

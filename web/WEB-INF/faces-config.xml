@@ -9,4 +9,12 @@
     <factory>
         <render-kit-factory>org.omnifaces.renderkit.Html5RenderKitFactory</render-kit-factory>
     </factory>
+     <application>
+        <locale-config>
+            <default-locale>pt_BR</default-locale>
+        </locale-config>
+        <message-bundle>
+            Messages
+        </message-bundle>
+     </application>
 </faces-config>

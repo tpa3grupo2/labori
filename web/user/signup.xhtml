@@ -3,7 +3,8 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:o="http://omnifaces.org/ui">
     <ui:composition template="/template.xhtml">
         <ui:define name="title">Cadastro de currículo : labori</ui:define>
         <ui:define name="body">
@@ -15,67 +16,95 @@
                         <div class="control-group">
                             <h:outputLabel for="email" value="Email" styleClass="control-label" />
                             <div class="controls">
-                                <h:inputText id="email" value="#{cadastroMB.usuario.nome}" required="true" maxlength="64" placeholder="email" styleClass="input-xlarge">
+                                <h:inputText id="email" value="#{cadastroMB.user.email}" required="true" maxlength="64" placeholder="email" styleClass="input-xlarge">
                                     <f:ajax event="blur" render="emailMessage" />
                                     <f:validator validatorId="validator.Email"/>
-                                    <f:validator validatorId="validator.CheckExistingUser"/>
+                                    <f:validator validatorId="validator.CheckExistingUser" />
                                 </h:inputText>
                                 <h:message id="emailMessage" for="email" styleClass="help-inline error" />
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="inputPassword">Senha</label>
+                            <h:outputLabel for="password" value="Senha" styleClass="control-label" />
                             <div class="controls">
-                                <input type="password" id="inputPassword" placeholder="senha"  class="input-small" />
+                                <h:inputSecret id="password" placeholder="senha" styleClass="input-small" value="#{cadastroMB.user.password}" required="true" maxlength="64">
+                                    <f:ajax event="blur" render="passwordMessage" />
+                                </h:inputSecret>
+                                <h:message id="passwordMessage" for="password" styleClass="help-inline error" />
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="inputPassword">Repita a senha</label>
+                            <h:outputLabel for="password2" value="Repita a senha" styleClass="control-label" />
                             <div class="controls">
-                                <input type="password" id="inputPassword" placeholder="senha" class="input-small" />
+                                <h:inputSecret id="password2" placeholder="senha" styleClass="input-small" required="true" maxlength="64">
+                                    <f:ajax event="blur" render="password2Message" />
+                                </h:inputSecret>
+                                <o:validateEqual id="passwordEquality" components="password password2" message="Digite a mesma senha em ambos os campos" />
+                                <h:message id="password2Message" for="password2" styleClass="help-inline error" />
+                                <h:message id="password2Message2" for="passwordEquality" styleClass="help-inline error" />
                             </div>
                         </div>
 
                         <legend>Dados pessoais</legend>
                         <div class="control-group">
-                            <label class="control-label" for="inputPassword">Nome completo</label>
+                            <h:outputLabel for="name" value="Nome completo" styleClass="control-label" />
                             <div class="controls">
-                                <input type="text" id="inputPassword" placeholder="senha" class="input-xlarge" />
+                                <h:inputText id="name" placeholder="senha" styleClass="input-xlarge" value="#{cadastroMB.user.name}" required="true" maxlength="64">
+                                    <f:ajax event="blur" render="nameMessage" />
+                                </h:inputText>
+                                <h:message id="nameMessage" for="name" styleClass="help-inline error" />
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="inputPassword">Telefone</label>
+                            <h:outputLabel for="phone" value="Telefone" styleClass="control-label" />
                             <div class="controls">
-                                <input type="text" id="inputPassword" placeholder="senha" class="input-medium" />
+                                <h:inputText id="phone" placeholder="seu telefone" styleClass="input-medium" value="#{cadastroMB.user.phone}" required="true" maxlength="64">
+                                    <f:ajax event="blur" render="phoneMessage" />
+                                </h:inputText>
+                                <h:message id="phoneMessage" for="phone" styleClass="help-inline error" />
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="inputPassword">Estado</label>
+                            <h:outputLabel for="uf" value="Estado" styleClass="control-label" />
                             <div class="controls">
-                                <input type="text" id="inputPassword" placeholder="senha" class="input-medium" />
+                                <h:inputText id="uf" placeholder="senha" styleClass="input-medium" value="#{cadastroMB.user.uf}" required="true" maxlength="64">
+                                    <f:ajax event="blur" render="ufMessage" />
+                                </h:inputText>
+                                <h:message id="ufMessage" for="uf" styleClass="help-inline error" />
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="inputPassword">Cidade</label>
+                            <h:outputLabel for="city" value="Cidade" styleClass="control-label" />
                             <div class="controls">
-                                <input type="text" id="inputPassword" placeholder="senha" class="input-xlarge" />
-                            </div>
-                        </div>
-                        <div class="control-group error">
-                            <label class="control-label" for="inputPassword">Endereço completo</label>
-                            <div class="controls">
-                                <input type="text" id="inputPassword" placeholder="endereço com complemento, se houver" class="input-xlarge" />
-                                <span class="help-inline">Please correct the error</span>
+                                <h:inputText id="city" placeholder="senha" styleClass="input-xlarge" value="#{cadastroMB.user.city}" required="true" maxlength="64">
+                                    <f:ajax event="blur" render="cityMessage" />
+                                </h:inputText>
+                                <h:message id="cityMessage" for="city" styleClass="help-inline error" />
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="inputPassword">CEP</label>
+                            <h:outputLabel for="address" value="Endereço completo" styleClass="control-label" />
                             <div class="controls">
-                                <input type="text" id="inputPassword" placeholder="seu CEP" class="input-small" />
+                                <h:inputText id="address" placeholder="endereço com complemento, se houver" styleClass="input-xlarge" value="#{cadastroMB.user.address}" required="true" maxlength="64">
+                                    <f:ajax event="blur" render="addressMessage" />
+                                </h:inputText>
+                                <h:message id="addressMessage" for="address" styleClass="help-inline error" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <h:outputLabel for="cep" value="CEP" styleClass="control-label" />
+                            <div class="controls">
+                                <h:inputText id="cep" placeholder="seu CEP" styleClass="input-small" value="#{cadastroMB.user.cep}" required="true" maxlength="64">
+                                    <f:ajax event="blur" render="cepMessage" />
+                                </h:inputText>
+                                <h:message id="cepMessage" for="cep" styleClass="help-inline error" />
                             </div>
                         </div>
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-primary">Salvar e continuar &#187;</button>
+                            <h:commandButton value="Salvar e continuar &#187;" action="#{cadastroMB.criarConta}" styleClass="btn btn-primary">
+                                <f:ajax execute="@form" render="@form" />
+                            </h:commandButton>
+                            <h:messages globalOnly="true" layout="table" />
                         </div>
                     </h:form>
                 </div>
