@@ -16,7 +16,7 @@
                         <div class="control-group">
                             <h:outputLabel for="email" value="Email" styleClass="control-label" />
                             <div class="controls">
-                                <h:inputText id="email" value="#{cadastroMB.user.email}" required="true" maxlength="64" placeholder="email" styleClass="input-xlarge">
+                                <h:inputText id="email" value="#{signupBean.user.email}" required="true" maxlength="64" placeholder="email" styleClass="input-xlarge">
                                     <f:ajax event="blur" render="emailMessage" />
                                     <f:validator validatorId="validator.Email"/>
                                     <f:validator validatorId="validator.CheckExistingUser" />
@@ -27,7 +27,7 @@
                         <div class="control-group">
                             <h:outputLabel for="password" value="Senha" styleClass="control-label" />
                             <div class="controls">
-                                <h:inputSecret id="password" placeholder="senha" styleClass="input-small" value="#{cadastroMB.user.password}" required="true" maxlength="64">
+                                <h:inputSecret id="password" placeholder="senha" styleClass="input-small" value="#{signupBean.user.password}" required="true" maxlength="64">
                                     <f:ajax event="blur" render="passwordMessage" />
                                 </h:inputSecret>
                                 <h:message id="passwordMessage" for="password" styleClass="help-inline error" />
@@ -49,7 +49,7 @@
                         <div class="control-group">
                             <h:outputLabel for="name" value="Nome completo" styleClass="control-label" />
                             <div class="controls">
-                                <h:inputText id="name" placeholder="senha" styleClass="input-xlarge" value="#{cadastroMB.user.name}" required="true" maxlength="64">
+                                <h:inputText id="name" placeholder="senha" styleClass="input-xlarge" value="#{signupBean.user.name}" required="true" maxlength="64">
                                     <f:ajax event="blur" render="nameMessage" />
                                 </h:inputText>
                                 <h:message id="nameMessage" for="name" styleClass="help-inline error" />
@@ -58,7 +58,7 @@
                         <div class="control-group">
                             <h:outputLabel for="phone" value="Telefone" styleClass="control-label" />
                             <div class="controls">
-                                <h:inputText id="phone" placeholder="seu telefone" styleClass="input-medium" value="#{cadastroMB.user.phone}" required="true" maxlength="64">
+                                <h:inputText id="phone" placeholder="seu telefone" styleClass="input-medium" value="#{signupBean.user.phone}" required="true" maxlength="64">
                                     <f:ajax event="blur" render="phoneMessage" />
                                 </h:inputText>
                                 <h:message id="phoneMessage" for="phone" styleClass="help-inline error" />
@@ -67,7 +67,7 @@
                         <div class="control-group">
                             <h:outputLabel for="uf" value="Estado" styleClass="control-label" />
                             <div class="controls">
-                                <h:inputText id="uf" placeholder="senha" styleClass="input-medium" value="#{cadastroMB.user.uf}" required="true" maxlength="64">
+                                <h:inputText id="uf" placeholder="senha" styleClass="input-medium" value="#{signupBean.user.uf}" required="true" maxlength="64">
                                     <f:ajax event="blur" render="ufMessage" />
                                 </h:inputText>
                                 <h:message id="ufMessage" for="uf" styleClass="help-inline error" />
@@ -76,7 +76,7 @@
                         <div class="control-group">
                             <h:outputLabel for="city" value="Cidade" styleClass="control-label" />
                             <div class="controls">
-                                <h:inputText id="city" placeholder="senha" styleClass="input-xlarge" value="#{cadastroMB.user.city}" required="true" maxlength="64">
+                                <h:inputText id="city" placeholder="senha" styleClass="input-xlarge" value="#{signupBean.user.city}" required="true" maxlength="64">
                                     <f:ajax event="blur" render="cityMessage" />
                                 </h:inputText>
                                 <h:message id="cityMessage" for="city" styleClass="help-inline error" />
@@ -85,7 +85,7 @@
                         <div class="control-group">
                             <h:outputLabel for="address" value="Endereço completo" styleClass="control-label" />
                             <div class="controls">
-                                <h:inputText id="address" placeholder="endereço com complemento, se houver" styleClass="input-xlarge" value="#{cadastroMB.user.address}" required="true" maxlength="64">
+                                <h:inputText id="address" placeholder="endereço com complemento, se houver" styleClass="input-xlarge" value="#{signupBean.user.address}" required="true" maxlength="64">
                                     <f:ajax event="blur" render="addressMessage" />
                                 </h:inputText>
                                 <h:message id="addressMessage" for="address" styleClass="help-inline error" />
@@ -94,14 +94,14 @@
                         <div class="control-group">
                             <h:outputLabel for="cep" value="CEP" styleClass="control-label" />
                             <div class="controls">
-                                <h:inputText id="cep" placeholder="seu CEP" styleClass="input-small" value="#{cadastroMB.user.cep}" required="true" maxlength="64">
+                                <h:inputText id="cep" placeholder="seu CEP" styleClass="input-small" value="#{signupBean.user.cep}" required="true" maxlength="64">
                                     <f:ajax event="blur" render="cepMessage" />
                                 </h:inputText>
                                 <h:message id="cepMessage" for="cep" styleClass="help-inline error" />
                             </div>
                         </div>
                         <div class="form-actions">
-                            <h:commandButton value="Salvar e continuar &#187;" action="#{cadastroMB.criarConta}" styleClass="btn btn-primary">
+                            <h:commandButton value="Salvar e continuar &#187;" action="#{signupBean.createUser}" styleClass="btn btn-primary">
                                 <f:ajax execute="@form" render="@form" />
                             </h:commandButton>
                             <h:messages globalOnly="true" layout="table" />
@@ -110,6 +110,7 @@
                 </div>
                 <div class="span4">
                     <div class="well">
+                        <h:outputText value="#{userBean.logged}" />
                         <h4>Antes do cadastro...</h4>
                         <p>Se você já se cadastrou anteriormente no <strong>labori</strong>, não se cadastre novamente, <a href="">acesse sua conta por aqui</a>.</p>
                         <hr />

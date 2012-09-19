@@ -13,26 +13,26 @@
 				<h:panelGrid columns="3">
 
 					<h:outputLabel for="nome" value="Nome" />
-					<h:inputText id="nome" value="#{cadastroMB.usuario.nome}" required="true" maxlength="64">
+					<h:inputText id="nome" value="#{signupBean.usuario.nome}" required="true" maxlength="64">
                                                 <f:validator validatorId="validator.CheckExistingUser"/>
 						<f:ajax event="blur" render="nomeMensagem" />
 					</h:inputText>
 					<h:message id="nomeMensagem" for="nome" class="error" />
 
 					<h:outputLabel for="email" value="email" />
-					<h:inputText id="email" value="#{cadastroMB.usuario.email}" required="true" maxlength="64">
+					<h:inputText id="email" value="#{signupBean.usuario.email}" required="true" maxlength="64">
 						<f:ajax event="blur" render="emailMensagem" />
 					</h:inputText>
 					<h:message id="emailMensagem" for="email" />
 
 					<h:outputLabel for="senha" value="Senha" />
-					<h:inputSecret id="senha" value="#{cadastroMB.usuario.senha}" required="true" redisplay="true" maxlength="32">
+					<h:inputSecret id="senha" value="#{signupBean.usuario.senha}" required="true" redisplay="true" maxlength="32">
 						<f:ajax event="blur" render="senhaMensagem" />
 					</h:inputSecret>
 					<h:message id="senhaMensagem" for="senha" />
 
 					<h:panelGroup />
-					<h:commandButton value="Criar Conta" action="#{cadastroMB.criarConta}">
+					<h:commandButton value="Criar Conta" action="#{signupBean.criarConta}">
 						<f:ajax execute="@form" render="@form" />
 					</h:commandButton>
 					<h:messages globalOnly="true" layout="table" />

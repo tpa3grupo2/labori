@@ -34,18 +34,38 @@
 
             <div class="row-fluid">
                 <div class="span4" id="header">
-                    <h1><img src="#{request.contextPath}/assets/images/labori-logo.gif" /></h1>
+                    <h1><a href="#{request.contextPath}/"><img src="#{request.contextPath}/assets/images/labori-logo.gif" /></a></h1>
                 </div>
                 <div class="span8">
-                    <form action="#{request.contextPath}/user/login.xhtml" method="post" class="login-form form-inline">
-                        <span class="input-prepend">
-                            <span class="add-on"><i class="icon-envelope"></i></span>
-                            <input class="input-medium" id="email" type="text" placeholder="email" />
-                        </span>
-                        <input class="input-small" id="senha" type="password" placeholder="senha" />
-                        <input type="submit" class="btn" value="Entrar" />
-                        <div><small><a href="#{request.contextPath}/user/signup.xhtml">Cadastre-se</a></small></div>
-                    </form>
+                    <ui:fragment rendered="#{userBean.logged}">
+                        <div class="login-data">
+                            <div class="btn-group">
+                            <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i>&#160; #{userBean.user.name}</a>
+                            <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <h:link outcome="/user/logout">
+                                        <i class="icon-signout"></i> Sair
+                                    </h:link>
+                                </li>
+                            </ul>
+                            </div>
+                        </div>
+                    </ui:fragment>
+                    <ui:fragment rendered="#{!userBean.logged}">
+                        <h:form styleClass="login-data form-inline">
+                            <span class="input-prepend">
+                                <span class="add-on"><i class="icon-envelope"></i></span>
+                                <h:inputText id="email" value="#{loginBean.email}" placeholder="email" styleClass="input-medium" required="true" maxlength="32" />
+                            </span>
+                            <h:outputText value=" " />
+                            <h:inputSecret id="password" value="#{loginBean.password}" placeholder="senha" styleClass="input-small" required="true" maxlength="64" />
+                            <h:outputText value=" " />
+                            <h:commandButton value="Entrar" action="#{loginBean.login}" styleClass="btn" />
+                            <input type="hidden" value="#{view.viewId}" name="from" />
+                            <div><small><h:link value="Cadastre-se" outcome="/user/signup" /></small></div>
+                        </h:form>
+                    </ui:fragment>
 
                 </div>
             </div>
