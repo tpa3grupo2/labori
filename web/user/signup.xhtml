@@ -67,9 +67,10 @@
                         <div class="control-group">
                             <h:outputLabel for="uf" value="Estado" styleClass="control-label" />
                             <div class="controls">
-                                <h:inputText id="uf" placeholder="senha" styleClass="input-medium" value="#{signupBean.user.uf}" required="true" maxlength="64">
-                                    <f:ajax event="blur" render="ufMessage" />
-                                </h:inputText>
+                                <h:selectOneMenu value="#{signupBean.user.uf}" title="selecione">
+                                    <f:selectItem itemValue="" itemLabel="--" />
+                                    <f:selectItems value="#{signupBean.ufs}" var="uf" itemValue="#{uf.id}" itemLabel="#{uf.name}" />
+                                </h:selectOneMenu>
                                 <h:message id="ufMessage" for="uf" styleClass="help-inline error" />
                             </div>
                         </div>
@@ -110,7 +111,6 @@
                 </div>
                 <div class="span4">
                     <div class="well">
-                        <h:outputText value="#{userBean.logged}" />
                         <h4>Antes do cadastro...</h4>
                         <p>Se você já se cadastrou anteriormente no <strong>labori</strong>, não se cadastre novamente, <a href="">acesse sua conta por aqui</a>.</p>
                         <hr />
