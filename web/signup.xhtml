@@ -6,9 +6,9 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:o="http://omnifaces.org/ui">
     <ui:composition template="/template.xhtml">
-        <ui:define name="title">Cadastro de currículo : labori</ui:define>
+        <ui:define name="title">Cadastro de usuário : labori</ui:define>
         <ui:define name="body">
-            <h1>Cadastro de currículo</h1>
+            <h1>Cadastro de usuário</h1>
             <div class="row">
                 <div class="span8">
                     <h:form styleClass="form-horizontal">
@@ -67,9 +67,10 @@
                         <div class="control-group">
                             <h:outputLabel for="uf" value="Estado" styleClass="control-label" />
                             <div class="controls">
-                                <h:selectOneMenu value="#{signupBean.user.uf}" title="selecione">
+                                <h:selectOneMenu value="#{signupBean.user.uf}" required="true" id="uf">
                                     <f:selectItem itemValue="" itemLabel="--" />
                                     <f:selectItems value="#{signupBean.ufs}" var="uf" itemValue="#{uf.id}" itemLabel="#{uf.name}" />
+                                    <f:ajax event="change" render="ufMessage" />
                                 </h:selectOneMenu>
                                 <h:message id="ufMessage" for="uf" styleClass="help-inline error" />
                             </div>

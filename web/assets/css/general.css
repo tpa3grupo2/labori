@@ -49,3 +49,23 @@ footer {
 footer li {
     font-size:85%;
 }
+
+.right {
+    text-align:right;
+}
+
+.center {
+    text-align:center !important;
+}
+
+.float-right {
+    float:right;
+}
+
+.login-panel .form-actions {
+    padding-bottom:0;
+}
+
+table.table th {
+    background-color:#F0F7FF;
+}

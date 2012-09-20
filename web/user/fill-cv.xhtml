@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">Seu currículo : labori</ui:define>
+        <ui:define name="body">
+            <h1>Seu currículo</h1>
+            <h:form styleClass="">
+                <section>
+                    <legend>Área de atuação</legend>
+                    <div class="row">
+                        <div class="span8">
+                            <div class="control-group">
+                                <h:outputLabel for="field" value="Selecione a sua área de atuação" styleClass="control-label" />
+                                <h:selectOneMenu value="" required="true" id="field" styleClass="span4">
+                                    <f:selectItem itemValue="" itemLabel="--" />
+                                    <f:selectItems value="#{signupBean.fields}" var="field" itemValue="#{field.id}" itemLabel="#{field.name}" />
+                                    <f:ajax event="change" render="fieldMessage" />
+                                </h:selectOneMenu>
+                                <h:message id="fieldMessage" for="field" styleClass="help-block error" />
+                            </div>
+                        </div>
+                        <div class="span4">b</div>
+                    </div>
+                </section>
+                <section>
+                    <legend>Formação acadêmica</legend>
+                    <div class="row">
+                        <div class="span8">
+                            <p>Adicione abaixo a sua formação acadêmica bla bla bla</p>
+                            <table class="table table-striped table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Ano de formação</th>
+                                        <th>Universidade</th>
+                                        <th>Curso</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>2009</td>
+                                        <td>USP</td>
+                                        <td>Meteorologia</td>
+                                        <td class="center"><small><a href=""><i class="icon-remove"></i> Remover</a></small></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>2012</td>
+                                        <td>Universidade Presbiteriana Mackenzie</td>
+                                        <td>Sistemas de Informação</td>
+                                        <td class="center"><small><a href=""><i class="icon-remove"></i> Remover</a></small></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="right"><a href=""><i class="icon-plus"></i> Adicionar formação acadêmica</a></p>
+                        </div>
+                        <div class="span4">b</div>
+                    </div>
+                </section>
+                <section>
+                    <legend>Experiências profissionais</legend>
+                    <div class="row">
+                        <div class="span8">
+                            <p>Adicione abaixo a sua formação acadêmica bla bla bla</p>
+                            <table class="table table-striped table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="center">Não há experiência profissional cadastrada</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <p class="right"><a href=""><i class="icon-plus"></i> Adicionar experiência profissional</a></p>
+
+                        </div>
+                        <div class="span4">b</div>
+                    </div>
+                </section>
+                <section>
+                    <legend>Informações complementares</legend>
+                    <div class="row">
+                        <div class="span8">a</div>
+                        <div class="span4">b</div>
+                    </div>
+                </section>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+</html>
+

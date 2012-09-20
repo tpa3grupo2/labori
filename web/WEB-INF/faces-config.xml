@@ -1,17 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 
 <faces-config version="2.0"
-    xmlns="http://java.sun.com/xml/ns/javaee" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
-    
-    <!-- adds support to html5 tags -->
+
     <factory>
+        <!-- adds support to html5 tags -->
         <render-kit-factory>org.omnifaces.renderkit.Html5RenderKitFactory</render-kit-factory>
     </factory>
      <application>
         <locale-config>
-            <default-locale>pt_BR</default-locale>
+            <!--default-locale>pt_BR</default-locale -->
         </locale-config>
         <message-bundle>
             Messages

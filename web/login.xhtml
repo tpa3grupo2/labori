@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="body">
+            <div class="row">
+                <div class="span12">
+                    <h1>Login</h1>
+                    <br />
+                </div>
+                <div class="span4 offset4">
+                <h:form>
+                    <div class="well login-panel">
+                        <div class="row">
+                            <div class="span3">
+                                <div class="control-group">
+                                    <h:outputLabel for="email" value="Email" />
+                                    <span class="input-prepend">
+                                        <span class="add-on">@</span>
+                                        <h:inputText id="email" value="#{loginBean.email}" placeholder="email" styleClass="input-xlarge" required="true" maxlength="32">
+                                            <f:validator validatorId="validator.Email"/>
+                                        </h:inputText>
+                                    </span>
+                                    <h:message id="emailMessage" for="email" styleClass="help-block error" />
+                                </div>
+                                <div class="control-group">
+                                    <h:outputLabel for="password" value="Senha" />
+                                    <span class="input-prepend">
+                                        <span class="add-on"><i class="icon-key"></i></span>
+            |                           <h:inputSecret id="password" value="#{loginBean.password}" placeholder="senha" styleClass="input-xlarge" required="true" maxlength="64" />
+                                    </span>
+                                    <h:message id="passwordMessage" for="password" styleClass="help-block error" />
+                                </div>
+                            </div>
+                            <div class="span2">
+                            </div>
+
+                        </div>
+                        <div class="form-actions">
+                            <h:commandButton value="Entrar" action="#{loginBean.login}" styleClass="btn btn-primary" />
+                            <span class="muted float-right right">Ainda não tem cadastro?<br /><h:link value="Cadastre-se agora!" outcome="/signup" /></span>
+                        </div>
+                    </div>
+                </h:form>
+
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
+
