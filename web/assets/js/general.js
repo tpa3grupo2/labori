@@ -33,7 +33,7 @@ $('document').ready(function(data){
 
         jsf.ajax.addOnEvent(function(data){
             if (data.status == 'success') {
-                fixErrorsMessages();
+                fixErrorMessages();
             }
         });
     }

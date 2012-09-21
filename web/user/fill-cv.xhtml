@@ -6,6 +6,9 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <ui:composition template="/template.xhtml">
         <ui:define name="title">Seu currículo : labori</ui:define>
+        <ui:define name="extra_css">
+            <link href="#{request.contextPath}/assets/css/thirdparty/bootstrap-wysihtml5-0.0.2.css" rel="stylesheet"></link>
+        </ui:define>
         <ui:define name="body">
             <h1>Seu currículo</h1>
             <h:form styleClass="">
@@ -23,7 +26,11 @@
                                 <h:message id="fieldMessage" for="field" styleClass="help-block error" />
                             </div>
                         </div>
-                        <div class="span4">b</div>
+                        <div class="span4">
+                            <div class="well">
+                                <p>Qualquer texto auxiliar no preenchimento dos dados</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 <section>
@@ -60,7 +67,12 @@
                             </table>
                             <p class="right"><a href=""><i class="icon-plus"></i> Adicionar formação acadêmica</a></p>
                         </div>
-                        <div class="span4">b</div>
+                        <div class="span4">
+                            <div class="well">
+                                <h5>Bla bla</h5>
+                                <p>Qualquer texto auxiliar no preenchimento dos dados</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 <section>
@@ -78,17 +90,45 @@
                             <p class="right"><a href=""><i class="icon-plus"></i> Adicionar experiência profissional</a></p>
 
                         </div>
-                        <div class="span4">b</div>
+                        <div class="span4">
+                            <div class="well">
+                                <h5>Bla bla</h5>
+                                <p>Qualquer texto auxiliar no preenchimento dos dados</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 <section>
                     <legend>Informações complementares</legend>
                     <div class="row">
-                        <div class="span8">a</div>
-                        <div class="span4">b</div>
+                        <div class="span8">
+                            <textarea></textarea>
+                        </div>
+                        <div class="span4">
+                            <div class="well">
+                                <h5>Bla bla</h5>
+                                <p>Qualquer texto auxiliar no preenchimento dos dados</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
+                <div class="row">
+                    <div class="span12">
+                        <div class="form-actions">
+                            <h:commandButton value="Salvar currículo &#187;" action="#{signupBean.createUser}" styleClass="btn btn-primary">
+                                <f:ajax execute="@form" render="@form" />
+                            </h:commandButton>
+                            <h:messages globalOnly="true" layout="table" />
+                        </div>
+                    </div>
+                </div>
             </h:form>
+        </ui:define>
+        <ui:define name="extra_js">
+            <script type="text/javascript" src="#{request.contextPath}/assets/js/thirdparty/wysihtml5/wysihtml5-0.3.0.min.js"></script>
+            <script type="text/javascript" src="#{request.contextPath}/assets/js/thirdparty/wysihtml5/bootstrap-wysihtml5.js"></script>
+            <script type="text/javascript" src="#{request.contextPath}/assets/js/thirdparty/wysihtml5/bootstrap-wysihtml5.pt-BR.js"></script>
+            <script>$(document).ready(function(){$('textarea').wysihtml5({locale:'pt-BR'});});</script>
         </ui:define>
 
     </ui:composition>
