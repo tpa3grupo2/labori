@@ -1,3 +1,3 @@
 language: java
 before_script: "chmod +x ./scripts/build.sh"
-script: "./scripts/build.sh"
+script: "./scripts/travis_build.sh"
