@@ -6,5 +6,7 @@
 *.jar
 *.war
 *.ear
-/build/
-/dist/
+/LaboriEnterprise/labori-war/dist/
+/LaboriEnterprise/labori-war/build/
+/LaboriEnterprise/labori-ejb/dist/
+/LaboriEnterprise/labori-ejb/build/
