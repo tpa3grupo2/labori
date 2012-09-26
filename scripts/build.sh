@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # download .jar dependencies
-#./scripts/prepare_dependencies.sh
+./scripts/prepare_dependencies.sh
 
 _PWD=`pwd`
 
@@ -12,6 +12,7 @@ DerbyClientLib="$_PWD/lib/derbyclient.jar"
 
 #CLASSPATH=$CLASSPATH:$_PWD/lib/ant-contrib-1.0b3.jar:$CopyLibs:$GeneralLibs:$HibernateLibs
 CLASSPATH=$CLASSPATH:$_PWD/lib/ant-contrib-1.0b3.jar:$CopyLibs
+
 export CLASSPATH
 echo "CLASSPATH:"$CLASSPATH
 
