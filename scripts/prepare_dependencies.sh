@@ -6,25 +6,6 @@ LIBS_DIR=$_PWD/lib
 mkdir -p $LIBS_DIR
 
 echo ==============
-echo Downloading Hibernate Support package...
-wget https://dl.dropbox.com/u/12910711/labori/hibernate-support.tar.gz -P $LIBS_DIR/
-tar xzvf $LIBS_DIR/hibernate-support.tar.gz -C $LIBS_DIR
-
-echo ==============
-echo Downloading dependencies package...
+echo Downloading labori libs package...
 wget https://dl.dropbox.com/u/12910711/labori/labori-libs.tar.gz -P $LIBS_DIR/
 tar xzvf $LIBS_DIR/labori-libs.tar.gz -C $LIBS_DIR
-
-echo ==============
-echo Downloading derbyclient.jar and javax.servlet-api.jar...
-wget https://dl.dropbox.com/u/12910711/labori/derbyclient.jar -P $LIBS_DIR/
-wget https://dl.dropbox.com/u/12910711/labori/javax.servlet-api.jar -P $LIBS_DIR/
-
-
-# LIBS_DIR=../web/WEB-INF/lib
-
-# mkdir -p $LIBS_DIR
-# cd $LIBS_DIR
-# echo Downloading omnifaces...
-# curl http://omnifaces.googlecode.com/files/omnifaces-1.1.jar -O
-# echo DONE.

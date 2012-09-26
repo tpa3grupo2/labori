@@ -1,16 +1,14 @@
 #!/bin/bash
 
-# download .jar dependencies
+# download libs
 ./scripts/prepare_dependencies.sh
 
 _PWD=`pwd`
 
 CopyLibs=$_PWD/lib/org-netbeans-modules-java-j2seproject-copylibstask.jar
-#GeneralLibs=`echo $_PWD/lib/*.jar | tr ' ' ':'`
 HibernateLibs=`echo $_PWD/lib/hibernate-support/*.jar | tr ' ' ':'`
 DerbyClientLib="$_PWD/lib/derbyclient.jar"
 
-#CLASSPATH=$CLASSPATH:$_PWD/lib/ant-contrib-1.0b3.jar:$CopyLibs:$GeneralLibs:$HibernateLibs
 CLASSPATH=$CLASSPATH:$_PWD/lib/ant-contrib-1.0b3.jar:$CopyLibs
 
 export CLASSPATH
@@ -19,7 +17,7 @@ echo "CLASSPATH:"$CLASSPATH
 echo " "
 echo "Compiling these projects:"
 for i in * ; do
-  if [ -d "$i" ] && [ ! "$i" = "lib" ]; then
+  if [ -d "$i" ] && [ ! "$i" = "lib" ] && [ ! "$i" = "scripts" ]; then
     cd "$i"
 
     if [ -f "manifest.mf" ]; then
