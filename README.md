@@ -23,7 +23,7 @@ Como rodar o projeto
 3. Inicie o Derby a partir da aba `Services` no NetBeans
 4. Ainda no `Derby`, crie o banco `labori` e o usuário `admin` com senha `admin`
 5. Execute o arquivo `main.Main.java` (ele criará e preencherá as tabelas necessárias para a execução do projeto)
-6. Baixe o arquivo [http://omnifaces.googlecode.com/files/omnifaces-1.1.jar](http://omnifaces.googlecode.com/files/omnifaces-1.1.jar) e salve-o na pasta `labori/web/WEB-INF/lib` (crie-o se não existir)
+6. Baixe o arquivo [http://omnifaces.googlecode.com/files/omnifaces-1.1.jar](http://omnifaces.googlecode.com/files/omnifaces-1.1.jar) e salve-o na pasta `LaboriEnterprise/labori-war/web/WEB-INF/lib` (crie-o se não existir)
 7. Execute o projeto no NetBeans (ele iniciará o GlassFish e fará o Deploy automaticamente)
 8. Acesse a página inicial no [http://localhost:8080/](http://localhost:8080/)
 
