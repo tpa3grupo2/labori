@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # download .jar dependencies
-#./prepare_dependencies.sh
+./prepare_dependencies.sh
 
 _PWD=`pwd`
 
