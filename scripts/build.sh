@@ -7,23 +7,22 @@ _PWD=`pwd`
 
 CopyLibs=$_PWD/lib/org-netbeans-modules-java-j2seproject-copylibstask.jar
 
-HibernateLibs=\
-    $_PWD/lib/hibernate-support/antlr-2.7.6.jar;\
-    $_PWD/lib/hibernate-support/asm.jar;\
-    $_PWD/lib/hibernate-support/asm-attrs.jar;\
-    $_PWD/lib/hibernate-support/cglib-2.1.3.jar;\
-    $_PWD/lib/hibernate-support/commons-collections-2.1.1.jar;\
-    $_PWD/lib/hibernate-support/org-apache-commons-logging.jar;\
-    $_PWD/lib/hibernate-support/dom4j-1.6.1.jar;\
-    $_PWD/lib/hibernate-support/ehcache-1.2.3.jar;\
-    $_PWD/lib/hibernate-support/jdbc2_0-stdext.jar;\
-    $_PWD/lib/hibernate-support/jta.jar;\
-    $_PWD/lib/hibernate-support/hibernate3.jar;\
-    $_PWD/lib/hibernate-support/hibernate-tools.jar;\
-    $_PWD/lib/hibernate-support/hibernate-annotations.jar;\
-    $_PWD/lib/hibernate-support/hibernate-commons-annotations.jar;\
-    $_PWD/lib/hibernate-support/hibernate-entitymanager.jar;\
-    $_PWD/lib/hibernate-support/javassist.jar
+HibernateLibs="$_PWD/lib/hibernate-support/antlr-2.7.6.jar;"
+HibernateLibs="$_PWD/lib/hibernate-support/asm.jar;"
+$_PWD/lib/hibernate-support/asm-attrs.jar;
+$_PWD/lib/hibernate-support/cglib-2.1.3.jar;
+$_PWD/lib/hibernate-support/commons-collections-2.1.1.jar;
+$_PWD/lib/hibernate-support/org-apache-commons-logging.jar;
+$_PWD/lib/hibernate-support/dom4j-1.6.1.jar;
+$_PWD/lib/hibernate-support/ehcache-1.2.3.jar;
+$_PWD/lib/hibernate-support/jdbc2_0-stdext.jar;
+$_PWD/lib/hibernate-support/jta.jar;
+$_PWD/lib/hibernate-support/hibernate3.jar;
+$_PWD/lib/hibernate-support/hibernate-tools.jar;
+$_PWD/lib/hibernate-support/hibernate-annotations.jar;
+$_PWD/lib/hibernate-support/hibernate-commons-annotations.jar;
+$_PWD/lib/hibernate-support/hibernate-entitymanager.jar;
+$_PWD/lib/hibernate-support/javassist.jar
 
 CLASSPATH=$CLASSPATH:$_PWD/lib/ant-contrib-1.0b3.jar:$CopyLibs:$HibernateLibs
 export CLASSPATH
