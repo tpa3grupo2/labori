@@ -7,12 +7,12 @@ mkdir -p $LIBS_DIR
 
 echo ==============
 echo Downloading Hibernate Support package...
-wget https://dl.dropbox.com/u/12910711/hibernate-support.tar.gz -P $LIBS_DIR/
+wget https://dl.dropbox.com/u/12910711/labori/hibernate-support.tar.gz -P $LIBS_DIR/
 tar xzvf $LIBS_DIR/hibernate-support.tar.gz -C $LIBS_DIR
 
 echo ==============
 echo Downloading dependencies package...
-wget https://dl.dropbox.com/u/12910711/labori-libs.tar.gz -P $LIBS_DIR/
+wget https://dl.dropbox.com/u/12910711/labori/labori-libs.tar.gz -P $LIBS_DIR/
 tar xzvf $LIBS_DIR/labori-libs.tar.gz -C $LIBS_DIR
 
 echo ==============
