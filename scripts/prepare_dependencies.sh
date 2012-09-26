@@ -6,9 +6,9 @@ LIBS_DIR=$_PWD/lib
 mkdir -p $LIBS_DIR
 
 echo ==============
-echo Downloading Hibernate 3.2.5...
-wget https://dl.dropbox.com/u/12910711/hibernate-3.2.5.tar.gz -P $LIBS_DIR/
-tar xzvf $LIBS_DIR/hibernate-3.2.5.tar.gz -C $LIBS_DIR
+echo Downloading Hibernate Support package...
+wget https://dl.dropbox.com/u/12910711/hibernate-support.tar.gz -P $LIBS_DIR/
+tar xzvf $LIBS_DIR/hibernate-support.tar.gz -C $LIBS_DIR
 
 echo ==============
 echo Downloading dependencies package...
