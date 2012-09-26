@@ -3,7 +3,6 @@
 # download .jar dependencies
 #./prepare_dependencies.sh
 
-cd ..
 _PWD=`pwd`
 
 CopyLibs=$_PWD/lib/org-netbeans-modules-java-j2seproject-copylibstask.jar
