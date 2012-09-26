@@ -6,7 +6,7 @@ LIBS_DIR=$_PWD/lib
 mkdir -p $LIBS_DIR
 
 wget https://dl.dropbox.com/u/12910711/labori-libs.tar.gz -P $LIBS_DIR/
-tar xzvf labori-libs.tar.gz
+tar xzvf $LIBS_DIR/labori-libs.tar.gz -C $LIBS_DIR
 
 # LIBS_DIR=../web/WEB-INF/lib
 
