@@ -23,7 +23,7 @@ HibernateLibs="$HibernateLibs;$_PWD/lib/hibernate-support/hibernate-commons-anno
 HibernateLibs="$HibernateLibs;$_PWD/lib/hibernate-support/hibernate-entitymanager.jar"
 HibernateLibs="$HibernateLibs;$_PWD/lib/hibernate-support/javassist.jar"
 
-DerbyClient="$_PWD/derbyclient.jar"
+DerbyClient="$_PWD/lib/derbyclient.jar"
 
 CLASSPATH=$CLASSPATH:$_PWD/lib/ant-contrib-1.0b3.jar:$CopyLibs:$HibernateLibs:$DerbyClient
 export CLASSPATH
