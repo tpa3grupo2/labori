@@ -1,16 +1,17 @@
 #!/bin/bash
 
 # download .jar dependencies
-./scripts/prepare_dependencies.sh
+#./scripts/prepare_dependencies.sh
 
 _PWD=`pwd`
 
 CopyLibs=$_PWD/lib/org-netbeans-modules-java-j2seproject-copylibstask.jar
-GeneralLibs=`echo $_PWD/lib/*.jar | tr ' ' ':'`
+#GeneralLibs=`echo $_PWD/lib/*.jar | tr ' ' ':'`
 HibernateLibs=`echo $_PWD/lib/hibernate-support/*.jar | tr ' ' ':'`
 DerbyClientLib="$_PWD/lib/derbyclient.jar"
 
-CLASSPATH=$CLASSPATH:$_PWD/lib/ant-contrib-1.0b3.jar:$CopyLibs:$GeneralLibs:$HibernateLibs
+#CLASSPATH=$CLASSPATH:$_PWD/lib/ant-contrib-1.0b3.jar:$CopyLibs:$GeneralLibs:$HibernateLibs
+CLASSPATH=$CLASSPATH:$_PWD/lib/ant-contrib-1.0b3.jar:$CopyLibs
 export CLASSPATH
 echo "CLASSPATH:"$CLASSPATH
 
