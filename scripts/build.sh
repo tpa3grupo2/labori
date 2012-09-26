@@ -23,7 +23,9 @@ HibernateLibs="$HibernateLibs;$_PWD/lib/hibernate-support/hibernate-commons-anno
 HibernateLibs="$HibernateLibs;$_PWD/lib/hibernate-support/hibernate-entitymanager.jar"
 HibernateLibs="$HibernateLibs;$_PWD/lib/hibernate-support/javassist.jar"
 
-CLASSPATH=$CLASSPATH:$_PWD/lib/ant-contrib-1.0b3.jar:$CopyLibs:$HibernateLibs
+DerbyClient="$_PWD/derbyclient.jar"
+
+CLASSPATH=$CLASSPATH:$_PWD/lib/ant-contrib-1.0b3.jar:$CopyLibs:$HibernateLibs:$DerbyClient
 export CLASSPATH
 echo "CLASSPATH:"$CLASSPATH
 
@@ -44,6 +46,7 @@ for i in * ; do
     echo "----- $i -----"
     ant -Dlibs.CopyLibs.classpath="$CopyLibs" \
         -Dlibs.hibernate-support.classpath="$HibernateLibs" \
+        -Dfile.reference.derbyclient.jar="$DerbyClient" \
         -Dj2ee.server.home="$_PWD" $TARGET
     RET=$?
     if [ ! "$RET" = "0" ]; then

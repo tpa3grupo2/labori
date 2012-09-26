@@ -15,6 +15,10 @@ echo Downloading dependencies package...
 wget https://dl.dropbox.com/u/12910711/labori-libs.tar.gz -P $LIBS_DIR/
 tar xzvf $LIBS_DIR/labori-libs.tar.gz -C $LIBS_DIR
 
+echo ==============
+echo Downloading derbyclient.jar...
+wget https://dl.dropbox.com/u/12910711/labori/derbyclient.jar -P $LIBS_DIR/
+
 
 # LIBS_DIR=../web/WEB-INF/lib
 
