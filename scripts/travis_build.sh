@@ -31,8 +31,7 @@ for i in * ; do
 
     echo " "
     echo "----- $i -----"
-    ant -lib $GeneralLibs \
-        -Dlibs.CopyLibs.classpath="$CopyLibs" \
+    ant -Dlibs.CopyLibs.classpath="$CopyLibs" \
         -Dlibs.hibernate-support.classpath="$HibernateLibs" \
         -Dfile.reference.derbyclient.jar="$DerbyClientLib" \
         -Dj2ee.server.home="$_PWD" $TARGET
