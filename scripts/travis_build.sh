@@ -30,7 +30,7 @@ for i in * ; do
 
     echo " "
     echo "----- $i -----"
-    ant -lib $GeneralLibs
+    ant -lib $GeneralLibs \
         -Dlibs.CopyLibs.classpath="$CopyLibs" \
         -Dlibs.hibernate-support.classpath="$HibernateLibs" \
         -Dfile.reference.derbyclient.jar="$DerbyClientLib" \
