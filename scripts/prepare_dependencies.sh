@@ -2,7 +2,7 @@
 
 _PWD=`pwd`
 
-LIBS_DIR=$_PWD/modles
+LIBS_DIR=$_PWD/modules
 mkdir -p $LIBS_DIR
 
 echo ==============
