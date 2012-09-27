@@ -7,9 +7,10 @@ _PWD=`pwd`
 
 CopyLibs=$_PWD/lib/org-netbeans-modules-java-j2seproject-copylibstask.jar
 HibernateLibs=`echo $_PWD/lib/hibernate-support/*.jar | tr ' ' ':'`
+GeneralLibs=`echo $_PWD/lib/*.jar | tr ' ' ':'`
 DerbyClientLib="$_PWD/lib/derbyclient.jar"
 
-CLASSPATH=$CLASSPATH:$_PWD/lib/ant-contrib-1.0b3.jar:$CopyLibs
+CLASSPATH=$CLASSPATH:$_PWD/lib/ant-contrib-1.0b3.jar:$CopyLibs:$GeneralLibs
 
 export CLASSPATH
 echo "CLASSPATH:"$CLASSPATH
