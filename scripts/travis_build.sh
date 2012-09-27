@@ -7,10 +7,10 @@ _PWD=`pwd`
 
 CopyLibs=$_PWD/lib/org-netbeans-modules-java-j2seproject-copylibstask.jar
 HibernateLibs=`echo $_PWD/lib/hibernate-support/*.jar | tr ' ' ':'`
-GeneralLibs=`echo $_PWD/lib/*.jar | tr ' ' ':'`
+GeneralLibs=$_PWD/lib/
 DerbyClientLib="$_PWD/lib/derbyclient.jar"
 
-CLASSPATH=$CLASSPATH:$_PWD/lib/ant-contrib-1.0b3.jar:$CopyLibs:$GeneralLibs
+CLASSPATH=$CLASSPATH:$_PWD/lib/ant-contrib-1.0b3.jar:$CopyLibs
 
 export CLASSPATH
 echo "CLASSPATH:"$CLASSPATH
@@ -30,7 +30,8 @@ for i in * ; do
 
     echo " "
     echo "----- $i -----"
-    ant -Dlibs.CopyLibs.classpath="$CopyLibs" \
+    ant -lib $GeneralLibs
+        -Dlibs.CopyLibs.classpath="$CopyLibs" \
         -Dlibs.hibernate-support.classpath="$HibernateLibs" \
         -Dfile.reference.derbyclient.jar="$DerbyClientLib" \
         -Dj2ee.server.home="$_PWD" $TARGET
