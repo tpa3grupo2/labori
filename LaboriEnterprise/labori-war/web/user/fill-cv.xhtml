@@ -66,6 +66,48 @@
                                 </tbody>
                             </table>
                             <p class="right"><a href=""><i class="icon-plus"></i> Adicionar formação acadêmica</a></p>
+                            <form>
+                                <div class="control-group">
+                                    <h:outputLabel for="field" value="Universidade" styleClass="control-label" />
+                                    <h:selectOneMenu value="" required="true" id="field" styleClass="span4">
+                                        <f:selectItem itemValue="" itemLabel="--" />
+                                        <f:selectItems value="#{curriculumBean.availableUniversities}" var="field" itemValue="#{field.id}" itemLabel="#{field.name}" />
+                                        <f:ajax event="change" render="fieldMessage" />
+                                    </h:selectOneMenu>
+                                    <h:message id="fieldMessage" for="field" styleClass="help-block error" />
+                                </div>
+                                <div class="control-group">
+                                    <h:outputLabel for="curso" value="Curso" styleClass="control-label" />
+                                    <h:inputText required="true" id="curso" styleClass="span4" />
+                                    <h:message id="cursoMessage" for="curso" styleClass="help-block error" />
+                                </div>
+                                <div class="control-group">
+                                    <div class="row">
+                                        <div class="span2">
+                                            <div class="control-group">
+                                                <h:outputLabel for="startYear" value="Ano de início" styleClass="control-label" />
+                                                <h:selectOneMenu value="" required="true" id="startYear" styleClass="span2">
+                                                    <f:selectItem itemValue="" itemLabel="--" />
+                                                    <f:selectItems value="#{curriculumBean.availableYears}" var="field" itemValue="#{field}" itemLabel="#{field}" />
+                                                    <f:ajax event="change" render="fieldMessage" />
+                                                </h:selectOneMenu>
+                                                <h:message id="startYearMessage" for="startYear" styleClass="help-block error" />
+                                            </div>
+                                        </div>
+                                        <div class="span2">
+                                            <div class="control-group">
+                                                <h:outputLabel for="endYear" value="Ano de término" styleClass="control-label" />
+                                                <h:selectOneMenu value="" required="true" id="endYear" styleClass="span2">
+                                                    <f:selectItem itemValue="" itemLabel="--" />
+                                                    <f:selectItems value="#{curriculumBean.availableYears}" var="field" itemValue="#{field}" itemLabel="#{field}" />
+                                                    <f:ajax event="change" render="endYearMessage" />
+                                                </h:selectOneMenu>
+                                                <h:message id="endYearMessage" for="endYear" styleClass="help-block error" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <div class="span4">
                             <div class="well">

@@ -59,3 +59,7 @@ INSERT INTO FIELD (ID, NAME) VALUES (31, 'Serviços Gerais');
 INSERT INTO FIELD (ID, NAME) VALUES (32, 'Serviços Sociais e Comunitários');
 INSERT INTO FIELD (ID, NAME) VALUES (33, 'Telemarketing');
 INSERT INTO FIELD (ID, NAME) VALUES (34, 'Transportes');
+
+INSERT INTO UNIVERSITY (ID, NAME, ADDRESS, UF_ID) VALUES (1, 'Universidade de São Paulo', 'Cidade Universitária', 35);
+INSERT INTO UNIVERSITY (ID, NAME, ADDRESS, UF_ID) VALUES (2, 'Universidade Presbiteriana Mackenzie', 'Rua da Consolação 930', 35);
+INSERT INTO UNIVERSITY (ID, NAME, ADDRESS, UF_ID) VALUES (3, 'Pontifícia Universidade Católica de São Paulo', 'Rua Marquês de São Vicente 225', 35);

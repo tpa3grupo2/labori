@@ -13,7 +13,7 @@ public class Uf implements Serializable {
 
     @Column(unique = true, length=2)
     private String code;
-    
+
     @Column(unique = true, length=64)
     private String name;
 
@@ -40,5 +40,10 @@ public class Uf implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }

@@ -12,28 +12,27 @@ public class UserLabori implements Serializable {
     @Id
     @GeneratedValue(generator = "Emp_Gen")
     @SequenceGenerator(name = "Emp_Gen", allocationSize = 1)
-
     private Long id;
+
     @Column(unique = true, length = 64)
-
     private String email;
-    @Column(length = 32)
 
+    @Column(length = 32)
     private String password;
-    @Column(length = 64)
 
+    @Column(length = 64)
     private String name;
+
     @Column(length = 16)
-
     private String phone;
-    @Column(length = 32)
 
-    private String uf;
-    @Column(length = 32)
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Uf uf;
 
+    @Column(length = 32)
     private String city;
-    @Column(length = 64)
 
+    @Column(length = 64)
     private String address;
 
     @Column(length = 16)
@@ -55,7 +54,7 @@ public class UserLabori implements Serializable {
         this.id = id;
     }
 
-    
+
     public String getEmail() {
         return email;
     }
@@ -104,11 +103,11 @@ public class UserLabori implements Serializable {
         this.phone = phone;
     }
 
-    public String getUf() {
+    public Uf getUf() {
         return uf;
     }
 
-    public void setUf(String uf) {
+    public void setUf(Uf uf) {
         this.uf = uf;
     }
 }

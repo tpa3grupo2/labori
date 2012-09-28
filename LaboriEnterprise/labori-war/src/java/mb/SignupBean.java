@@ -12,6 +12,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import util.GeneralFactory;
 import util.HibernateUtil;
 
 @ManagedBean
@@ -33,11 +34,13 @@ public class SignupBean implements Serializable {
 
     public String createUser() {
 
-            IDAO dao = new UserDAOImpl();
-            dao.create(user);
+        GeneralFactory<entity.UserLabori> userFactory
+                = new GeneralFactory<entity.UserLabori>("UserLabori");
 
-            userBean.login(user.getEmail(), user.getPassword());
-            return "/user/fill-cv?faces-redirect=true";
+        userFactory.create(user);
+
+        userBean.login(user.getEmail(), user.getPassword());
+        return "/user/fill-cv?faces-redirect=true";
     }
 
     public UserLabori getUser() {
@@ -53,7 +56,7 @@ public class SignupBean implements Serializable {
         session.beginTransaction();
 
         Query query = session.createQuery("from Uf");
-        return query.list();
+        return (List<Uf>) query.list();
     }
 
     public List<Field> getFields() {
@@ -61,6 +64,6 @@ public class SignupBean implements Serializable {
         session.beginTransaction();
 
         Query query = session.createQuery("from Field");
-        return query.list();
+        return (List<Field>) query.list();
     }
 }
