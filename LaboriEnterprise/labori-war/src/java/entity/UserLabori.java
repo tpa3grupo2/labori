@@ -38,6 +38,12 @@ public class UserLabori implements Serializable {
     @Column(length = 16)
     private String cep;
 
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Field field;
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    private Education education;
+
     public String getName() {
         return name;
     }
@@ -109,5 +115,21 @@ public class UserLabori implements Serializable {
 
     public void setUf(Uf uf) {
         this.uf = uf;
+    }
+
+    public Education getEducation() {
+        return education;
+    }
+
+    public void setEducation(Education education) {
+        this.education = education;
+    }
+
+    public Field getField() {
+        return field;
+    }
+
+    public void setField(Field field) {
+        this.field = field;
     }
 }

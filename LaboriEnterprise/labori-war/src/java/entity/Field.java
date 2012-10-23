@@ -14,6 +14,10 @@ public class Field implements Serializable {
     @Column(unique = true, length = 64)
     private String name;
 
+    public boolean equals(Field o) {
+        return id == o.id;
+    }
+
     public Long getId() {
         return id;
     }

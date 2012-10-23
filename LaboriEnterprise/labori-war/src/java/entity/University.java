@@ -20,6 +20,11 @@ public class University implements Serializable {
     @ManyToOne(cascade=CascadeType.ALL)
     private Uf uf;
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public String getAddress() {
         return address;
     }

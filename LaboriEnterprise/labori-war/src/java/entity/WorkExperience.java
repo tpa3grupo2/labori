@@ -11,6 +11,59 @@ public class WorkExperience implements Serializable {
     @SequenceGenerator(name = "Emp_Gen", allocationSize = 1)
     private Long id;
 
-    @Column(unique = true, length = 64)
-    private String name;
+    private Integer startYear;
+    private Integer endYear;
+
+    @Column(unique=true, length=64)
+    private String position;
+
+    @ManyToOne()
+    private UserLabori user;
+
+    @ManyToOne()
+    private Company company;
+
+    public void setUser(UserLabori user) {
+        this.user = user;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Integer getEndYear() {
+        return endYear;
+    }
+
+    public void setEndYear(Integer endYear) {
+        this.endYear = endYear;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public Integer getStartYear() {
+        return startYear;
+    }
+
+    public void setStartYear(Integer startYear) {
+        this.startYear = startYear;
+    }
 }

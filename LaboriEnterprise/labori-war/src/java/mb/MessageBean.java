@@ -10,7 +10,7 @@ import util.Message;
 @SessionScoped
 public class MessageBean implements Serializable {
 
-    ArrayList<Message> messages = new ArrayList<Message>();
+    private ArrayList<Message> messages = new ArrayList<Message>();
 
     public ArrayList getMessages() {
         ArrayList<Message> returnList = new ArrayList<Message>(messages);

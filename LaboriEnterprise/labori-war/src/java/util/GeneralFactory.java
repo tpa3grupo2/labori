@@ -1,6 +1,6 @@
 package util;
 
-import java.io.Serializable;
+import entity.UserLabori;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -22,6 +22,15 @@ public class GeneralFactory<T> {
         return (List<T>) query.list();
     }
 
+    public List<T> getAllfromUser(UserLabori user) {
+        session.beginTransaction();
+
+        Query query = session.createQuery("from " + className + " where user_id = :user_id")
+                        .setParameter("user_id", user.getId());
+
+        return (List<T>) query.list();
+    }
+
     public T getById(String id) {
         try {
             return getById(Integer.parseInt(id));
@@ -32,6 +41,7 @@ public class GeneralFactory<T> {
 
     public Long create(Object newObject) {
 
+        session.clear();
         session.beginTransaction();
 	Long id = (Long) session.save(newObject);
         session.getTransaction().commit();
@@ -45,5 +55,16 @@ public class GeneralFactory<T> {
                        .setParameter("id", id);
 
         return (T) query.uniqueResult();
+    }
+
+    public void remove(T obj) {
+        session.clear();
+        session.beginTransaction();
+	session.delete(obj);
+        session.getTransaction().commit();
+    }
+
+    public void removeFromId(Integer id) {
+        remove(getById(id));
     }
 }

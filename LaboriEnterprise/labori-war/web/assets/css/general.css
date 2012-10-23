@@ -69,3 +69,12 @@ footer li {
 table.table th {
     background-color:#F0F7FF;
 }
+
+.fillcv textarea {
+    width:100%;
+    height:120px;
+}
+
+.modal form {
+    margin-bottom:0;
+}
