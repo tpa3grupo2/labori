@@ -26,6 +26,9 @@ public class UserLabori implements Serializable {
     @Column(length = 16)
     private String phone;
 
+    @Column(length=4000)
+    private String additionalInformation;
+
     @ManyToOne(cascade=CascadeType.ALL)
     private Uf uf;
 
@@ -132,4 +135,13 @@ public class UserLabori implements Serializable {
     public void setField(Field field) {
         this.field = field;
     }
+
+    public String getAdditionalInformation() {
+        return additionalInformation;
+    }
+
+    public void setAdditionalInformation(String additionalInformation) {
+        this.additionalInformation = additionalInformation;
+    }
+
 }

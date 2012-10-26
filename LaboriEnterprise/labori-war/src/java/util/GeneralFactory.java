@@ -49,6 +49,13 @@ public class GeneralFactory<T> {
         return id;
     }
 
+    public void update(Object changedObject) {
+        session.clear();
+        session.beginTransaction();
+	session.update(changedObject);
+        session.getTransaction().commit();
+    }
+
     public T getById(Integer id) {
         session.beginTransaction();
         Query query = session.createQuery("from " + className + " where id = :id")

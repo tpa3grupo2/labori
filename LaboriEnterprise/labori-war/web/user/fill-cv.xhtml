@@ -103,9 +103,9 @@
                         <ui:fragment rendered="#{curriculumBean.userWorkExperience.size() > 0}">
                             <h:dataTable
                                     styleClass="table table-striped table-hover table-bordered"
-                                    columnClasses="center,,,,center"
+                                    columnClasses="center,,,,,center"
                                     id="workExperienceDTable"
-                                    value="#{curriculumBean.workExperience}"
+                                    value="#{curriculumBean.userWorkExperience}"
                                     var="o">
                                 <h:column>
                                     <f:facet name="header">#</f:facet>
@@ -133,7 +133,7 @@
                                         <h:commandLink action="#{curriculumBean.removeWorkExperience}">
                                             <f:setPropertyActionListener target="#{curriculumBean.workExperienceIdToRemove}" value="#{o.id}" />
                                             <i class="icon-remove"></i> Remover
-                                            <f:ajax render=":fillcv:outerWorkExpeienceDTable"></f:ajax>
+                                            <f:ajax render=":fillcv:outerWorkExperienceDTable"></f:ajax>
                                         </h:commandLink>
                                     </small>
                                 </h:column>
@@ -164,7 +164,7 @@
                     <legend>Informações complementares</legend>
                     <div class="row">
                         <div class="span8">
-                            <h:inputTextarea id="additionalInformation" />
+                            <h:inputTextarea id="additionalInformation" value="#{userBean.user.additionalInformation}" />
                         </div>
                         <div class="span4">
                             <div class="well">
@@ -177,7 +177,7 @@
                 <div class="row">
                     <div class="span12">
                         <div class="form-actions">
-                            <h:commandButton value="Salvar currículo &#187;" action="#{signupBean.createUser}" styleClass="btn btn-primary">
+                            <h:commandButton value="Salvar currículo &#187;" action="#{curriculumBean.saveUser}" styleClass="btn btn-primary">
                             </h:commandButton>
                             <h:messages globalOnly="true" layout="table" />
                         </div>
@@ -234,7 +234,7 @@
                             </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
                         <h:commandButton value="Salvar &raquo;" styleClass="btn btn-primary" action="#{curriculumBean.addEducation}">
                             <f:ajax execute="@form" render="@form :fillcv:outerEducationDTable" />
                         </h:commandButton>
@@ -267,7 +267,7 @@
                                 <div class="row">
                                     <div class="span2">
                                         <div class="control-group">
-                                            <h:outputLabel for="startYear" value="Ano de início" styleClass="control-label" />
+                                            <h:outputLabel for="startYear" value="Ano de entrada" styleClass="control-label" />
                                             <h:selectOneMenu value="#{curriculumBean.workExperience.startYear}" required="true" id="startYear" styleClass="span2">
                                                 <f:selectItem itemValue="" itemLabel="--" />
                                                 <f:selectItems value="#{curriculumBean.availableYears}" var="field" itemValue="#{field}" itemLabel="#{field}" />
@@ -278,8 +278,8 @@
                                     </div>
                                     <div class="span2">
                                         <div class="control-group">
-                                            <h:outputLabel for="endYear" value="Ano de término" styleClass="control-label" />
-                                            <h:selectOneMenu value="#{curriculumBean.workExperience.endYear}" required="true" id="endYear" styleClass="span2">
+                                            <h:outputLabel for="endYear" value="Ano de saída" styleClass="control-label" />
+                                            <h:selectOneMenu value="#{curriculumBean.workExperience.endYear}" id="endYear" styleClass="span2">
                                                 <f:selectItem itemValue="" itemLabel="--" />
                                                 <f:selectItems value="#{curriculumBean.availableYears}" var="field" itemValue="#{field}" itemLabel="#{field}" />
                                                 <f:ajax event="change" render="endYearMessage" />
@@ -291,9 +291,9 @@
                             </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                        <button class="btn" data-dismiss="modal" aria-hidden="true">Fechar</button>
                         <h:commandButton value="Salvar &raquo;" styleClass="btn btn-primary" action="#{curriculumBean.addWorkExperience}">
-                            <f:ajax execute="@form" render="@form :fillcv:outerEducationDTable" />
+                            <f:ajax execute="@form" render="@form :fillcv:outerWorkExperienceDTable" />
                         </h:commandButton>
                     </div>
                 </h:form>

@@ -34,8 +34,15 @@ public class CurriculumBean implements Serializable {
         workExperience = new WorkExperience();
     }
 
-    public void salvar(){
-        this.education = new Education();
+    public String saveUser() {
+
+        GeneralFactory<entity.UserLabori> userFactory
+                = new GeneralFactory<entity.UserLabori>("UserLabori");
+
+        userBean.getMessageBean().addMessage("Currículo atualizado com sucesso!", "success");
+
+        userFactory.update(userBean.getUser());
+        return "/user/fill-cv?faces-redirect=true";
     }
 
     public Education getEducation() {
@@ -94,11 +101,11 @@ public class CurriculumBean implements Serializable {
         educationFactory.removeFromId(educationIdToRemove);
     }
 
-    public List<Education> getUserWorkExperience() {
-        GeneralFactory<entity.Education> educationFactory
-                = new GeneralFactory<entity.Education>("Education");
+    public List<WorkExperience> getUserWorkExperience() {
+        GeneralFactory<entity.WorkExperience> workExperienceFactory
+                = new GeneralFactory<entity.WorkExperience>("WorkExperience");
 
-        return educationFactory.getAllfromUser(userBean.getUser());
+        return workExperienceFactory.getAllfromUser(userBean.getUser());
     }
 
     public void addWorkExperience() {

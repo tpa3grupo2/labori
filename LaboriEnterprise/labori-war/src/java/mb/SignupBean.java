@@ -43,6 +43,7 @@ public class SignupBean implements Serializable {
         return "/user/fill-cv?faces-redirect=true";
     }
 
+
     public UserLabori getUser() {
         return user;
     }
