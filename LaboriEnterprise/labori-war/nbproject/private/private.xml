@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/web/signup.xhtml</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/web/user/fill-cv.xhtml</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/mb/CurriculumBean.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/mb/LoginBean.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/mb/UserBean.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/dao/impl/UserDAOImpl.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/entity/Education.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/entity/UserLabori.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/util/GeneralFactory.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/entity/WorkExperience.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/entity/Uf.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/entity/University.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/mb/utilsBean.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/filter/LoginFilter.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/mb/MessageBean.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/web/assets/css/general.css</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/web/template.xhtml</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/converters/UfConverter.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/converters/fieldConverter.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/converters/universityConverter.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/entity/Field.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/converters/companyConverter.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/entity/Company.java</file>
+        <file>file:/Users/cauelt/dev/projs/labori/LaboriEnterprise/labori-war/src/java/import.sql</file>
+    </open-files>
+</project-private>

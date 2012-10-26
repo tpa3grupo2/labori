@@ -1,7 +1,5 @@
 package mb;
 
-import dao.IDAO;
-import dao.impl.UserDAOImpl;
 import entity.Field;
 import entity.Uf;
 import entity.UserLabori;

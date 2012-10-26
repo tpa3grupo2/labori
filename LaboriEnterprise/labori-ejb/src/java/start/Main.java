@@ -1,4 +1,4 @@
-package main;
+package start;
 
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import util.HibernateUtil;
