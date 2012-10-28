@@ -21,9 +21,27 @@ public abstract class BaseHibernateDAO<T, PK extends Serializable> implements Ba
     public BaseHibernateDAO(final Class objectClass) {
         this.objectClass = objectClass;
     }
-    
-    private Session getSession(Boolean create) {
+
+    public Session getSession() {
+        return getSession(true);
+    }
+
+    public void resetSession() {
+        session = HibernateUtil.getSessionFactory().openSession();
+    }
+
+    public Session getSession(Boolean create) {
+        if (!session.isOpen())
+            session = HibernateUtil.getSessionFactory().openSession();
         return session;
+    }
+
+    public void startTransaction() {
+        getSession().beginTransaction();
+    }
+
+    public void commitTransaction() {
+        getSession().getTransaction().commit();
     }
 
     @Override
@@ -138,7 +156,6 @@ public abstract class BaseHibernateDAO<T, PK extends Serializable> implements Ba
         try {
             final Session s = getSession(false);
             final Criteria c = s.createCriteria(objectClass);
-            addOrderToCriteria(c);
             return c.list();
         } catch (final HibernateException ex) {
             BaseHibernateDAO.logger.error(ex);
@@ -153,7 +170,6 @@ public abstract class BaseHibernateDAO<T, PK extends Serializable> implements Ba
             final Session s = getSession(false);
             final Criteria c = s.createCriteria(objectClass);
             c.add(Example.create(example).enableLike(MatchMode.ANYWHERE).ignoreCase().setPropertySelector(this));
-            addOrderToCriteria(c);
             addPropertiedToCriteria(c, example);
             return c.list();
         } catch (final HibernateException ex) {
@@ -173,7 +189,6 @@ public abstract class BaseHibernateDAO<T, PK extends Serializable> implements Ba
             final Criteria c = s.createCriteria(objectClass);
             c.add(Example.create(example).enableLike(MatchMode.ANYWHERE).ignoreCase().setPropertySelector(this));
             addPropertiedToCriteria(c, example);
-            addOrderToCriteria(c);
             if (first != 0) {
                 c.setFirstResult(first);
             }
@@ -193,7 +208,6 @@ public abstract class BaseHibernateDAO<T, PK extends Serializable> implements Ba
         try {
             final Session s = getSession(false);
             final Criteria c = s.createCriteria(objectClass);
-            addOrderToCriteria(c);
             if (first != 0) {
                 c.setFirstResult(first);
             }
@@ -205,9 +219,6 @@ public abstract class BaseHibernateDAO<T, PK extends Serializable> implements Ba
             BaseHibernateDAO.logger.error(ex);
             throw ex;
         }
-    }
-
-    protected void addOrderToCriteria(Criteria c) {
     }
 
     @Override

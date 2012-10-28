@@ -1,32 +1,47 @@
 package converters;
 
+import ejb.stateless.CompanyBeanLocal;
+import ejb.stateless.UniversityBeanLocal;
 import entity.Company;
+import entity.University;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
-import util.GeneralFactory;
+import javax.naming.NamingException;
 
 @FacesConverter(value="companyConverter", forClass=entity.Company.class)
 public class companyConverter implements Converter {
 
-    private GeneralFactory<entity.Company> universityFactory = new GeneralFactory<entity.Company>("Company");
-
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
+        CompanyBeanLocal companyEJB = null;
+
         if (value.equals(""))
             return null;
 
-        Company field = universityFactory.getById(Integer.parseInt(value));
+        try {
+            companyEJB = new util.GetEJB().getCompany();
+        } catch (NamingException ex) {
+            Logger.getLogger(companyConverter.class.getName()).log(Level.SEVERE, null, ex);
 
-        if (field == null) {
+            FacesMessage msg = new FacesMessage("Erro de comunicação com o EJB");
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+            throw new ConverterException(msg);
+        }
+
+        Company company = companyEJB.getById(Long.parseLong(value));
+
+        if (company == null) {
             FacesMessage msg = new FacesMessage("Por favor entre com uma empresa válida.");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ConverterException(msg);
         }
-        return field;
+        return company;
     }
 
     @Override

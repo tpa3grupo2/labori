@@ -1,16 +1,16 @@
 package validator;
 
 import entity.UserLabori;
-import java.util.List;
+import ejb.stateless.UserLaboriBeanLocal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import util.HibernateUtil;
+import javax.naming.NamingException;
 
 @FacesValidator("validator.CheckExistingUser")
 public class CheckExistingUserValidator implements Validator {
@@ -19,15 +19,17 @@ public class CheckExistingUserValidator implements Validator {
     public void validate(FacesContext context, UIComponent component,
             Object value) throws ValidatorException {
 
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        UserLaboriBeanLocal userLaboriEJB = null;
 
-        session.beginTransaction();
-        Query query = session.createQuery("select count(u) from UserLabori u where email = :email")
-                .setParameter("email", value.toString());
+        try {
+            userLaboriEJB = new util.GetEJB().getUserLabori();
+        } catch (NamingException ex) {
+            Logger.getLogger(CheckExistingUserValidator.class.getName()).log(Level.SEVERE, null, ex);
+            FacesMessage msg = new FacesMessage("Erro de comunicação com o EJB");
+            throw new ValidatorException(msg);
+        }
 
-        
-        Long numNameDuplicates = (Long) query.uniqueResult();
-        if (numNameDuplicates > 0) {
+        if (userLaboriEJB.getByEmail(value.toString()) != null) {
             FacesMessage msg = new FacesMessage("Esse email já está cadastrado. Efetue o login.");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);

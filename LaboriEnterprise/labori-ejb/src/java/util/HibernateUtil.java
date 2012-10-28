@@ -20,7 +20,7 @@ public class HibernateUtil {
                 .addAnnotatedClass(UserLabori.class)
                 .addAnnotatedClass(WorkExperience.class)
                 .configure();
-            
+
             sessionFactory = config.buildSessionFactory();
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
