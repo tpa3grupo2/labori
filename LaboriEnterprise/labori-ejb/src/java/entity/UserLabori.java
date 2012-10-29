@@ -1,6 +1,8 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -29,7 +31,7 @@ public class UserLabori implements Serializable {
     @Column(length=4000)
     private String additionalInformation;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.PERSIST)
     private Uf uf;
 
     @Column(length = 32)
@@ -44,8 +46,24 @@ public class UserLabori implements Serializable {
     @ManyToOne(cascade=CascadeType.ALL)
     private Field field;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    private Education education;
+    @OneToMany(
+        fetch=FetchType.EAGER,
+        cascade=CascadeType.ALL,
+        mappedBy="user",
+        targetEntity=Education.class,
+        orphanRemoval=true
+    )
+    private Set<Education> educationRecords = new HashSet<Education>();
+
+    @OneToMany(
+        fetch=FetchType.EAGER,
+        cascade= CascadeType.ALL,
+        mappedBy="user",
+        targetEntity=WorkExperience.class,
+        orphanRemoval=true
+    )
+    private Set<WorkExperience> workExperienceRecords;
+
 
     public String getName() {
         return name;
@@ -120,14 +138,6 @@ public class UserLabori implements Serializable {
         this.uf = uf;
     }
 
-    public Education getEducation() {
-        return education;
-    }
-
-    public void setEducation(Education education) {
-        this.education = education;
-    }
-
     public Field getField() {
         return field;
     }
@@ -144,4 +154,29 @@ public class UserLabori implements Serializable {
         this.additionalInformation = additionalInformation;
     }
 
+    public Set<Education> getEducationRecords() {
+        return educationRecords;
+    }
+
+    public void addEducation(Education education) {
+        if (!getEducationRecords().contains(education)) {
+            education.setUser(this);
+            getEducationRecords().add(education);
+        }
+    }
+
+    public void removeEducation(Education education) {
+        //education.setUser(null);
+        getEducationRecords().remove(education);
+    }
+
+    public Set<WorkExperience> getWorkExperienceRecords() {
+        return workExperienceRecords;
+    }
+
+    public void addWorkExperience(WorkExperience workExperienceRecords) {
+        if (!getWorkExperienceRecords().contains(workExperienceRecords)) {
+            getWorkExperienceRecords().add(workExperienceRecords);
+        }
+    }
 }

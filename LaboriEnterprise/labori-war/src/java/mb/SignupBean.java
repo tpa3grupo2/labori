@@ -31,7 +31,7 @@ public class SignupBean implements Serializable {
     }
 
     public String createUser() {
-        user = userLaboriEJB.create(user);
+        userLaboriEJB.create(user);
         userBean.login(user.getEmail(), user.getPassword());
         return "/user/fill-cv?faces-redirect=true";
     }

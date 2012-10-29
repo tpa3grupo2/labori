@@ -45,7 +45,7 @@ public class CurriculumBean implements Serializable {
     }
 
     public String saveUser() {
-        userLaboriEJB.update(userBean.getUser());
+        userLaboriEJB.edit(userBean.getUser());
         userBean.getMessageBean().addMessage("Currículo atualizado com sucesso!", "success");
         return "/user/fill-cv?faces-redirect=true";
     }
@@ -77,17 +77,15 @@ public class CurriculumBean implements Serializable {
         return list;
     }
 
-    public List<Education> getUserEducation() {
-        return userLaboriEJB.getUserEducation(userBean.getUser());
-    }
-
     public void addEducation() {
-        userLaboriEJB.addEducation(userBean.getUser(), education);
+        userBean.getUser().addEducation(education);
+        userLaboriEJB.edit(userBean.getUser());
         education = new Education();
     }
 
     public void removeEducation() {
-        userLaboriEJB.removeEducation(educationToRemove);
+        userBean.getUser().removeEducation(educationToRemove);
+        userBean.setUser(userLaboriEJB.edit(userBean.getUser()));
     }
 
     public List<WorkExperience> getUserWorkExperience() {
@@ -100,7 +98,7 @@ public class CurriculumBean implements Serializable {
     }
 
     public void removeWorkExperience() {
-        userLaboriEJB.removeWorkExperience(workExperienceToRemove);
+
     }
 
     public UserBean getUserBean() {

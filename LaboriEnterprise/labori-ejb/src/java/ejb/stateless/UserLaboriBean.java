@@ -1,48 +1,63 @@
 package ejb.stateless;
 
-import dao.impl.EducationDAOImpl;
-import dao.impl.UserDAOImpl;
-import dao.impl.WorkExperienceDAOImpl;
-import entity.Education;
-import entity.Field;
 import entity.UserLabori;
 import entity.WorkExperience;
+import facade.AbstractFacade;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateless(mappedName="ejb/userLabori")
-public class UserLaboriBean implements UserLaboriBeanLocal {
+public class UserLaboriBean extends AbstractFacade<UserLabori> implements UserLaboriBeanLocal {
 
-    private UserDAOImpl userDAO;
-    private EducationDAOImpl educationDAO;
-    private WorkExperienceDAOImpl workExperienceDAO;
+    @PersistenceContext(unitName = "labori-warPU")
+    private EntityManager em;
 
     public UserLaboriBean() {
-        userDAO = new UserDAOImpl<UserLabori, Long>();
-        educationDAO = new EducationDAOImpl<Education, Long>();
-        workExperienceDAO = new WorkExperienceDAOImpl<WorkExperience, Long>();
+        super(UserLabori.class);
+    }
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
+    @Override
+    public UserLabori edit(UserLabori user) {
+        user = super.edit(user);
+        em.flush();
+        return user;
+    }
+
+    @Override
+    public UserLabori getByEmail(String email) {
+        Query query = em.createQuery("SELECT u FROM UserLabori u WHERE u.email = :email");
+
+        try {
+            return (UserLabori) query
+                    .setParameter("email", email)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public void create (UserLabori user) {
+        user.setUf(em.merge(user.getUf()));
+        em.persist(user);
     }
 
     @Override
     public List<UserLabori> getAll() {
-        return userDAO.listAll();
+        return findAll();
     }
 
     @Override
     public UserLabori getById(Long id) {
-        return (UserLabori) userDAO.get(id);
-    }
-
-    @Override
-    public void update(UserLabori user) {
-        userDAO.startTransaction();
-        user.setField((Field)userDAO.getSession().merge(user.getField()));
-        userDAO.update(user);
-    }
-
-    @Override
-    public void remove(UserLabori user) {
-        userDAO.delete(user);
+        return (UserLabori) find(id);
     }
 
     @Override
@@ -54,90 +69,26 @@ public class UserLaboriBean implements UserLaboriBeanLocal {
         return null;
     }
 
+//    @Override
+//    public Education addEducation(UserLabori user, Education education) {
+//        user.addEducation(education);
+//        em.merge(user);
+//        return education;
+//    }
+//
+//    @Override
+//    public void removeEducation(Education education) {
+//        education = em.merge(education);
+//        em.remove(education);
+//    }
+//
     @Override
-    public UserLabori getByEmail(String email) {
-
-        List<UserLabori> listUsers;
-        UserLabori userExample = new UserLabori();
-        userExample.setEmail(email);
-
-        userDAO.startTransaction();
-        listUsers = userDAO.findByExample(userExample);
-        userDAO.commitTransaction();
-
-        if (listUsers.size() > 0)
-            return listUsers.get(0);
+    public WorkExperience addWorkExperience(UserLabori user, WorkExperience workExperience) {
         return null;
     }
 
     @Override
-    public UserLabori create(UserLabori user) {
-        userDAO.resetSession();
-        userDAO.startTransaction();
-        user = (UserLabori) userDAO.save(user);
-        userDAO.commitTransaction();
-        return user;
-    }
-
-    @Override
-    public List<Education> getUserEducation(UserLabori user) {
-        userDAO.startTransaction();
-
-        Education education = new Education();
-        education.setUser(user);
-        List<Education> listEducation = educationDAO.findByExample(education);
-
-        userDAO.commitTransaction();
-        return listEducation;
-    }
-
-    @Override
-    public Education addEducation(UserLabori user, Education education) {
-        userDAO.startTransaction();
-
-        user = (UserLabori) userDAO.findOneByExample(user);
-        education.setUser(user);
-        education = (Education) educationDAO.save(education);
-
-        userDAO.commitTransaction();
-        return education;
-    }
-
-    @Override
-    public void removeEducation(Education education) {
-        userDAO.startTransaction();
-        educationDAO.delete(education);
-        userDAO.commitTransaction();
-    }
-
-    @Override
     public List<WorkExperience> getWorkExperience(UserLabori user) {
-        userDAO.startTransaction();
-
-        WorkExperience workExperience = new WorkExperience();
-        workExperience.setUser(user);
-        List<WorkExperience> listWorkExperience = workExperienceDAO.findByExample(workExperience);
-
-        userDAO.commitTransaction();
-        return listWorkExperience;
-    }
-
-    @Override
-    public WorkExperience addWorkExperience(UserLabori user, WorkExperience workExperience) {
-        userDAO.startTransaction();
-
-        user = (UserLabori) userDAO.findOneByExample(user);
-        workExperience.setUser(user);
-        workExperience = (WorkExperience) workExperienceDAO.save(workExperience);
-
-        userDAO.commitTransaction();
-        return workExperience;
-    }
-
-    @Override
-    public void removeWorkExperience(WorkExperience workExperience) {
-        userDAO.startTransaction();
-        educationDAO.delete(workExperience);
-        userDAO.commitTransaction();
+        return null;
     }
 }
