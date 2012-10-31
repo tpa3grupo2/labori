@@ -131,7 +131,9 @@
       <SubComponents>
         <Component class="javax.swing.JList" name="listArea">
           <BindingProperties>
-            <BindingProperty name="elements" source="fieldList" target="listArea" targetPath="elements" updateStrategy="0" immediately="false"/>
+            <BindingProperty name="elements" source="fieldList" target="listArea" targetPath="elements" updateStrategy="0" immediately="false">
+              <Property name="name" type="java.lang.String" value=""/>
+            </BindingProperty>
           </BindingProperties>
           <Events>
             <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="listAreaValueChanged"/>

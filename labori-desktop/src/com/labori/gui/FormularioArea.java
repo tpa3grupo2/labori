@@ -4,7 +4,6 @@
  */
 package com.labori.gui;
 
-import com.labori.dao.impl.CompanyDAOImpl;
 import com.labori.dao.impl.FieldDAOImpl;
 
 /**
@@ -43,6 +42,7 @@ public class FormularioArea extends javax.swing.JFrame {
 	 */
 	public FormularioArea() {
 		initComponents();
+                this.fieldDao = new FieldDAOImpl();
 	}
 
 	/**

@@ -38,6 +38,7 @@ public class FrameArea extends javax.swing.JFrame {
 
 	public void atualizarListaEmpresa() {
 		initComponents();
+                
 	}
 
 	/**

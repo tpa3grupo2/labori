@@ -112,7 +112,8 @@ public class MenuAdmin extends javax.swing.JFrame {
 	}//GEN-LAST:event_btnEmpresaActionPerformed
 
 	private void btnAtuacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtuacaoActionPerformed
-		// TODO add your handling code here:
+                this.setVisible(false);
+		this.frameArea.setVisible(true);
 	}//GEN-LAST:event_btnAtuacaoActionPerformed
 
 	private void btnUniversidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUniversidadeActionPerformed
