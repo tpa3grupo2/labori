@@ -5,6 +5,7 @@
 package com.labori.gui;
 
 import com.labori.dao.impl.CompanyDAOImpl;
+import com.labori.dao.impl.FieldDAOImpl;
 import javax.swing.JList;
 
 /**
@@ -13,9 +14,9 @@ import javax.swing.JList;
  */
 public class FrameArea extends javax.swing.JFrame {
 
-	private Company empresaSelecionada;
+	private Field areaSelecionada;
 	private MenuAdmin menuAdmin;
-	private CompanyDAOImpl companyDao;
+	private FieldDAOImpl fieldDao;
 
 	public MenuAdmin getMenuAdmin() {
 		return menuAdmin;
@@ -25,14 +26,15 @@ public class FrameArea extends javax.swing.JFrame {
 		this.menuAdmin = menuAdmin;
 	}
 
-	public Company getEmpresaSelecionada() {
-		return empresaSelecionada;
-	}
+    public Field getAreaSelecionada() {
+        return areaSelecionada;
+    }
 
-	public void setEmpresaSelecionada(Company empresaSelecionada) {
-		this.empresaSelecionada = empresaSelecionada;
-	}
-	private FormularioEmpresa formularioEmpresa;
+    public void setAreaSelecionada(Field areaSelecionada) {
+        this.areaSelecionada = areaSelecionada;
+    }
+        
+	private FormularioArea formularioArea;
 
 	public void atualizarListaEmpresa() {
 		initComponents();
@@ -42,9 +44,9 @@ public class FrameArea extends javax.swing.JFrame {
 	 * Creates new form FrameEmpresa
 	 */
 	public FrameArea() {
-		this.formularioEmpresa = new FormularioEmpresa();
-		this.formularioEmpresa.setFrameEmpresa(this);
-		this.companyDao = new CompanyDAOImpl();
+		this.formularioArea = new FormularioArea();
+		this.formularioArea.setFrameArea(this);
+		this.fieldDao = new FieldDAOImpl();
 		initComponents();
 	}
 
@@ -61,9 +63,11 @@ public class FrameArea extends javax.swing.JFrame {
         laboriPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("laboriPU").createEntityManager();
         companyQuery = java.beans.Beans.isDesignTime() ? null : laboriPUEntityManager.createQuery("SELECT c FROM Company c");
         companyList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : companyQuery.getResultList();
+        fieldQuery = java.beans.Beans.isDesignTime() ? null : laboriPUEntityManager.createQuery("SELECT f FROM Field f");
+        fieldList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : fieldQuery.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listEmpresa = new javax.swing.JList();
+        listArea = new javax.swing.JList();
         jLabel2 = new javax.swing.JLabel();
         btnRemoverEmpresa = new javax.swing.JButton();
         btnAdicionarEmpresa = new javax.swing.JButton();
@@ -76,18 +80,18 @@ public class FrameArea extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Labori - Sistema de Gerenciamento de Currículos");
 
-        org.jdesktop.swingbinding.JListBinding jListBinding = org.jdesktop.swingbinding.SwingBindings.createJListBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, companyList, listEmpresa);
+        org.jdesktop.swingbinding.JListBinding jListBinding = org.jdesktop.swingbinding.SwingBindings.createJListBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, fieldList, listArea);
         bindingGroup.addBinding(jListBinding);
 
-        listEmpresa.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+        listArea.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listEmpresaValueChanged(evt);
+                listAreaValueChanged(evt);
             }
         });
-        jScrollPane1.setViewportView(listEmpresa);
+        jScrollPane1.setViewportView(listArea);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Gerenciamento de Empresas");
+        jLabel2.setText("Gerenciamento de Área de Atuação");
 
         btnRemoverEmpresa.setText("Remover");
         btnRemoverEmpresa.addActionListener(new java.awt.event.ActionListener() {
@@ -173,21 +177,21 @@ public class FrameArea extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void btnAdicionarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarEmpresaActionPerformed
-		this.formularioEmpresa.setEmpresa(new Company());
-		this.formularioEmpresa.mostrarDados();
-		this.formularioEmpresa.setVisible(true);
+		this.formularioArea.setCampo(new Field());
+		this.formularioArea.mostrarDados();
+		this.formularioArea.setVisible(true);
 		this.setVisible(false);
 	}//GEN-LAST:event_btnAdicionarEmpresaActionPerformed
 
-	private void listEmpresaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listEmpresaValueChanged
+	private void listAreaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listAreaValueChanged
 		JList lista = (JList) evt.getSource();
-		this.empresaSelecionada = (Company) lista.getSelectedValue();
-	}//GEN-LAST:event_listEmpresaValueChanged
+		this.areaSelecionada = (Field) lista.getSelectedValue();
+	}//GEN-LAST:event_listAreaValueChanged
 
 	private void btnEditarEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarEmpresaActionPerformed
-		this.formularioEmpresa.setEmpresa(this.empresaSelecionada);
-		this.formularioEmpresa.mostrarDados();
-		this.formularioEmpresa.setVisible(true);
+		this.formularioArea.setCampo(this.areaSelecionada);
+		this.formularioArea.mostrarDados();
+		this.formularioArea.setVisible(true);
 		this.setVisible(false);
 	}//GEN-LAST:event_btnEditarEmpresaActionPerformed
 
@@ -197,9 +201,9 @@ public class FrameArea extends javax.swing.JFrame {
 	}//GEN-LAST:event_btnVoltarActionPerformed
 
 	private void btnRemoverEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverEmpresaActionPerformed
-		if(this.empresaSelecionada!=null){
-			this.listEmpresa.remove(0);
-			this.companyDao.delete(this.empresaSelecionada);
+		if(this.areaSelecionada!=null){
+			this.listArea.remove(0);
+			this.fieldDao.delete(this.areaSelecionada);
 			atualizarListaEmpresa();
 		}
 	}//GEN-LAST:event_btnRemoverEmpresaActionPerformed
@@ -257,11 +261,13 @@ public class FrameArea extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltar;
     private java.util.List<com.labori.gui.Company> companyList;
     private javax.persistence.Query companyQuery;
+    private java.util.List<com.labori.gui.Field> fieldList;
+    private javax.persistence.Query fieldQuery;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.persistence.EntityManager laboriPUEntityManager;
-    private javax.swing.JList listEmpresa;
+    private javax.swing.JList listArea;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

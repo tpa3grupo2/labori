@@ -5,6 +5,7 @@
     <class>com.labori.gui.Company</class>
     <class>com.labori.gui.Uf</class>
     <class>com.labori.gui.University</class>
+    <class>com.labori.gui.Field</class>
     <properties>
       <property name="toplink.jdbc.user" value="admin"/>
       <property name="toplink.jdbc.password" value="admin"/>
