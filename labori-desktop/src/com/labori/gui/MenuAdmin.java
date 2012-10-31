@@ -12,6 +12,7 @@ public class MenuAdmin extends javax.swing.JFrame {
 
 	private FrameEmpresa frameEmpresa;
 	private FrameUniversidade frameUniversidade;
+        private FrameArea frameArea;
 	
 	/**
 	 * Creates new form MenuAdmin
@@ -19,10 +20,14 @@ public class MenuAdmin extends javax.swing.JFrame {
 	public MenuAdmin() {
 		this.frameEmpresa = new FrameEmpresa();
 		this.frameEmpresa.setMenuAdmin(this);
+                
 		
 		this.frameUniversidade = new FrameUniversidade();
 		this.frameUniversidade.setMenuAdmin(this);
-				
+		
+                this.frameArea = new FrameArea();
+                this.frameArea.setMenuAdmin(this);
+                
 		initComponents();
 	}
 

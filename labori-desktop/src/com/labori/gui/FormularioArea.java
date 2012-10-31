@@ -145,13 +145,13 @@ public class FormularioArea extends javax.swing.JFrame {
 		this.fieldDao.create(this.campo);
 		this.setVisible(false);
 		
-		this.frameCampo.atualizarListaEmpresa();
-		this.frameCampo.setVisible(true);
+		this.frameArea.atualizarListaEmpresa();
+		this.frameArea.setVisible(true);
 	}//GEN-LAST:event_btnOkActionPerformed
 
 	private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
 		this.setVisible(false);
-		this.frameCampo.setVisible(true);
+		this.frameArea.setVisible(true);
 	}//GEN-LAST:event_btnCancelarActionPerformed
 
 	/**
