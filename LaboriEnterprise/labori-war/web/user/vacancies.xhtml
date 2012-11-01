@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">Vagas : labori</ui:define>
+        <ui:define name="body">
+            <h1>Vagas</h1>
+            <p class="lead">Confira aqui as vagas disponíveis para <strong>#{userBean.user.field}</strong>:</p>
+            <h:panelGroup rendered="#{empty userBean.user.field}">
+                <p class="lead">Olá! <h:link outcome="/user/fill-cv">Atualize seu currículo</h:link> e adicione sua <strong>área de atuação</strong> para ver as vagas.</p>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{not empty userBean.user.field}">
+                <h:panelGroup rendered="#{not empty userBean.availableVacancies}">
+                    <h:dataTable
+                            styleClass="table table-hover"
+                            columnClasses=",right"
+                            id="jobsVacanciesDTable"
+                            value="#{userBean.availableVacancies}"
+                            var="v">
+                        <h:column>
+                            <f:facet name="header">Vaga</f:facet>
+                            <p class="vacancy-name">#{v.name}</p>
+                            <p class="vacancy-company"><strong>#{v.company}</strong></p>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header"></f:facet>
+                            <h:panelGroup>
+                                <h:commandButton value="Me candidatar" action="#{signupBean.createUser}" styleClass="btn btn-primary">
+                                </h:commandButton>
+                            </h:panelGroup>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{empty userBean.availableVacancies}">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="center">Não há vagas cadastradas para essa área de atuação</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </h:panelGroup>
+            </h:panelGroup>
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,5 +1,7 @@
 package ejb.stateless;
 
+import entity.Field;
+import entity.JobVacancy;
 import entity.UserLabori;
 import entity.WorkExperience;
 import java.util.List;
@@ -18,4 +20,6 @@ public interface UserLaboriBeanLocal {
 
     public List<WorkExperience> getWorkExperience(UserLabori user);
     public WorkExperience addWorkExperience(UserLabori user, WorkExperience workExperience);
+    
+    public List<JobVacancy> getAvailableVacancies (Field field);
 }

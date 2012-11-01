@@ -4,7 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-public class Company implements Serializable {
+public class JobVacancy implements Serializable {
 
     @Id
     @GeneratedValue(generator = "Emp_Gen")
@@ -14,20 +14,15 @@ public class Company implements Serializable {
     @Column(length = 64)
     private String name;
 
-    @Column(unique = true, length = 32)
-    private String cnpj;
+    @ManyToOne(optional=false)
+    private Company company;
+    
+    @ManyToOne(optional=false)
+    private Field field;
 
     @Override
     public String toString() {
         return name;
-    }
-
-    public String getCnpj() {
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
     }
 
     public Long getId() {
@@ -46,6 +41,22 @@ public class Company implements Serializable {
         this.name = name;
     }
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Field getField() {
+        return field;
+    }
+
+    public void setField(Field field) {
+        this.field = field;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -54,7 +65,7 @@ public class Company implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Company other = (Company) obj;
+        final JobVacancy other = (JobVacancy) obj;
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }

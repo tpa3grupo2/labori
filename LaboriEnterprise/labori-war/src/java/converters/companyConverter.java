@@ -1,9 +1,7 @@
 package converters;
 
 import ejb.stateless.CompanyBeanLocal;
-import ejb.stateless.UniversityBeanLocal;
 import entity.Company;
-import entity.University;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;

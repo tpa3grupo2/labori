@@ -1,5 +1,7 @@
 package ejb.stateless;
 
+import entity.Field;
+import entity.JobVacancy;
 import entity.UserLabori;
 import entity.WorkExperience;
 import facade.AbstractFacade;
@@ -27,7 +29,6 @@ public class UserLaboriBean extends AbstractFacade<UserLabori> implements UserLa
     @Override
     public UserLabori edit(UserLabori user) {
         user = super.edit(user);
-        em.flush();
         return user;
     }
 
@@ -90,5 +91,18 @@ public class UserLaboriBean extends AbstractFacade<UserLabori> implements UserLa
     @Override
     public List<WorkExperience> getWorkExperience(UserLabori user) {
         return null;
+    }
+    
+    @Override
+    public List<JobVacancy> getAvailableVacancies (Field field) {
+        Query query = em.createQuery("SELECT j FROM JobVacancy j WHERE j.field = :field");
+
+        try {
+            return (List<JobVacancy>) query
+                    .setParameter("field", field)
+                    .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

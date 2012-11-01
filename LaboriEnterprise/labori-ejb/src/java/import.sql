@@ -65,3 +65,7 @@ INSERT INTO UNIVERSITY (ID, NAME, ADDRESS, UF_ID) VALUES (2, 'Universidade Presb
 INSERT INTO UNIVERSITY (ID, NAME, ADDRESS, UF_ID) VALUES (3, 'Pontifícia Universidade Católica de São Paulo', 'Rua Marquês de São Vicente 225', 35);
 
 INSERT INTO COMPANY (ID, NAME, CNPJ) VALUES (3, 'Carrefour', '123.123/0001-12');
+
+INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID) VALUES (1, 'Auxiliar de administração', 3, 1);
+INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID) VALUES (2, 'Subauxiliar de administração', 3, 1);
+INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID) VALUES (3, 'Gerente do departamento de administração', 3, 1);

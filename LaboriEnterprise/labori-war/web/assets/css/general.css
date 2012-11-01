@@ -51,11 +51,21 @@ footer li {
 }
 
 .right {
-    text-align:right;
+    text-align:right !important;
 }
 
 .center {
     text-align:center !important;
+}
+
+.vacancy-name {
+    font-size:130%;
+    font-weight:bold;
+}
+
+.vacancy-company {
+    font-size:90%;
+    color:#666;
 }
 
 .float-right {

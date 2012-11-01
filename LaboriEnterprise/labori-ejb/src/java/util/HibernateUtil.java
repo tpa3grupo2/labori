@@ -19,6 +19,7 @@ public class HibernateUtil {
                 .addAnnotatedClass(University.class)
                 .addAnnotatedClass(UserLabori.class)
                 .addAnnotatedClass(WorkExperience.class)
+                .addAnnotatedClass(JobVacancy.class)
                 .configure();
 
             sessionFactory = config.buildSessionFactory();

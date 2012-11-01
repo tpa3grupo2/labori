@@ -1,12 +1,13 @@
 package mb;
 
 import ejb.stateless.UserLaboriBeanLocal;
+import entity.JobVacancy;
 import entity.UserLabori;
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 @ManagedBean
@@ -71,5 +72,7 @@ public class UserBean implements Serializable {
         this.messageBean = messageBean;
     }
 
-
+    public List<JobVacancy> getAvailableVacancies() {
+        return userLaboriEJB.getAvailableVacancies(user.getField());
+    }
 }

@@ -166,7 +166,7 @@ public class UserLabori implements Serializable {
     }
 
     public void removeEducation(Education education) {
-        //education.setUser(null);
+        education.setUser(null);
         getEducationRecords().remove(education);
     }
 
@@ -174,9 +174,14 @@ public class UserLabori implements Serializable {
         return workExperienceRecords;
     }
 
-    public void addWorkExperience(WorkExperience workExperienceRecords) {
-        if (!getWorkExperienceRecords().contains(workExperienceRecords)) {
-            getWorkExperienceRecords().add(workExperienceRecords);
+    public void addWorkExperience(WorkExperience workExperience) {
+        if (!getWorkExperienceRecords().contains(workExperience)) {
+            getWorkExperienceRecords().add(workExperience);
         }
+    }
+    
+    public void removeWorkExperience(WorkExperience workExperience) {
+        workExperience.setUser(null);
+        getWorkExperienceRecords().remove(workExperience);
     }
 }
