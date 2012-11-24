@@ -1,37 +1,24 @@
 package ejb.stateless;
 
-import dao.impl.FieldDAOImpl;
 import entity.Field;
-import entity.Uf;
 import java.util.List;
 import javax.ejb.Stateless;
-import org.hibernate.Hibernate;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Stateless(mappedName="ejb/field")
 public class FieldBean implements FieldBeanLocal {
 
-    private FieldDAOImpl FieldDAO;
-
-    public FieldBean() {
-        FieldDAO = new FieldDAOImpl<Field, Long>();
-    }
+    @PersistenceContext(unitName = "labori-warPU")
+    private EntityManager em;
 
     @Override
     public List<Field> getAll() {
-        FieldDAO.resetSession();
-        FieldDAO.startTransaction();
-        List<Field> listField = FieldDAO.listAll();
-        FieldDAO.commitTransaction();
-        return listField;
-
+        return em.createQuery("select x from Field x").getResultList();
     }
 
     @Override
     public Field getById(Long id) {
-        FieldDAO.startTransaction();
-        Field field = (Field) FieldDAO.get(id);
-        Hibernate.initialize(field);
-        FieldDAO.commitTransaction();
-        return field;
+        return em.find(Field.class, id);
     }
 }

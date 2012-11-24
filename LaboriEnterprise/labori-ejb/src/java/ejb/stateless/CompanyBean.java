@@ -1,26 +1,24 @@
 package ejb.stateless;
 
-import dao.impl.CompanyDAOImpl;
 import entity.Company;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Stateless(mappedName="ejb/company")
 public class CompanyBean implements CompanyBeanLocal {
 
-    private CompanyDAOImpl companyDAO;
-
-    public CompanyBean() {
-        companyDAO = new CompanyDAOImpl<Company, Long>();
-    }
+    @PersistenceContext(unitName = "labori-warPU")
+    private EntityManager em;
 
     @Override
     public List<Company> getAll() {
-        return companyDAO.listAll();
+        return em.createQuery("select x from Company x").getResultList();
     }
 
     @Override
     public Company getById(Long id) {
-        return (Company) companyDAO.get(id);
+        return em.find(Company.class, id);
     }
 }

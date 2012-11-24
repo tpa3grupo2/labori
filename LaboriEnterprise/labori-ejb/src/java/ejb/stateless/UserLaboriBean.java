@@ -1,10 +1,6 @@
 package ejb.stateless;
 
-import entity.Field;
-import entity.JobVacancy;
-import entity.UserLabori;
-import entity.WorkExperience;
-import facade.AbstractFacade;
+import entity.*;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -12,23 +8,14 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 @Stateless(mappedName="ejb/userLabori")
-public class UserLaboriBean extends AbstractFacade<UserLabori> implements UserLaboriBeanLocal {
+public class UserLaboriBean implements UserLaboriBeanLocal {
 
     @PersistenceContext(unitName = "labori-warPU")
     private EntityManager em;
 
-    public UserLaboriBean() {
-        super(UserLabori.class);
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-
     @Override
     public UserLabori edit(UserLabori user) {
-        user = super.edit(user);
+        em.merge(user);
         return user;
     }
 
@@ -47,18 +34,17 @@ public class UserLaboriBean extends AbstractFacade<UserLabori> implements UserLa
 
     @Override
     public void create (UserLabori user) {
-        user.setUf(em.merge(user.getUf()));
-        em.persist(user);
+        em.merge(user);
     }
 
     @Override
     public List<UserLabori> getAll() {
-        return findAll();
+        return em.createQuery("select x from UserLabori x").getResultList();
     }
 
     @Override
     public UserLabori getById(Long id) {
-        return (UserLabori) find(id);
+        return em.find(UserLabori.class, id);
     }
 
     @Override
@@ -70,29 +56,6 @@ public class UserLaboriBean extends AbstractFacade<UserLabori> implements UserLa
         return null;
     }
 
-//    @Override
-//    public Education addEducation(UserLabori user, Education education) {
-//        user.addEducation(education);
-//        em.merge(user);
-//        return education;
-//    }
-//
-//    @Override
-//    public void removeEducation(Education education) {
-//        education = em.merge(education);
-//        em.remove(education);
-//    }
-//
-    @Override
-    public WorkExperience addWorkExperience(UserLabori user, WorkExperience workExperience) {
-        return null;
-    }
-
-    @Override
-    public List<WorkExperience> getWorkExperience(UserLabori user) {
-        return null;
-    }
-    
     @Override
     public List<JobVacancy> getAvailableVacancies (Field field) {
         Query query = em.createQuery("SELECT j FROM JobVacancy j WHERE j.field = :field");
@@ -105,4 +68,35 @@ public class UserLaboriBean extends AbstractFacade<UserLabori> implements UserLa
             return null;
         }
     }
+
+    @Override
+    public void remove(UserLabori user) {
+        em.remove(user);
+    }
+
+    @Override
+    public UserLabori addEducation(UserLabori user, Education education) {
+        user.addEducation(education);
+        return em.merge(user);
+    }
+
+    @Override
+    public UserLabori removeEducation(UserLabori user, Education education) {
+        user.removeEducation(education);
+        return em.merge(user);
+    }
+
+    @Override
+    public UserLabori addWorkExperience(UserLabori user, WorkExperience workExperience) {
+        user.addWorkExperience(workExperience);
+        return em.merge(user);
+    }
+
+    @Override
+    public UserLabori removeWorkExperience(UserLabori user, WorkExperience workExperience) {
+        user.removeWorkExperience(workExperience);
+        return em.merge(user);
+    }
+
 }
+

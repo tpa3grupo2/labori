@@ -3,10 +3,7 @@ package mb;
 import ejb.stateless.CompanyBeanLocal;
 import ejb.stateless.UniversityBeanLocal;
 import ejb.stateless.UserLaboriBeanLocal;
-import entity.Company;
-import entity.Education;
-import entity.University;
-import entity.WorkExperience;
+import entity.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,6 +20,8 @@ public class CurriculumBean implements Serializable {
 
     private Education education, educationToRemove;
     private WorkExperience workExperience, workExperienceToRemove;
+    private JobVacancy jobVacancyToApply;
+
     private UserLaboriBeanLocal userLaboriEJB;
     private UniversityBeanLocal universityEJB;
     private CompanyBeanLocal companyEJB;
@@ -78,29 +77,21 @@ public class CurriculumBean implements Serializable {
     }
 
     public void addEducation() {
-        userBean.getUser().addEducation(education);
-        userLaboriEJB.edit(userBean.getUser());
+        userBean.setUser(userLaboriEJB.addEducation(userBean.getUser(), education));
         education = new Education();
     }
 
     public void removeEducation() {
-        userBean.getUser().removeEducation(educationToRemove);
-        userBean.setUser(userLaboriEJB.edit(userBean.getUser()));
-    }
-
-    public List<WorkExperience> getUserWorkExperience() {
-        return userLaboriEJB.getWorkExperience(userBean.getUser());
+        userBean.setUser(userLaboriEJB.removeEducation(userBean.getUser(), educationToRemove));
     }
 
     public void addWorkExperience() {
-        userBean.getUser().addWorkExperience(workExperience);
-        userLaboriEJB.edit(userBean.getUser());
+        userBean.setUser(userLaboriEJB.addWorkExperience(userBean.getUser(), workExperience));
         workExperience = new WorkExperience();
     }
 
     public void removeWorkExperience() {
-        userBean.getUser().removeWorkExperience(workExperienceToRemove);
-        userBean.setUser(userLaboriEJB.edit(userBean.getUser()));
+        userBean.setUser(userLaboriEJB.removeWorkExperience(userBean.getUser(), workExperienceToRemove));
     }
 
     public UserBean getUserBean() {
@@ -133,5 +124,17 @@ public class CurriculumBean implements Serializable {
 
     public void setWorkExperienceToRemove(WorkExperience workExperienceToRemove) {
         this.workExperienceToRemove = workExperienceToRemove;
+    }
+
+    public JobVacancy getJobVacancyToApply() {
+        return jobVacancyToApply;
+    }
+
+    public void setJobVacancyToApply(JobVacancy jobVacancyToApply) {
+        this.jobVacancyToApply = jobVacancyToApply;
+    }
+
+    public void applyToJobVacancy(JobVacancy jobVacancy) {
+        System.out.println(jobVacancy);
     }
 }

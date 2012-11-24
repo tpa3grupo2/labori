@@ -1,9 +1,6 @@
 package ejb.stateless;
 
-import entity.Field;
-import entity.JobVacancy;
-import entity.UserLabori;
-import entity.WorkExperience;
+import entity.*;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -18,8 +15,11 @@ public interface UserLaboriBeanLocal {
     public void remove(UserLabori user);
     public UserLabori checkPass(String email, String password);
 
-    public List<WorkExperience> getWorkExperience(UserLabori user);
-    public WorkExperience addWorkExperience(UserLabori user, WorkExperience workExperience);
-    
+    public UserLabori addEducation(UserLabori user, Education education);
+    public UserLabori removeEducation(UserLabori user, Education education);
+
+    public UserLabori addWorkExperience(UserLabori user, WorkExperience workExperience);
+    public UserLabori removeWorkExperience(UserLabori user, WorkExperience workExperience);
+
     public List<JobVacancy> getAvailableVacancies (Field field);
 }

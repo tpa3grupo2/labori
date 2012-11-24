@@ -1,35 +1,26 @@
 package ejb.stateless;
 
-import dao.impl.UfDAOImpl;
 import entity.Uf;
 import java.util.List;
 import javax.ejb.Stateless;
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaQuery;
 
 @Stateless(mappedName="ejb/uf")
 public class UfBean implements UfBeanLocal {
-    private UfDAOImpl ufDAO;
 
-    public UfBean() {
-        ufDAO = new UfDAOImpl<Uf, Long>();
-    }
+    @PersistenceContext(unitName = "labori-warPU")
+    private EntityManager em;
 
     @Override
     public List<Uf> getAll() {
-        ufDAO.resetSession();
-        ufDAO.startTransaction();
-        List<Uf> listUf = ufDAO.listAll();
-        ufDAO.commitTransaction();
-        return listUf;
+        return em.createQuery("select x from Uf x").getResultList();
     }
 
     @Override
     public Uf getById(Long id) {
-        ufDAO.startTransaction();
-        Uf uf = (Uf) ufDAO.get(id);
-        Hibernate.initialize(uf);
-        ufDAO.commitTransaction();
-        return uf;
+        return em.find(Uf.class, id);
     }
 }

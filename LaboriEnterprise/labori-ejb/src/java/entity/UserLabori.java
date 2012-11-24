@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(
@@ -48,21 +49,31 @@ public class UserLabori implements Serializable {
 
     @OneToMany(
         fetch=FetchType.EAGER,
-        cascade=CascadeType.ALL,
+        cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},
         mappedBy="user",
         targetEntity=Education.class,
         orphanRemoval=true
     )
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+            org.hibernate.annotations.CascadeType.DELETE,
+            org.hibernate.annotations.CascadeType.MERGE,
+            org.hibernate.annotations.CascadeType.PERSIST,
+            org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
     private Set<Education> educationRecords = new HashSet<Education>();
 
     @OneToMany(
         fetch=FetchType.EAGER,
-        cascade= CascadeType.ALL,
+        cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},
         mappedBy="user",
         targetEntity=WorkExperience.class,
         orphanRemoval=true
     )
-    private Set<WorkExperience> workExperienceRecords;
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+            org.hibernate.annotations.CascadeType.DELETE,
+            org.hibernate.annotations.CascadeType.MERGE,
+            org.hibernate.annotations.CascadeType.PERSIST,
+            org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
+    private Set<WorkExperience> workExperienceRecords  = new HashSet<WorkExperience>();
 
 
     public String getName() {
@@ -166,7 +177,6 @@ public class UserLabori implements Serializable {
     }
 
     public void removeEducation(Education education) {
-        education.setUser(null);
         getEducationRecords().remove(education);
     }
 
@@ -176,12 +186,12 @@ public class UserLabori implements Serializable {
 
     public void addWorkExperience(WorkExperience workExperience) {
         if (!getWorkExperienceRecords().contains(workExperience)) {
+            workExperience.setUser(this);
             getWorkExperienceRecords().add(workExperience);
         }
     }
-    
+
     public void removeWorkExperience(WorkExperience workExperience) {
-        workExperience.setUser(null);
         getWorkExperienceRecords().remove(workExperience);
     }
 }

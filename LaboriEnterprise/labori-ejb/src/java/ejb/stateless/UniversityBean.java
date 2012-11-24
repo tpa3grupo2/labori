@@ -1,31 +1,24 @@
 package ejb.stateless;
 
-import dao.impl.UniversityDAOImpl;
-import entity.Field;
 import entity.University;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Stateless(mappedName="ejb/university")
 public class UniversityBean implements UniversityBeanLocal {
 
-    private UniversityDAOImpl universityDAO;
-
-    public UniversityBean() {
-        universityDAO = new UniversityDAOImpl<University, Long>();
-    }
+    @PersistenceContext(unitName = "labori-warPU")
+    private EntityManager em;
 
     @Override
     public List<University> getAll() {
-        universityDAO.resetSession();
-        universityDAO.startTransaction();
-        List<University> list = universityDAO.listAll();
-        universityDAO.commitTransaction();
-        return list;
+        return em.createQuery("select x from University x").getResultList();
     }
 
     @Override
     public University getById(Long id) {
-        return (University) universityDAO.get(id);
+        return em.find(University.class, id);
     }
 }

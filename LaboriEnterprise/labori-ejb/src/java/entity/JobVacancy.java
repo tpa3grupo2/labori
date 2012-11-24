@@ -16,9 +16,15 @@ public class JobVacancy implements Serializable {
 
     @ManyToOne(optional=false)
     private Company company;
-    
+
     @ManyToOne(optional=false)
     private Field field;
+
+    @Column(length=512)
+    private String description;
+
+    @Column()
+    private float salary;
 
     @Override
     public String toString() {
@@ -55,6 +61,22 @@ public class JobVacancy implements Serializable {
 
     public void setField(Field field) {
         this.field = field;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public float getSalary() {
+        return salary;
+    }
+
+    public void setSalary(float salary) {
+        this.salary = salary;
     }
 
     @Override
