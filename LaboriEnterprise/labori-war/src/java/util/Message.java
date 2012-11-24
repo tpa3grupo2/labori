@@ -6,7 +6,7 @@ public class Message implements Serializable {
 
     private String text;
     /*
-     * Possibles states:
+     * Possible states:
      *  block
      *  error
      *  success

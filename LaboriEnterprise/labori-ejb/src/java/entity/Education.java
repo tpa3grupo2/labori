@@ -17,10 +17,10 @@ public class Education implements Serializable {
     @Column(length=64)
     private String curse;
 
-    @ManyToOne()
+    @ManyToOne(optional=false)
     private UserLabori user;
 
-    @ManyToOne()
+    @ManyToOne(optional=false)
     private University university;
 
     public String getCurse() {
@@ -69,5 +69,27 @@ public class Education implements Serializable {
 
     public void setUser(UserLabori user) {
         this.user = user;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Education other = (Education) obj;
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + (this.id != null ? this.id.hashCode() : 0);
+        return hash;
     }
 }

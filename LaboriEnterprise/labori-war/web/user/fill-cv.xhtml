@@ -39,42 +39,41 @@
                         <div class="span8">
                             <p>Adicione abaixo a sua formação acadêmica</p>
                     <h:panelGroup id="outerEducationDTable">
-                        <ui:fragment rendered="#{curriculumBean.userEducation.size() > 0}">
-                            <h:dataTable
-                                    styleClass="table table-striped table-hover table-bordered"
-                                    columnClasses="center,,,,center"
-                                    id="educationDTable"
-                                    value="#{curriculumBean.userEducation}"
-                                    var="o">
-                                <h:column>
-                                    <f:facet name="header">#</f:facet>
-                                    #{utilsBean.tableCounter}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Ano de formação</f:facet>
-                                    #{o.endYear}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Universidade</f:facet>
-                                    #{o.university}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">Curso</f:facet>
-                                    #{o.curse}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header"></f:facet>
-                                    <small>
-                                        <h:commandLink action="#{curriculumBean.removeEducation}">
-                                            <f:setPropertyActionListener target="#{curriculumBean.educationIdToRemove}" value="#{o.id}" />
-                                            <i class="icon-remove"></i> Remover
-                                            <f:ajax render=":fillcv:outerEducationDTable"></f:ajax>
-                                        </h:commandLink>
-                                    </small>
-                                </h:column>
-                            </h:dataTable>
-                        </ui:fragment>
-                        <ui:fragment rendered="#{curriculumBean.userEducation.size() == 0}">
+                        <h:dataTable
+                                rendered="#{userBean.user.educationRecords.size() > 0}"
+                                styleClass="table table-striped table-hover table-bordered"
+                                columnClasses="center,,,,center"
+                                id="educationDTable"
+                                value="#{userBean.user.educationRecords.setToList}"
+                                var="o">
+                            <h:column>
+                                <f:facet name="header">#</f:facet>
+                                #{utilsBean.tableCounter}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Ano de formação</f:facet>
+                                #{o.endYear}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Universidade</f:facet>
+                                #{o.university}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Curso</f:facet>
+                                #{o.curse}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"></f:facet>
+                                <small>
+                                    <h:commandLink action="#{curriculumBean.removeEducation}">
+                                        <f:setPropertyActionListener target="#{curriculumBean.educationToRemove}" value="#{o}" />
+                                        <i class="icon-remove"></i> Remover
+                                        <f:ajax render=":fillcv:outerEducationDTable"></f:ajax>
+                                    </h:commandLink>
+                                </small>
+                            </h:column>
+                        </h:dataTable>
+                        <ui:fragment rendered="#{userBean.user.educationRecords.size() == 0}">
                             <table class="table table-striped table-hover table-bordered">
                                 <thead>
                                     <tr>
@@ -100,12 +99,12 @@
                         <div class="span8">
                             <p>Adicione abaixo a sua formação acadêmica</p>
                     <h:panelGroup id="outerWorkExperienceDTable">
-                        <ui:fragment rendered="#{curriculumBean.userWorkExperience.size() > 0}">
+                        <ui:fragment rendered="#{userBean.user.workExperienceRecords.size() > 0}">
                             <h:dataTable
                                     styleClass="table table-striped table-hover table-bordered"
                                     columnClasses="center,,,,,center"
                                     id="workExperienceDTable"
-                                    value="#{curriculumBean.userWorkExperience}"
+                                    value="#{userBean.user.workExperienceRecords.setToList}"
                                     var="o">
                                 <h:column>
                                     <f:facet name="header">#</f:facet>
@@ -131,7 +130,7 @@
                                     <f:facet name="header"></f:facet>
                                     <small>
                                         <h:commandLink action="#{curriculumBean.removeWorkExperience}">
-                                            <f:setPropertyActionListener target="#{curriculumBean.workExperienceIdToRemove}" value="#{o.id}" />
+                                            <f:setPropertyActionListener target="#{curriculumBean.workExperienceToRemove}" value="#{o}" />
                                             <i class="icon-remove"></i> Remover
                                             <f:ajax render=":fillcv:outerWorkExperienceDTable"></f:ajax>
                                         </h:commandLink>
@@ -139,7 +138,7 @@
                                 </h:column>
                             </h:dataTable>
                         </ui:fragment>
-                        <ui:fragment rendered="#{curriculumBean.userWorkExperience.size() == 0}">
+                        <ui:fragment rendered="#{userBean.user.workExperienceRecords.size() == 0}">
                             <table class="table table-striped table-hover table-bordered">
                                 <thead>
                                     <tr>

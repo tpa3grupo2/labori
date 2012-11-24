@@ -1,7 +1,10 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
+import org.hibernate.annotations.Cascade;
 
 @Entity
 @Table(
@@ -29,7 +32,7 @@ public class UserLabori implements Serializable {
     @Column(length=4000)
     private String additionalInformation;
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.PERSIST)
     private Uf uf;
 
     @Column(length = 32)
@@ -44,8 +47,34 @@ public class UserLabori implements Serializable {
     @ManyToOne(cascade=CascadeType.ALL)
     private Field field;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    private Education education;
+    @OneToMany(
+        fetch=FetchType.EAGER,
+        cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},
+        mappedBy="user",
+        targetEntity=Education.class,
+        orphanRemoval=true
+    )
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+            org.hibernate.annotations.CascadeType.DELETE,
+            org.hibernate.annotations.CascadeType.MERGE,
+            org.hibernate.annotations.CascadeType.PERSIST,
+            org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
+    private Set<Education> educationRecords = new HashSet<Education>();
+
+    @OneToMany(
+        fetch=FetchType.EAGER,
+        cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},
+        mappedBy="user",
+        targetEntity=WorkExperience.class,
+        orphanRemoval=true
+    )
+    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE,
+            org.hibernate.annotations.CascadeType.DELETE,
+            org.hibernate.annotations.CascadeType.MERGE,
+            org.hibernate.annotations.CascadeType.PERSIST,
+            org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
+    private Set<WorkExperience> workExperienceRecords  = new HashSet<WorkExperience>();
+
 
     public String getName() {
         return name;
@@ -120,14 +149,6 @@ public class UserLabori implements Serializable {
         this.uf = uf;
     }
 
-    public Education getEducation() {
-        return education;
-    }
-
-    public void setEducation(Education education) {
-        this.education = education;
-    }
-
     public Field getField() {
         return field;
     }
@@ -144,4 +165,33 @@ public class UserLabori implements Serializable {
         this.additionalInformation = additionalInformation;
     }
 
+    public Set<Education> getEducationRecords() {
+        return educationRecords;
+    }
+
+    public void addEducation(Education education) {
+        if (!getEducationRecords().contains(education)) {
+            education.setUser(this);
+            getEducationRecords().add(education);
+        }
+    }
+
+    public void removeEducation(Education education) {
+        getEducationRecords().remove(education);
+    }
+
+    public Set<WorkExperience> getWorkExperienceRecords() {
+        return workExperienceRecords;
+    }
+
+    public void addWorkExperience(WorkExperience workExperience) {
+        if (!getWorkExperienceRecords().contains(workExperience)) {
+            workExperience.setUser(this);
+            getWorkExperienceRecords().add(workExperience);
+        }
+    }
+
+    public void removeWorkExperience(WorkExperience workExperience) {
+        getWorkExperienceRecords().remove(workExperience);
+    }
 }

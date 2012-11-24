@@ -1,6 +1,9 @@
 
 package mb;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 
@@ -18,4 +21,10 @@ public class utilsBean {
     public Integer getTableCounter() {
         return tableCounter++;
     }
+
+    public String realFormat(Float value) {
+        DecimalFormat df  = new DecimalFormat("###,###,###.00", new DecimalFormatSymbols(new Locale("pt","BR")));
+        return df.format(value);
+    }
+
 }

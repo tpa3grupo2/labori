@@ -1,9 +1,9 @@
 package mb;
 
-import entity.Company;
-import entity.Education;
-import entity.University;
-import entity.WorkExperience;
+import ejb.stateless.CompanyBeanLocal;
+import ejb.stateless.UniversityBeanLocal;
+import ejb.stateless.UserLaboriBeanLocal;
+import entity.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,16 +11,20 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import util.GeneralFactory;
+import javax.naming.NamingException;
+import util.GetEJB;
 
 @ManagedBean
 @ViewScoped
 public class CurriculumBean implements Serializable {
 
-    private Education education;
-    private WorkExperience workExperience;
-    private Integer educationIdToRemove;
-    private Integer workExperienceIdToRemove;
+    private Education education, educationToRemove;
+    private WorkExperience workExperience, workExperienceToRemove;
+    private JobVacancy jobVacancyToApply;
+
+    private UserLaboriBeanLocal userLaboriEJB;
+    private UniversityBeanLocal universityEJB;
+    private CompanyBeanLocal companyEJB;
 
     @ManagedProperty("#{userBean}")
     private UserBean userBean;
@@ -29,20 +33,20 @@ public class CurriculumBean implements Serializable {
         return "/dashboard";
     }
 
-    public CurriculumBean() {
+    public CurriculumBean() throws NamingException {
         education = new Education();
         workExperience = new WorkExperience();
+
+        GetEJB ejbGetter = new GetEJB();
+        userLaboriEJB = ejbGetter.getUserLabori();
+        universityEJB = ejbGetter.getUniversity();
+        companyEJB = ejbGetter.getCompany();
     }
 
     public String saveUser() {
-
-        GeneralFactory<entity.UserLabori> userFactory
-                = new GeneralFactory<entity.UserLabori>("UserLabori");
-
+        userLaboriEJB.edit(userBean.getUser());
         userBean.getMessageBean().addMessage("Currículo atualizado com sucesso!", "success");
-
-        userFactory.update(userBean.getUser());
-        return "/user/fill-cv?faces-redirect=true";
+        return "/user/vacancies?faces-redirect=true";
     }
 
     public Education getEducation() {
@@ -54,17 +58,11 @@ public class CurriculumBean implements Serializable {
     }
 
     public List<University> getAvailableUniversities() {
-        GeneralFactory<entity.University> universityFactory
-                = new GeneralFactory<entity.University>("University");
-
-        return universityFactory.getAll();
+        return universityEJB.getAll();
     }
 
     public List<Company> getAvailableCompanies() {
-        GeneralFactory<entity.Company> companyFactory
-                = new GeneralFactory<entity.Company>("Company");
-
-        return companyFactory.getAll();
+        return companyEJB.getAll();
     }
 
     public List<String> getAvailableYears() {
@@ -78,52 +76,23 @@ public class CurriculumBean implements Serializable {
         return list;
     }
 
-    public List<Education> getUserEducation() {
-        GeneralFactory<entity.Education> educationFactory
-                = new GeneralFactory<entity.Education>("Education");
-
-        return educationFactory.getAllfromUser(userBean.getUser());
-    }
-
     public void addEducation() {
-        GeneralFactory<entity.University> universityFactory
-                = new GeneralFactory<entity.University>("University");
-
-        education.setUser(userBean.getUser());
-        universityFactory.create(education);
+        userBean.setUser(userLaboriEJB.addEducation(userBean.getUser(), education));
         education = new Education();
     }
 
     public void removeEducation() {
-        GeneralFactory<entity.Education> educationFactory
-                = new GeneralFactory<entity.Education>("Education");
-
-        educationFactory.removeFromId(educationIdToRemove);
-    }
-
-    public List<WorkExperience> getUserWorkExperience() {
-        GeneralFactory<entity.WorkExperience> workExperienceFactory
-                = new GeneralFactory<entity.WorkExperience>("WorkExperience");
-
-        return workExperienceFactory.getAllfromUser(userBean.getUser());
+        userBean.setUser(userLaboriEJB.removeEducation(userBean.getUser(), educationToRemove));
     }
 
     public void addWorkExperience() {
-        GeneralFactory<entity.WorkExperience> workExperienceFactory
-                = new GeneralFactory<entity.WorkExperience>("WorkExperience");
-
-        workExperience.setUser(userBean.getUser());
-        workExperienceFactory.create(workExperience);
+        userBean.setUser(userLaboriEJB.addWorkExperience(userBean.getUser(), workExperience));
         workExperience = new WorkExperience();
     }
 
     public void removeWorkExperience() {
-        GeneralFactory<entity.WorkExperience> workExperienceFactory
-                = new GeneralFactory<entity.WorkExperience>("WorkExperience");
-
-        workExperienceFactory.removeFromId(workExperienceIdToRemove);
+        userBean.setUser(userLaboriEJB.removeWorkExperience(userBean.getUser(), workExperienceToRemove));
     }
-
 
     public UserBean getUserBean() {
         return userBean;
@@ -131,14 +100,6 @@ public class CurriculumBean implements Serializable {
 
     public void setUserBean(UserBean userBean) {
         this.userBean = userBean;
-    }
-
-    public Integer getEducationIdToRemove() {
-        return educationIdToRemove;
-    }
-
-    public void setEducationIdToRemove(Integer educationIdToRemove) {
-        this.educationIdToRemove = educationIdToRemove;
     }
 
     public WorkExperience getWorkExperience() {
@@ -149,11 +110,31 @@ public class CurriculumBean implements Serializable {
         this.workExperience = workExperience;
     }
 
-    public Integer getWorkExperienceIdToRemove() {
-        return workExperienceIdToRemove;
+    public Education getEducationToRemove() {
+        return educationToRemove;
     }
 
-    public void setWorkExperienceIdToRemove(Integer workExperienceIdToRemove) {
-        this.workExperienceIdToRemove = workExperienceIdToRemove;
+    public void setEducationToRemove(Education educationToRemove) {
+        this.educationToRemove = educationToRemove;
+    }
+
+    public WorkExperience getWorkExperienceToRemove() {
+        return workExperienceToRemove;
+    }
+
+    public void setWorkExperienceToRemove(WorkExperience workExperienceToRemove) {
+        this.workExperienceToRemove = workExperienceToRemove;
+    }
+
+    public JobVacancy getJobVacancyToApply() {
+        return jobVacancyToApply;
+    }
+
+    public void setJobVacancyToApply(JobVacancy jobVacancyToApply) {
+        this.jobVacancyToApply = jobVacancyToApply;
+    }
+
+    public void applyToJobVacancy(JobVacancy jobVacancy) {
+        System.out.println(jobVacancy);
     }
 }

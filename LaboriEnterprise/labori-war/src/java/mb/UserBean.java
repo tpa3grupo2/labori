@@ -1,13 +1,14 @@
 package mb;
 
+import ejb.stateless.UserLaboriBeanLocal;
+import entity.JobVacancy;
 import entity.UserLabori;
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import util.HibernateUtil;
+import javax.naming.NamingException;
 
 @ManagedBean
 @SessionScoped
@@ -15,13 +16,16 @@ public class UserBean implements Serializable {
 
     private UserLabori user;
     private boolean logged;
+    private UserLaboriBeanLocal userLaboriEJB;
 
     @ManagedProperty("#{messageBean}")
     private MessageBean messageBean;
 
-    public UserBean() {
+    public UserBean() throws NamingException {
         super();
         reset();
+
+        userLaboriEJB = new util.GetEJB().getUserLabori();
     }
 
     private void reset() {
@@ -31,21 +35,12 @@ public class UserBean implements Serializable {
 
     public boolean login(String email, String password) {
 
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-
-
-        Query query = session.createQuery("from UserLabori u where email = :email and password = :password")
-                .setParameter("email", email.toString())
-                .setParameter("password", password.toString());
-
-        user = (UserLabori) query.uniqueResult();
+        user = userLaboriEJB.checkPass(email, password);
 
         if (user != null) {
             setLogged(true);
             return true;
         }
-
         return false;
     }
 
@@ -75,5 +70,10 @@ public class UserBean implements Serializable {
 
     public void setMessageBean(MessageBean messageBean) {
         this.messageBean = messageBean;
+    }
+
+    public List<JobVacancy> getAvailableVacancies() {
+        List<JobVacancy> a = userLaboriEJB.getAvailableVacancies(user.getField());
+        return a;
     }
 }

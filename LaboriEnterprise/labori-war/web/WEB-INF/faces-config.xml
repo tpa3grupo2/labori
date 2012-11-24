@@ -10,8 +10,10 @@
         <render-kit-factory>org.omnifaces.renderkit.Html5RenderKitFactory</render-kit-factory>
     </factory>
      <application>
+         <!-- used to list sets on datatables -->
+         <el-resolver>util.SetToListELResolver</el-resolver>
         <locale-config>
-            <!--default-locale>pt_BR</default-locale -->
+            <default-locale>pt_BR</default-locale>
         </locale-config>
         <message-bundle>
             Messages
