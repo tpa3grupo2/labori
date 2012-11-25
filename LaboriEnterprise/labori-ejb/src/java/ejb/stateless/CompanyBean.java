@@ -3,6 +3,7 @@ package ejb.stateless;
 import entity.Company;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -21,4 +22,29 @@ public class CompanyBean implements CompanyBeanLocal {
     public Company getById(Long id) {
         return em.find(Company.class, id);
     }
+
+    @Override
+    public Company getByCNPJ(String cnpj) {
+        Query query = em.createQuery("SELECT x FROM Company x WHERE x.cnpj = :cnpj");
+
+        try {
+            Company c = (Company) query
+                    .setParameter("cnpj", cnpj)
+                    .getSingleResult();
+            return c;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Company checkPass(String cnpj, String password) {
+        Company companyMatched = getByCNPJ(cnpj);
+
+        if (companyMatched != null && companyMatched.getPassword().equals(password))
+            return companyMatched;
+        return null;
+
+    }
+
 }

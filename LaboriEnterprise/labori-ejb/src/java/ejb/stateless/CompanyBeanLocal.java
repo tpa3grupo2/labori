@@ -8,4 +8,7 @@ import javax.ejb.Remote;
 public interface CompanyBeanLocal {
     public List<Company> getAll();
     public Company getById(Long id);
+
+    public Company getByCNPJ(String cnpj);
+    public Company checkPass(String cnpj, String password);
 }

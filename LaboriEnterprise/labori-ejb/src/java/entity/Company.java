@@ -14,8 +14,11 @@ public class Company implements Serializable {
     @Column(length = 64)
     private String name;
 
-    @Column(unique = true, length = 32)
+    @Column(unique = true, length = 18)
     private String cnpj;
+
+    @Column(length = 32)
+    private String password;
 
     @Override
     public String toString() {
@@ -44,6 +47,14 @@ public class Company implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
