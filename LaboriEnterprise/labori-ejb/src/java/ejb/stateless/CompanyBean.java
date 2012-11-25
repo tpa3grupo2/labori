@@ -1,6 +1,8 @@
 package ejb.stateless;
 
 import entity.Company;
+import entity.JobVacancy;
+import entity.UserLabori;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.Query;
@@ -45,6 +47,29 @@ public class CompanyBean implements CompanyBeanLocal {
             return companyMatched;
         return null;
 
+    }
+
+    @Override
+    public List<JobVacancy> getAllVacancies(Company company) {
+        Query query = em.createQuery("SELECT x FROM JobVacancy x WHERE x.company = :company");
+
+        try {
+            return (List<JobVacancy>) query
+                    .setParameter("company", company)
+                    .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<UserLabori> getVacancyCandidates(JobVacancy vacancy) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int getVacancyCandidatesCount(JobVacancy vacancy) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

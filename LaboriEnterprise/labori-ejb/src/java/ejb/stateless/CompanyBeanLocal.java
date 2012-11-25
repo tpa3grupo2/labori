@@ -1,6 +1,8 @@
 package ejb.stateless;
 
 import entity.Company;
+import entity.JobVacancy;
+import entity.UserLabori;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -11,4 +13,7 @@ public interface CompanyBeanLocal {
 
     public Company getByCNPJ(String cnpj);
     public Company checkPass(String cnpj, String password);
+    public List<JobVacancy> getAllVacancies(Company company);
+    public List<UserLabori> getVacancyCandidates(JobVacancy vacancy);
+    public int getVacancyCandidatesCount(JobVacancy vacancy);
 }
