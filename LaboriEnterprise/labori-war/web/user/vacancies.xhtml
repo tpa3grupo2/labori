@@ -16,8 +16,8 @@
                 <h:panelGroup rendered="#{not empty userBean.user.field}">
                     <h:panelGroup rendered="#{not empty userBean.availableVacancies}">
                         <h:dataTable
-                                styleClass="table table-hover"
-                                columnClasses=",,right"
+                                styleClass="jobs-table table table-hover"
+                                columnClasses=",right,details"
                                 id="jobsVacanciesDTable"
                                 value="#{userBean.availableVacancies}"
                                 var="v">
@@ -25,6 +25,7 @@
                                 <f:facet name="header">Vaga</f:facet>
                                 <p class="vacancy-name">#{v.name}</p>
                                 <p class="vacancy-company"><strong>#{v.company}</strong></p>
+                                <div class="description detail-info hide">#{v.description}</div>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Salário</f:facet>
@@ -33,10 +34,16 @@
                             <h:column>
                                 <f:facet name="header"></f:facet>
                                 <h:panelGroup>
-                                    <h:commandButton value="Me candidatar" action="#{curriculumBean.applyToJobVacancy(v)}" styleClass="btn btn-primary">
-                                        <!-- f:setPropertyActionListener target="#{curriculumBean.jobVacancyToApply}" value="#{v}" /-->
-                                        <!--f:ajax render="@form"></f:ajax-->
-                                    </h:commandButton>
+                                    <p>
+                                        <a href="" class="btn btn-small btn-primary open details">
+                                            <i class="icon-search"></i> detalhes
+                                        </a>
+                                    </p>
+                                    <h:commandLink action="#{curriculumBean.applyToJobVacancy(v)}" styleClass="btn btn-success apply hide detail-info">
+                                        <f:ajax />
+                                        <i class="icon-ok"></i> Me candidatar
+                                    </h:commandLink>
+                                    <div class="alert alert-success hide apply-success">Você se candidatou com sucesso!</div>
                                 </h:panelGroup>
                             </h:column>
                         </h:dataTable>
@@ -53,5 +60,9 @@
                 </h:panelGroup>
             </h:form>
         </ui:define>
+        <ui:define name="extra_js">
+            <script type="text/javascript" src="#{request.contextPath}/assets/js/pages/vacancies.js"></script>
+        </ui:define>
+
     </ui:composition>
 </html>

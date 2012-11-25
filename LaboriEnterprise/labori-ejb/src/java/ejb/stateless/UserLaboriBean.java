@@ -57,12 +57,12 @@ public class UserLaboriBean implements UserLaboriBeanLocal {
     }
 
     @Override
-    public List<JobVacancy> getAvailableVacancies (Field field) {
-        Query query = em.createQuery("SELECT j FROM JobVacancy j WHERE j.field = :field");
-
+    public List<JobVacancy> getAvailableVacancies (UserLabori user) {
+        Query query = em.createQuery("SELECT DISTINCT j FROM JobVacancy j LEFT OUTER JOIN j.appliedUsers u WHERE j.field = :field AND (u IS NULL OR u IS NOT :user)");
         try {
             return (List<JobVacancy>) query
-                    .setParameter("field", field)
+                    .setParameter("field", user.getField())
+                    .setParameter("user", user)
                     .getResultList();
         } catch (Exception e) {
             return null;
@@ -98,5 +98,29 @@ public class UserLaboriBean implements UserLaboriBeanLocal {
         return em.merge(user);
     }
 
+    @Override
+    public UserLabori applyToJobVacancy(UserLabori user, JobVacancy jobVacancy) {
+        user.applyToJobVacancy(jobVacancy);
+        return em.merge(user);
+    }
+
+    @Override
+    public UserLabori removeApplyToJobVacancy(UserLabori user, JobVacancy jobVacancy) {
+        user.removeApplyToJobVacancy(jobVacancy);
+        return em.merge(user);
+    }
+
+    @Override
+    public List<JobVacancy> getAppliedVacancies(UserLabori user) {
+        Query query = em.createQuery("SELECT DISTINCT j FROM JobVacancy j INNER JOIN j.appliedUsers u WHERE j.field = :field AND u IS :user");
+        try {
+            return (List<JobVacancy>) query
+                    .setParameter("field", user.getField())
+                    .setParameter("user", user)
+                    .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
 

@@ -18,9 +18,8 @@ import util.GetEJB;
 @ViewScoped
 public class CurriculumBean implements Serializable {
 
-    private Education education, educationToRemove;
-    private WorkExperience workExperience, workExperienceToRemove;
-    private JobVacancy jobVacancyToApply;
+    private Education education;
+    private WorkExperience workExperience;
 
     private UserLaboriBeanLocal userLaboriEJB;
     private UniversityBeanLocal universityEJB;
@@ -81,7 +80,7 @@ public class CurriculumBean implements Serializable {
         education = new Education();
     }
 
-    public void removeEducation() {
+    public void removeEducation(Education educationToRemove) {
         userBean.setUser(userLaboriEJB.removeEducation(userBean.getUser(), educationToRemove));
     }
 
@@ -90,7 +89,7 @@ public class CurriculumBean implements Serializable {
         workExperience = new WorkExperience();
     }
 
-    public void removeWorkExperience() {
+    public void removeWorkExperience(WorkExperience workExperienceToRemove) {
         userBean.setUser(userLaboriEJB.removeWorkExperience(userBean.getUser(), workExperienceToRemove));
     }
 
@@ -110,31 +109,11 @@ public class CurriculumBean implements Serializable {
         this.workExperience = workExperience;
     }
 
-    public Education getEducationToRemove() {
-        return educationToRemove;
-    }
-
-    public void setEducationToRemove(Education educationToRemove) {
-        this.educationToRemove = educationToRemove;
-    }
-
-    public WorkExperience getWorkExperienceToRemove() {
-        return workExperienceToRemove;
-    }
-
-    public void setWorkExperienceToRemove(WorkExperience workExperienceToRemove) {
-        this.workExperienceToRemove = workExperienceToRemove;
-    }
-
-    public JobVacancy getJobVacancyToApply() {
-        return jobVacancyToApply;
-    }
-
-    public void setJobVacancyToApply(JobVacancy jobVacancyToApply) {
-        this.jobVacancyToApply = jobVacancyToApply;
-    }
-
     public void applyToJobVacancy(JobVacancy jobVacancy) {
-        System.out.println(jobVacancy);
+        userBean.setUser(userLaboriEJB.applyToJobVacancy(userBean.getUser(), jobVacancy));
+    }
+
+    public void removeApplyToJobVacancy(JobVacancy jobVacancy) {
+        userBean.setUser(userLaboriEJB.removeApplyToJobVacancy(userBean.getUser(), jobVacancy));
     }
 }

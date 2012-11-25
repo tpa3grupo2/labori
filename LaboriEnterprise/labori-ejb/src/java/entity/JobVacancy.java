@@ -1,6 +1,8 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -25,6 +27,9 @@ public class JobVacancy implements Serializable {
 
     @Column()
     private float salary;
+
+    @ManyToMany(mappedBy="applications")
+    private Set<UserLabori> appliedUsers = new HashSet<UserLabori>();
 
     @Override
     public String toString() {

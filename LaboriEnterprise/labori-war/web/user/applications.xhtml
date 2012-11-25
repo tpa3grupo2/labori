@@ -7,43 +7,59 @@
     <ui:composition template="/template.xhtml">
         <ui:define name="title">Vagas : labori</ui:define>
         <ui:define name="body">
-            <h1>Vagas</h1>
-            <h:panelGroup rendered="#{empty userBean.user.field}">
-                <p class="lead">Olá! <h:link outcome="/user/fill-cv">Atualize seu currículo</h:link> e adicione sua <strong>área de atuação</strong> para ver as vagas.</p>
-            </h:panelGroup>
-            <p class="lead">Confira aqui as vagas disponíveis para <strong>#{userBean.user.field}</strong>:</p>
-            <h:panelGroup rendered="#{not empty userBean.user.field}">
-                <h:panelGroup rendered="#{not empty userBean.availableVacancies}">
-                    <h:dataTable
-                            styleClass="table table-hover"
-                            columnClasses=",right"
-                            id="jobsVacanciesDTable"
-                            value="#{userBean.availableVacancies}"
-                            var="v">
-                        <h:column>
-                            <f:facet name="header">Vaga</f:facet>
-                            <p class="vacancy-name">#{v.name} a- R$ #{v.salary}</p>
-                            <p class="vacancy-company"><strong>#{v.company}</strong></p>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header"></f:facet>
-                            <h:panelGroup>
-                                <h:commandButton value="Me candidatar" action="#{signupBean.createUser}" styleClass="btn btn-primary">
-                                </h:commandButton>
-                            </h:panelGroup>
-                        </h:column>
-                    </h:dataTable>
+            <h1>Minhas candidaturas</h1>
+            <h:form styleClass="vacancies" id="vacancies">
+                <p class="lead">Confira aqui as vagas para as quais você se candidatou.</p>
+                <h:panelGroup rendered="#{not empty userBean.user.field}">
+                    <h:panelGroup rendered="#{not empty userBean.appliedVacancies}">
+                        <h:dataTable
+                                styleClass="jobs-table table table-hover"
+                                columnClasses=",right,details"
+                                id="jobsVacanciesDTable"
+                                value="#{userBean.appliedVacancies}"
+                                var="v">
+                            <h:column>
+                                <f:facet name="header">Vaga</f:facet>
+                                <p class="vacancy-name">#{v.name}</p>
+                                <p class="vacancy-company"><strong>#{v.company}</strong></p>
+                                <div class="description detail-info hide">#{v.description}</div>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Salário</f:facet>
+                                <p class="vacancy-company"><strong>R$ #{utilsBean.realFormat(v.salary)}</strong></p>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header"></f:facet>
+                                <h:panelGroup>
+                                    <p>
+                                        <a href="" class="btn btn-small btn-primary open details">
+                                            <i class="icon-search"></i> detalhes
+                                        </a>
+                                    </p>
+                                    <h:commandLink action="#{curriculumBean.removeApplyToJobVacancy(v)}" styleClass="btn btn-danger apply hide detail-info">
+                                        <f:ajax />
+                                        <i class="icon-remove"></i> Me descandidatar
+                                    </h:commandLink>
+                                    <div class="alert alert-success hide apply-success">Você se descandidatou com sucesso!</div>
+                                </h:panelGroup>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{empty userBean.appliedVacancies}">
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="center">Você não se candidatou para nenhuma vaga. <h:link outcome="/user/vacancies">Veja as vagas disponíveis!</h:link></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </h:panelGroup>
                 </h:panelGroup>
-                <h:panelGroup rendered="#{empty userBean.availableVacancies}">
-                    <table class="table table-striped table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th class="center">Não há vagas cadastradas para essa área de atuação</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </h:panelGroup>
-            </h:panelGroup>
+            </h:form>
         </ui:define>
+        <ui:define name="extra_js">
+            <script type="text/javascript" src="#{request.contextPath}/assets/js/pages/vacancies.js"></script>
+        </ui:define>
+
     </ui:composition>
 </html>

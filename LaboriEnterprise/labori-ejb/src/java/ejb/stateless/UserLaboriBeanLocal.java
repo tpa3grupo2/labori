@@ -21,5 +21,9 @@ public interface UserLaboriBeanLocal {
     public UserLabori addWorkExperience(UserLabori user, WorkExperience workExperience);
     public UserLabori removeWorkExperience(UserLabori user, WorkExperience workExperience);
 
-    public List<JobVacancy> getAvailableVacancies (Field field);
+    public UserLabori applyToJobVacancy(UserLabori user, JobVacancy jobVacancy);
+    public UserLabori removeApplyToJobVacancy(UserLabori user, JobVacancy jobVacancy);
+
+    public List<JobVacancy> getAvailableVacancies(UserLabori user);
+    public List<JobVacancy> getAppliedVacancies(UserLabori user);
 }

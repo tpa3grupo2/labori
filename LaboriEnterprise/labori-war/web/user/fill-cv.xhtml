@@ -65,8 +65,7 @@
                             <h:column>
                                 <f:facet name="header"></f:facet>
                                 <small>
-                                    <h:commandLink action="#{curriculumBean.removeEducation}">
-                                        <f:setPropertyActionListener target="#{curriculumBean.educationToRemove}" value="#{o}" />
+                                    <h:commandLink action="#{curriculumBean.removeEducation(o)}">
                                         <i class="icon-remove"></i> Remover
                                         <f:ajax render=":fillcv:outerEducationDTable"></f:ajax>
                                     </h:commandLink>
@@ -129,8 +128,7 @@
                                 <h:column>
                                     <f:facet name="header"></f:facet>
                                     <small>
-                                        <h:commandLink action="#{curriculumBean.removeWorkExperience}">
-                                            <f:setPropertyActionListener target="#{curriculumBean.workExperienceToRemove}" value="#{o}" />
+                                        <h:commandLink action="#{curriculumBean.removeWorkExperience(o)}">
                                             <i class="icon-remove"></i> Remover
                                             <f:ajax render=":fillcv:outerWorkExperienceDTable"></f:ajax>
                                         </h:commandLink>

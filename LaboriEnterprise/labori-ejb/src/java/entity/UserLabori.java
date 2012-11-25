@@ -47,6 +47,9 @@ public class UserLabori implements Serializable {
     @ManyToOne(cascade=CascadeType.ALL)
     private Field field;
 
+    @ManyToMany(fetch=FetchType.EAGER)
+    private Set<JobVacancy> applications = new HashSet<JobVacancy>();
+
     @OneToMany(
         fetch=FetchType.EAGER,
         cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},
@@ -193,5 +196,23 @@ public class UserLabori implements Serializable {
 
     public void removeWorkExperience(WorkExperience workExperience) {
         getWorkExperienceRecords().remove(workExperience);
+    }
+
+    public Set<JobVacancy> getApplications() {
+        return applications;
+    }
+
+    public void setApplications(Set<JobVacancy> applications) {
+        this.applications = applications;
+    }
+
+    public void applyToJobVacancy(JobVacancy jobVacancy) {
+        if (!getApplications().contains(jobVacancy)) {
+            getApplications().add(jobVacancy);
+        }
+    }
+
+    public void removeApplyToJobVacancy(JobVacancy jobVacancy) {
+        getApplications().remove(jobVacancy);
     }
 }

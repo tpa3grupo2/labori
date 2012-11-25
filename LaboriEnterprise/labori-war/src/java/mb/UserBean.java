@@ -73,7 +73,10 @@ public class UserBean implements Serializable {
     }
 
     public List<JobVacancy> getAvailableVacancies() {
-        List<JobVacancy> a = userLaboriEJB.getAvailableVacancies(user.getField());
-        return a;
+        return userLaboriEJB.getAvailableVacancies(user);
+    }
+
+    public List<JobVacancy> getAppliedVacancies() {
+        return userLaboriEJB.getAppliedVacancies(user);
     }
 }

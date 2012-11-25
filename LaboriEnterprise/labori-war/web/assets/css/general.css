@@ -88,3 +88,8 @@ table.table th {
 .modal form {
     margin-bottom:0;
 }
+
+.jobs-table td.details {
+    width:30%;
+    text-align:right;
+}
