@@ -5,9 +5,9 @@ import entity.JobVacancy;
 import entity.UserLabori;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateless(mappedName="ejb/company")
 public class CompanyBean implements CompanyBeanLocal {
@@ -64,12 +64,41 @@ public class CompanyBean implements CompanyBeanLocal {
 
     @Override
     public List<UserLabori> getVacancyCandidates(JobVacancy vacancy) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Query query = em.createQuery("SELECT x FROM UserLabori x INNER JOIN x.applications j WHERE j = :jobvacancy");
+
+        try {
+            return (List<UserLabori>) query
+                    .setParameter("jobvacancy", vacancy)
+                    .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
-    public int getVacancyCandidatesCount(JobVacancy vacancy) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Long getVacancyCandidatesCount(JobVacancy vacancy) {
+        Query query = em.createQuery("SELECT COUNT(x) FROM UserLabori x INNER JOIN x.applications j WHERE j = :jobvacancy");
+
+        try {
+            return ((Long) query
+                    .setParameter("jobvacancy", vacancy)
+                    .getSingleResult()).longValue();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public JobVacancy getJobVacancyById(Long id) {
+        return em.find(JobVacancy.class, id);
+    }
+
+    @Override
+    public void removeVavancy(JobVacancy vacancy) {
+        vacancy = em.merge(vacancy);
+        vacancy.getAppliedUsers().clear();
+        vacancy = em.merge(vacancy);
+        em.remove(vacancy);
     }
 
 }

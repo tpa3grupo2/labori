@@ -7,6 +7,7 @@ package laboriempresa.frames;
 import ejb.stateless.CompanyBeanLocal;
 import entity.Company;
 import entity.JobVacancy;
+import entity.UserLabori;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -34,8 +35,8 @@ public class MainFrame extends javax.swing.JFrame {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             System.exit(1);
         }
-
         initComponents();
+
         this.setLocationRelativeTo(null);
         labLoginError.setVisible(false);
         dialogLogin.setLocationRelativeTo(null);
@@ -61,13 +62,27 @@ public class MainFrame extends javax.swing.JFrame {
         inputLoginPassword = new javax.swing.JPasswordField();
         javax.swing.JButton buttonLoginSubmit = new javax.swing.JButton();
         labLoginError = new javax.swing.JLabel();
+        dialogVaga = new javax.swing.JDialog();
+        scrollPaneCandidatos = new javax.swing.JScrollPane();
+        tableCandidatos = new javax.swing.JTable();
+        javax.swing.JLabel labVagaVaga = new javax.swing.JLabel();
+        javax.swing.JLabel labVagaArea = new javax.swing.JLabel();
+        javax.swing.JLabel labTableCandidatos = new javax.swing.JLabel();
+        labVagaNomeVaga = new javax.swing.JLabel();
+        labVagaNomeArea = new javax.swing.JLabel();
+        butVagaVerCandidato = new javax.swing.JButton();
+        javax.swing.JButton butVagaAtualizar = new javax.swing.JButton();
+        javax.swing.JButton butVagaExcluirVaga = new javax.swing.JButton();
+        javax.swing.JButton butVagaVoltar = new javax.swing.JButton();
         javax.swing.JPanel panHeader = new javax.swing.JPanel();
         javax.swing.JLabel labEmpresa = new javax.swing.JLabel();
         javax.swing.JLabel labLogo = new javax.swing.JLabel();
         javax.swing.JPanel panelVagas = new javax.swing.JPanel();
         javax.swing.JScrollPane scrollPaneVagas = new javax.swing.JScrollPane();
         tableVagas = new javax.swing.JTable();
-        javax.swing.JButton butGerVagas = new javax.swing.JButton();
+        butVerCandidatos = new javax.swing.JButton();
+        butRefreshTableVagas = new javax.swing.JButton();
+        butAdicionarVaga = new javax.swing.JButton();
         javax.swing.JLabel labEmpresa2 = new javax.swing.JLabel();
         javax.swing.JLabel labCNPJ = new javax.swing.JLabel();
         labNomeEmpresa = new javax.swing.JLabel();
@@ -180,8 +195,139 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        dialogVaga.setTitle("Detalhes da vaga");
+        dialogVaga.setResizable(false);
+        dialogVaga.setSize(new java.awt.Dimension(400, 276));
+
+        tableCandidatos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "ID", "Nome"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableCandidatos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickTableCandidatos(evt);
+            }
+        });
+        scrollPaneCandidatos.setViewportView(tableCandidatos);
+        tableCandidatos.getColumnModel().getColumn(0).setMaxWidth(30);
+
+        labVagaVaga.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labVagaVaga.setText("Vaga:");
+
+        labVagaArea.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labVagaArea.setText("Área:");
+
+        labTableCandidatos.setText("Candidatos à vaga:");
+
+        labVagaNomeVaga.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        labVagaNomeVaga.setText("jLabel1");
+
+        labVagaNomeArea.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        labVagaNomeArea.setText("jLabel1");
+
+        butVagaVerCandidato.setText("Ver candidato");
+        butVagaVerCandidato.setEnabled(false);
+
+        butVagaAtualizar.setText("Atualizar");
+        butVagaAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butVagaAtualizarActionPerformed(evt);
+            }
+        });
+
+        butVagaExcluirVaga.setText("Excluir vaga");
+        butVagaExcluirVaga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butVagaExcluirVagaActionPerformed(evt);
+            }
+        });
+
+        butVagaVoltar.setText("Voltar");
+        butVagaVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butVagaVoltarActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout dialogVagaLayout = new org.jdesktop.layout.GroupLayout(dialogVaga.getContentPane());
+        dialogVaga.getContentPane().setLayout(dialogVagaLayout);
+        dialogVagaLayout.setHorizontalGroup(
+            dialogVagaLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(dialogVagaLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(dialogVagaLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(scrollPaneCandidatos, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .add(dialogVagaLayout.createSequentialGroup()
+                        .add(labTableCandidatos, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(136, 136, 136))
+                    .add(dialogVagaLayout.createSequentialGroup()
+                        .add(labVagaArea, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 67, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(labVagaNomeArea, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))
+                    .add(dialogVagaLayout.createSequentialGroup()
+                        .add(labVagaVaga, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 67, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(labVagaNomeVaga, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, dialogVagaLayout.createSequentialGroup()
+                        .add(dialogVagaLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(butVagaAtualizar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(butVagaExcluirVaga, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(dialogVagaLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(butVagaVoltar, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                            .add(butVagaVerCandidato, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        dialogVagaLayout.setVerticalGroup(
+            dialogVagaLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(dialogVagaLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(dialogVagaLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(labVagaVaga)
+                    .add(labVagaNomeVaga))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(dialogVagaLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(labVagaArea)
+                    .add(labVagaNomeArea))
+                .add(24, 24, 24)
+                .add(labTableCandidatos)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(scrollPaneCandidatos, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 84, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(dialogVagaLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(butVagaVerCandidato)
+                    .add(butVagaAtualizar))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(dialogVagaLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(butVagaExcluirVaga)
+                    .add(butVagaVoltar))
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login");
+        setTitle("labori : Empresa");
         setLocationByPlatform(true);
         setName("frameLogin");
         setResizable(false);
@@ -222,17 +368,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         tableVagas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null}
+                {null, null, null, null}
             },
             new String [] {
-                "Nome da vaga", "Área de atuação", "Candidatos"
+                "ID", "Nome da vaga", "Área de atuação", "Candidatos"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -243,11 +389,34 @@ public class MainFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableVagas.setColumnSelectionAllowed(true);
+        tableVagas.setShowGrid(false);
+        tableVagas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clickTableVagas(evt);
+            }
+        });
         scrollPaneVagas.setViewportView(tableVagas);
-        tableVagas.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tableVagas.getColumnModel().getColumn(0).setPreferredWidth(10);
+        tableVagas.getColumnModel().getColumn(1).setPreferredWidth(140);
+        tableVagas.getColumnModel().getColumn(2).setPreferredWidth(120);
+        tableVagas.getColumnModel().getColumn(3).setPreferredWidth(10);
 
-        butGerVagas.setText("Gerenciar vagas");
+        butVerCandidatos.setText("Ver candidatos");
+        butVerCandidatos.setEnabled(false);
+        butVerCandidatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butVerCandidatosActionPerformed(evt);
+            }
+        });
+
+        butRefreshTableVagas.setText("Atualizar");
+        butRefreshTableVagas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butRefreshTableVagasActionPerformed(evt);
+            }
+        });
+
+        butAdicionarVaga.setText("Adicionar vaga");
 
         org.jdesktop.layout.GroupLayout panelVagasLayout = new org.jdesktop.layout.GroupLayout(panelVagas);
         panelVagas.setLayout(panelVagasLayout);
@@ -256,19 +425,24 @@ public class MainFrame extends javax.swing.JFrame {
             .add(panelVagasLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(panelVagasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(scrollPaneVagas)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, scrollPaneVagas)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, panelVagasLayout.createSequentialGroup()
-                        .add(0, 0, Short.MAX_VALUE)
-                        .add(butGerVagas)))
+                        .add(butRefreshTableVagas)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(butAdicionarVaga)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(butVerCandidatos)))
                 .addContainerGap())
         );
         panelVagasLayout.setVerticalGroup(
             panelVagasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panelVagasLayout.createSequentialGroup()
-                .add(scrollPaneVagas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 131, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(butGerVagas)
-                .addContainerGap())
+                .add(scrollPaneVagas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 111, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(panelVagasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(butVerCandidatos)
+                    .add(butRefreshTableVagas)
+                    .add(butAdicionarVaga)))
         );
 
         labEmpresa2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
@@ -319,7 +493,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .add(labNumCNPJ))
                 .add(20, 20, 20)
                 .add(panelVagas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(226, Short.MAX_VALUE))
+                .addContainerGap(252, Short.MAX_VALUE))
         );
 
         pack();
@@ -339,26 +513,110 @@ public class MainFrame extends javax.swing.JFrame {
 
             labNomeEmpresa.setText(company.getName());
             labNumCNPJ.setText(company.getCnpj());
-            this.setVisible(true);
+
             loadTableVagas();
+            this.setVisible(true);
         }
     }//GEN-LAST:event_login
 
+    private void butVerCandidatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butVerCandidatosActionPerformed
+        openVagaDialog();
+    }//GEN-LAST:event_butVerCandidatosActionPerformed
+
+    private void butRefreshTableVagasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butRefreshTableVagasActionPerformed
+        loadTableVagas();
+    }//GEN-LAST:event_butRefreshTableVagasActionPerformed
+
+    private void clickTableVagas(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickTableVagas
+        checkButVerCandidatosStatus();
+        if ( evt.getClickCount() == 2 )
+            openVagaDialog();
+    }//GEN-LAST:event_clickTableVagas
+
+    private void butVagaAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butVagaAtualizarActionPerformed
+        loadTableCandidatos();
+    }//GEN-LAST:event_butVagaAtualizarActionPerformed
+
+    private void butVagaExcluirVagaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butVagaExcluirVagaActionPerformed
+        companyBean.removeVavancy(workingVaga);
+        loadTableVagas();
+        dialogVaga.setVisible(false);
+    }//GEN-LAST:event_butVagaExcluirVagaActionPerformed
+
+    private void butVagaVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butVagaVoltarActionPerformed
+        dialogVaga.setVisible(false);
+    }//GEN-LAST:event_butVagaVoltarActionPerformed
+
+    private void clickTableCandidatos(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickTableCandidatos
+        checkButVerCandidatoStatus();
+        if ( evt.getClickCount() == 2 ) {}
+            //openVagaDialog();
+    }//GEN-LAST:event_clickTableCandidatos
+
+    private void checkButVerCandidatoStatus() {
+        if (tableCandidatos.getSelectedRow() == -1)
+            butVagaVerCandidato.setEnabled(false);
+        else
+            butVagaVerCandidato.setEnabled(true);
+    }
+
+    private void checkButVerCandidatosStatus() {
+        if (tableVagas.getSelectedRow() == -1)
+            butVerCandidatos.setEnabled(false);
+        else
+            butVerCandidatos.setEnabled(true);
+    }
+
+    private void openVagaDialog() {
+        workingVaga = companyBean.getJobVacancyById((Long)tableVagas.getValueAt(tableVagas.getSelectedRow(), 0));
+
+        labVagaNomeVaga.setText(workingVaga.getName());
+        labVagaNomeArea.setText(workingVaga.getField().getName());
+        loadTableCandidatos();
+
+        dialogVaga.setLocationRelativeTo(null);
+        dialogVaga.setVisible(true);
+    }
+
+    private void loadTableCandidatos() {
+
+        DefaultTableModel model = (DefaultTableModel) tableCandidatos.getModel();
+
+        Integer totalToRemover = model.getRowCount();
+        for (int i=0; i<totalToRemover; i++)
+            model.removeRow(0);
+
+        List<UserLabori> candidatos = companyBean.getVacancyCandidates(workingVaga);
+        for (UserLabori candidato : candidatos) {
+            Vector<Object> vector = new Vector<Object>();
+            vector.add(candidato.getId());
+            vector.add(candidato.getName());
+            model.addRow(vector);
+        }
+        tableCandidatos.setModel(model);
+        checkButVerCandidatoStatus();
+    }
+
     private void loadTableVagas() {
         DefaultTableModel model = (DefaultTableModel) tableVagas.getModel();
-        model.removeRow(0);
+
+        Integer totalToRemover = model.getRowCount();
+        for (int i=0; i<totalToRemover; i++)
+            model.removeRow(0);
 
         List<JobVacancy> vacancies = companyBean.getAllVacancies(company);
         for (JobVacancy vacancy : vacancies) {
+            Long candidates = companyBean.getVacancyCandidatesCount(vacancy);
 
             Vector<Object> vector = new Vector<Object>();
+            vector.add(vacancy.getId());
             vector.add(vacancy.getName());
             vector.add(vacancy.getField());
-            vector.add(1);
+            vector.add(candidates);
             model.addRow(vector);
         }
-
         tableVagas.setModel(model);
+        checkButVerCandidatosStatus();
     }
 
 
@@ -407,14 +665,24 @@ public class MainFrame extends javax.swing.JFrame {
     private GetEJB getEJB;
     private Company company;
     private CompanyBeanLocal companyBean;
+    private JobVacancy workingVaga;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton butAdicionarVaga;
+    private javax.swing.JButton butRefreshTableVagas;
+    private javax.swing.JButton butVagaVerCandidato;
+    private javax.swing.JButton butVerCandidatos;
     private javax.swing.JDialog dialogLogin;
+    private javax.swing.JDialog dialogVaga;
     private javax.swing.JFormattedTextField inputLoginCNPJ;
     private javax.swing.JPasswordField inputLoginPassword;
     private javax.swing.JLabel labLoginError;
     private javax.swing.JLabel labNomeEmpresa;
     private javax.swing.JLabel labNumCNPJ;
+    private javax.swing.JLabel labVagaNomeArea;
+    private javax.swing.JLabel labVagaNomeVaga;
+    private javax.swing.JScrollPane scrollPaneCandidatos;
+    private javax.swing.JTable tableCandidatos;
     private javax.swing.JTable tableVagas;
     // End of variables declaration//GEN-END:variables
 }

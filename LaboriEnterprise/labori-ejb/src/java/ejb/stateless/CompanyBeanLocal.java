@@ -15,5 +15,8 @@ public interface CompanyBeanLocal {
     public Company checkPass(String cnpj, String password);
     public List<JobVacancy> getAllVacancies(Company company);
     public List<UserLabori> getVacancyCandidates(JobVacancy vacancy);
-    public int getVacancyCandidatesCount(JobVacancy vacancy);
+    public void removeVavancy(JobVacancy vacancy);
+    public Long getVacancyCandidatesCount(JobVacancy vacancy);
+
+    public JobVacancy getJobVacancyById(Long id);
 }

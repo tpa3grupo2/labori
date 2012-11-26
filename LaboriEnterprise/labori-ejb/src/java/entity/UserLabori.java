@@ -47,7 +47,7 @@ public class UserLabori implements Serializable {
     @ManyToOne(cascade=CascadeType.ALL)
     private Field field;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(mappedBy="appliedUsers", fetch=FetchType.EAGER)
     private Set<JobVacancy> applications = new HashSet<JobVacancy>();
 
     @OneToMany(

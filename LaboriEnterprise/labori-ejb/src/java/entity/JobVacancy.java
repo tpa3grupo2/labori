@@ -28,7 +28,7 @@ public class JobVacancy implements Serializable {
     @Column()
     private float salary;
 
-    @ManyToMany(mappedBy="applications")
+    @ManyToMany
     private Set<UserLabori> appliedUsers = new HashSet<UserLabori>();
 
     @Override
@@ -82,6 +82,14 @@ public class JobVacancy implements Serializable {
 
     public void setSalary(float salary) {
         this.salary = salary;
+    }
+
+    public Set<UserLabori> getAppliedUsers() {
+        return appliedUsers;
+    }
+
+    public void setAppliedUsers(Set<UserLabori> appliedUsers) {
+        this.appliedUsers = appliedUsers;
     }
 
     @Override
