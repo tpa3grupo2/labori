@@ -28,7 +28,7 @@ public class JobVacancy implements Serializable {
     @Column()
     private float salary;
 
-    @ManyToMany
+    @ManyToMany(mappedBy="applications", fetch=FetchType.EAGER)
     private Set<UserLabori> appliedUsers = new HashSet<UserLabori>();
 
     @Override
