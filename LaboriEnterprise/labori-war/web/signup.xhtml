@@ -49,7 +49,7 @@
                         <div class="control-group">
                             <h:outputLabel for="name" value="Nome completo" styleClass="control-label" />
                             <div class="controls">
-                                <h:inputText id="name" placeholder="senha" styleClass="input-xlarge" value="#{signupBean.user.name}" required="true" maxlength="64">
+                                <h:inputText id="name" placeholder="seu nome completo" styleClass="input-xlarge" value="#{signupBean.user.name}" required="true" maxlength="64">
                                     <f:ajax event="blur" render="nameMessage" />
                                 </h:inputText>
                                 <h:message id="nameMessage" for="name" styleClass="help-inline error" />
@@ -78,7 +78,7 @@
                         <div class="control-group">
                             <h:outputLabel for="city" value="Cidade" styleClass="control-label" />
                             <div class="controls">
-                                <h:inputText id="city" placeholder="senha" styleClass="input-xlarge" value="#{signupBean.user.city}" required="true" maxlength="64">
+                                <h:inputText id="city" placeholder="sua cidade" styleClass="input-xlarge" value="#{signupBean.user.city}" required="true" maxlength="64">
                                     <f:ajax event="blur" render="cityMessage" />
                                 </h:inputText>
                                 <h:message id="cityMessage" for="city" styleClass="help-inline error" />
