@@ -100,14 +100,28 @@ public class UserLaboriBean implements UserLaboriBeanLocal {
 
     @Override
     public UserLabori applyToJobVacancy(UserLabori user, JobVacancy jobVacancy) {
+        jobVacancy = em.merge(jobVacancy);
+        user = em.merge(user);
+
+        jobVacancy.applyUser(user);
+        em.merge(jobVacancy);
+
         user.applyToJobVacancy(jobVacancy);
-        return em.merge(user);
+        em.merge(user);
+        return user;
     }
 
     @Override
     public UserLabori removeApplyToJobVacancy(UserLabori user, JobVacancy jobVacancy) {
+        jobVacancy = em.merge(jobVacancy);
+        user = em.merge(user);
+
+        jobVacancy.removeAppliedUser(user);
+        em.merge(jobVacancy);
+
         user.removeApplyToJobVacancy(jobVacancy);
-        return em.merge(user);
+        em.merge(user);
+        return user;
     }
 
     @Override

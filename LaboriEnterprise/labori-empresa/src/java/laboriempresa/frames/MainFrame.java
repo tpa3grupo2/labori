@@ -5,10 +5,10 @@
 package laboriempresa.frames;
 
 import ejb.stateless.CompanyBeanLocal;
-import entity.Company;
-import entity.JobVacancy;
-import entity.UserLabori;
+import ejb.stateless.UserLaboriBeanLocal;
+import entity.*;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +30,7 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             getEJB = new GetEJB();
             companyBean = getEJB.getCompany();
+            userBean = getEJB.getUserLabori();
         } catch (NamingException ex) {
             JOptionPane.showMessageDialog(null, "ERRO FATAL: Sem comunicação com o EJB", null, WIDTH);
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,6 +75,29 @@ public class MainFrame extends javax.swing.JFrame {
         javax.swing.JButton butVagaAtualizar = new javax.swing.JButton();
         javax.swing.JButton butVagaExcluirVaga = new javax.swing.JButton();
         javax.swing.JButton butVagaVoltar = new javax.swing.JButton();
+        dialogCandidato = new javax.swing.JDialog();
+        labCandEmail = new javax.swing.JLabel();
+        labCandNome = new javax.swing.JLabel();
+        javax.swing.JLabel labCandEmailFixed = new javax.swing.JLabel();
+        javax.swing.JLabel labCandNomeFixed = new javax.swing.JLabel();
+        javax.swing.JLabel labCandTelefoneFixed = new javax.swing.JLabel();
+        labCandTelefone = new javax.swing.JLabel();
+        javax.swing.JLabel labCandCidadeFixed = new javax.swing.JLabel();
+        labCandCidade = new javax.swing.JLabel();
+        javax.swing.JLabel labCandEnderecoFixed = new javax.swing.JLabel();
+        labCandEndereco = new javax.swing.JLabel();
+        javax.swing.JLabel labCandCEPFixed = new javax.swing.JLabel();
+        labCandCEP = new javax.swing.JLabel();
+        butCandVoltar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        editCandInfo = new javax.swing.JEditorPane();
+        javax.swing.JLabel labCandInfoFixed = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tableCandEducation = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tableCandWorkExperience = new javax.swing.JTable();
+        javax.swing.JLabel labCandInfoFixed1 = new javax.swing.JLabel();
+        javax.swing.JLabel labCandInfoFixed2 = new javax.swing.JLabel();
         javax.swing.JPanel panHeader = new javax.swing.JPanel();
         javax.swing.JLabel labEmpresa = new javax.swing.JLabel();
         javax.swing.JLabel labLogo = new javax.swing.JLabel();
@@ -180,7 +204,7 @@ public class MainFrame extends javax.swing.JFrame {
             dialogLoginLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(dialogLoginLayout.createSequentialGroup()
                 .add(panLoginHeader2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 27, Short.MAX_VALUE)
                 .add(labLoginError)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(dialogLoginLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
@@ -192,7 +216,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .add(inputLoginPassword, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(buttonLoginSubmit)
-                .addContainerGap())
+                .add(15, 15, 15))
         );
 
         dialogVaga.setTitle("Detalhes da vaga");
@@ -249,6 +273,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         butVagaVerCandidato.setText("Ver candidato");
         butVagaVerCandidato.setEnabled(false);
+        butVagaVerCandidato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butVagaVerCandidatoActionPerformed(evt);
+            }
+        });
 
         butVagaAtualizar.setText("Atualizar");
         butVagaAtualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -326,6 +355,205 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
+        dialogCandidato.setTitle("Visualização do candidato");
+        dialogCandidato.setResizable(false);
+        dialogCandidato.setSize(new java.awt.Dimension(579, 477));
+
+        labCandEmail.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        labCandEmail.setText("labCandEmail");
+
+        labCandNome.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        labCandNome.setText("labCandNome");
+
+        labCandEmailFixed.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labCandEmailFixed.setText("Email:");
+
+        labCandNomeFixed.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labCandNomeFixed.setText("Nome:");
+
+        labCandTelefoneFixed.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labCandTelefoneFixed.setText("Telefone:");
+
+        labCandTelefone.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        labCandTelefone.setText("labCandTelefone");
+
+        labCandCidadeFixed.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labCandCidadeFixed.setText("Cidade:");
+
+        labCandCidade.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        labCandCidade.setText("labCandCidade");
+
+        labCandEnderecoFixed.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labCandEnderecoFixed.setText("Endereço:");
+
+        labCandEndereco.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        labCandEndereco.setText("labCandEndereco");
+
+        labCandCEPFixed.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labCandCEPFixed.setText("CEP:");
+
+        labCandCEP.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        labCandCEP.setText("labCandCEP");
+
+        butCandVoltar.setText("Voltar");
+        butCandVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butCandVoltarActionPerformed(evt);
+            }
+        });
+
+        editCandInfo.setContentType("text/html");
+        editCandInfo.setEditable(false);
+        editCandInfo.setText("");
+        jScrollPane1.setViewportView(editCandInfo);
+
+        labCandInfoFixed.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labCandInfoFixed.setText("Mais informações:");
+
+        tableCandEducation.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Curso", "Universidade", "Início", "Formação"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tableCandEducation);
+        tableCandEducation.getColumnModel().getColumn(2).setMaxWidth(70);
+        tableCandEducation.getColumnModel().getColumn(3).setMaxWidth(70);
+
+        tableCandWorkExperience.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Cargo", "Empresa", "Entrada", "Saída"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tableCandWorkExperience);
+        tableCandWorkExperience.getColumnModel().getColumn(2).setMaxWidth(70);
+        tableCandWorkExperience.getColumnModel().getColumn(3).setMaxWidth(70);
+
+        labCandInfoFixed1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labCandInfoFixed1.setText("Formação acadêmica:");
+
+        labCandInfoFixed2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labCandInfoFixed2.setText("Experiências profissionais:");
+
+        org.jdesktop.layout.GroupLayout dialogCandidatoLayout = new org.jdesktop.layout.GroupLayout(dialogCandidato.getContentPane());
+        dialogCandidato.getContentPane().setLayout(dialogCandidatoLayout);
+        dialogCandidatoLayout.setHorizontalGroup(
+            dialogCandidatoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(dialogCandidatoLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(dialogCandidatoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jScrollPane1)
+                    .add(jScrollPane2)
+                    .add(jScrollPane3)
+                    .add(labCandInfoFixed, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(labCandInfoFixed1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, labCandInfoFixed2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, dialogCandidatoLayout.createSequentialGroup()
+                        .add(0, 0, Short.MAX_VALUE)
+                        .add(butCandVoltar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 130, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                    .add(dialogCandidatoLayout.createSequentialGroup()
+                        .add(dialogCandidatoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, labCandEmailFixed, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, labCandNomeFixed, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(labCandTelefoneFixed, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
+                        .add(12, 12, 12)
+                        .add(dialogCandidatoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(labCandEmail, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(labCandTelefone, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, labCandNome, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(dialogCandidatoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, labCandEnderecoFixed, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.LEADING, labCandCidadeFixed, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(labCandCEPFixed, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(dialogCandidatoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, labCandEndereco, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(dialogCandidatoLayout.createSequentialGroup()
+                                .add(labCandCidade, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 167, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(0, 0, Short.MAX_VALUE))
+                            .add(labCandCEP, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        dialogCandidatoLayout.setVerticalGroup(
+            dialogCandidatoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(dialogCandidatoLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(dialogCandidatoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(labCandNomeFixed)
+                    .add(labCandNome)
+                    .add(labCandCidadeFixed)
+                    .add(labCandCidade))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(dialogCandidatoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(labCandEmailFixed)
+                    .add(labCandEmail)
+                    .add(labCandEnderecoFixed)
+                    .add(labCandEndereco))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(dialogCandidatoLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(labCandTelefoneFixed)
+                    .add(labCandTelefone)
+                    .add(labCandCEPFixed)
+                    .add(labCandCEP))
+                .add(18, 18, 18)
+                .add(labCandInfoFixed1)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 69, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(labCandInfoFixed2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 72, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(labCandInfoFixed)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 101, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(butCandVoltar)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("labori : Empresa");
         setLocationByPlatform(true);
@@ -396,10 +624,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         scrollPaneVagas.setViewportView(tableVagas);
-        tableVagas.getColumnModel().getColumn(0).setPreferredWidth(10);
+        tableVagas.getColumnModel().getColumn(0).setMaxWidth(30);
         tableVagas.getColumnModel().getColumn(1).setPreferredWidth(140);
         tableVagas.getColumnModel().getColumn(2).setPreferredWidth(120);
-        tableVagas.getColumnModel().getColumn(3).setPreferredWidth(10);
+        tableVagas.getColumnModel().getColumn(3).setMaxWidth(80);
 
         butVerCandidatos.setText("Ver candidatos");
         butVerCandidatos.setEnabled(false);
@@ -445,16 +673,16 @@ public class MainFrame extends javax.swing.JFrame {
                     .add(butAdicionarVaga)))
         );
 
-        labEmpresa2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        labEmpresa2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         labEmpresa2.setText("Empresa:");
 
-        labCNPJ.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        labCNPJ.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         labCNPJ.setText("CNPJ:");
 
-        labNomeEmpresa.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        labNomeEmpresa.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         labNomeEmpresa.setText("labNomeEmpresa");
 
-        labNumCNPJ.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        labNumCNPJ.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         labNumCNPJ.setText("labNumCNPJ");
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -538,9 +766,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_butVagaAtualizarActionPerformed
 
     private void butVagaExcluirVagaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butVagaExcluirVagaActionPerformed
-        companyBean.removeVavancy(workingVaga);
-        loadTableVagas();
-        dialogVaga.setVisible(false);
+        if (JOptionPane.showConfirmDialog(dialogVaga, "Deseja realmente exluir a vaga:\n" + workingVaga.toString() + "?", "Confirmação", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            companyBean.removeVavancy(workingVaga);
+            loadTableVagas();
+            dialogVaga.setVisible(false);
+        }
     }//GEN-LAST:event_butVagaExcluirVagaActionPerformed
 
     private void butVagaVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butVagaVoltarActionPerformed
@@ -549,9 +779,17 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void clickTableCandidatos(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickTableCandidatos
         checkButVerCandidatoStatus();
-        if ( evt.getClickCount() == 2 ) {}
-            //openVagaDialog();
+        if ( evt.getClickCount() == 2)
+            openCandidatoDialog();
     }//GEN-LAST:event_clickTableCandidatos
+
+    private void butVagaVerCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butVagaVerCandidatoActionPerformed
+        openCandidatoDialog();
+    }//GEN-LAST:event_butVagaVerCandidatoActionPerformed
+
+    private void butCandVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butCandVoltarActionPerformed
+        dialogCandidato.setVisible(false);
+    }//GEN-LAST:event_butCandVoltarActionPerformed
 
     private void checkButVerCandidatoStatus() {
         if (tableCandidatos.getSelectedRow() == -1)
@@ -567,6 +805,24 @@ public class MainFrame extends javax.swing.JFrame {
             butVerCandidatos.setEnabled(true);
     }
 
+    private void openCandidatoDialog() {
+        workingCandidate = userBean.getById((Long)tableCandidatos.getValueAt(tableCandidatos.getSelectedRow(), 0));
+
+        labCandNome.setText(workingCandidate.getName());
+        labCandEmail.setText(workingCandidate.getEmail());
+        labCandTelefone.setText(workingCandidate.getPhone());
+        labCandCidade.setText(workingCandidate.getCity() + ", " + workingCandidate.getUf().getCode());
+        labCandEndereco.setText(workingCandidate.getAddress());
+        labCandCEP.setText(workingCandidate.getCep());
+        editCandInfo.setText(workingCandidate.getAdditionalInformation());
+
+        loadTableCandidatoEducation();
+        loadTableCandidatoWorkExperience();
+
+        dialogCandidato.setLocationRelativeTo(null);
+        dialogCandidato.setVisible(true);
+    }
+
     private void openVagaDialog() {
         workingVaga = companyBean.getJobVacancyById((Long)tableVagas.getValueAt(tableVagas.getSelectedRow(), 0));
 
@@ -577,6 +833,46 @@ public class MainFrame extends javax.swing.JFrame {
         dialogVaga.setLocationRelativeTo(null);
         dialogVaga.setVisible(true);
     }
+
+    private void loadTableCandidatoWorkExperience() {
+        DefaultTableModel model = (DefaultTableModel) tableCandWorkExperience.getModel();
+
+        Integer totalToRemover = model.getRowCount();
+        for (int i=0; i<totalToRemover; i++)
+            model.removeRow(0);
+
+        Set<WorkExperience> workExperienceRecords = workingCandidate.getWorkExperienceRecords();
+
+        for (WorkExperience workExperience : workExperienceRecords) {
+            Vector<Object> vector = new Vector<Object>();
+            vector.add(workExperience.getPosition());
+            vector.add(workExperience.getCompany());
+            vector.add(workExperience.getStartYear());
+            vector.add(workExperience.getEndYear());
+            model.addRow(vector);
+        }
+    }
+
+    private void loadTableCandidatoEducation() {
+
+        DefaultTableModel model = (DefaultTableModel) tableCandEducation.getModel();
+
+        Integer totalToRemover = model.getRowCount();
+        for (int i=0; i<totalToRemover; i++)
+            model.removeRow(0);
+
+        Set<Education> educationRecords = workingCandidate.getEducationRecords();
+
+        for (Education education : educationRecords) {
+            Vector<Object> vector = new Vector<Object>();
+            vector.add(education.getCurse());
+            vector.add(education.getUniversity());
+            vector.add(education.getStartYear());
+            vector.add(education.getEndYear());
+            model.addRow(vector);
+        }
+    }
+
 
     private void loadTableCandidatos() {
 
@@ -593,7 +889,6 @@ public class MainFrame extends javax.swing.JFrame {
             vector.add(candidato.getName());
             model.addRow(vector);
         }
-        tableCandidatos.setModel(model);
         checkButVerCandidatoStatus();
     }
 
@@ -615,7 +910,6 @@ public class MainFrame extends javax.swing.JFrame {
             vector.add(candidates);
             model.addRow(vector);
         }
-        tableVagas.setModel(model);
         checkButVerCandidatosStatus();
     }
 
@@ -663,25 +957,42 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
     private GetEJB getEJB;
-    private Company company;
     private CompanyBeanLocal companyBean;
+    private UserLaboriBeanLocal userBean;
+
+    private Company company;
     private JobVacancy workingVaga;
+    private UserLabori workingCandidate;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton butAdicionarVaga;
+    private javax.swing.JButton butCandVoltar;
     private javax.swing.JButton butRefreshTableVagas;
     private javax.swing.JButton butVagaVerCandidato;
     private javax.swing.JButton butVerCandidatos;
+    private javax.swing.JDialog dialogCandidato;
     private javax.swing.JDialog dialogLogin;
     private javax.swing.JDialog dialogVaga;
+    private javax.swing.JEditorPane editCandInfo;
     private javax.swing.JFormattedTextField inputLoginCNPJ;
     private javax.swing.JPasswordField inputLoginPassword;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel labCandCEP;
+    private javax.swing.JLabel labCandCidade;
+    private javax.swing.JLabel labCandEmail;
+    private javax.swing.JLabel labCandEndereco;
+    private javax.swing.JLabel labCandNome;
+    private javax.swing.JLabel labCandTelefone;
     private javax.swing.JLabel labLoginError;
     private javax.swing.JLabel labNomeEmpresa;
     private javax.swing.JLabel labNumCNPJ;
     private javax.swing.JLabel labVagaNomeArea;
     private javax.swing.JLabel labVagaNomeVaga;
     private javax.swing.JScrollPane scrollPaneCandidatos;
+    private javax.swing.JTable tableCandEducation;
+    private javax.swing.JTable tableCandWorkExperience;
     private javax.swing.JTable tableCandidatos;
     private javax.swing.JTable tableVagas;
     // End of variables declaration//GEN-END:variables

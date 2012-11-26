@@ -96,8 +96,6 @@ public class CompanyBean implements CompanyBeanLocal {
     @Override
     public void removeVavancy(JobVacancy vacancy) {
         vacancy = em.merge(vacancy);
-        vacancy.getAppliedUsers().clear();
-        vacancy = em.merge(vacancy);
         em.remove(vacancy);
     }
 
