@@ -115,8 +115,10 @@ public class MainFrame extends javax.swing.JFrame {
         dialogLogin.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         dialogLogin.setTitle("Login");
         dialogLogin.setAlwaysOnTop(true);
+        dialogLogin.setMaximumSize(new java.awt.Dimension(330, 245));
+        dialogLogin.setMinimumSize(new java.awt.Dimension(330, 245));
+        dialogLogin.setPreferredSize(new java.awt.Dimension(330, 245));
         dialogLogin.setResizable(false);
-        dialogLogin.setSize(new java.awt.Dimension(328, 230));
         dialogLogin.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 quitProgram(evt);
@@ -186,7 +188,7 @@ public class MainFrame extends javax.swing.JFrame {
         dialogLogin.getContentPane().setLayout(dialogLoginLayout);
         dialogLoginLayout.setHorizontalGroup(
             dialogLoginLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panLoginHeader2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+            .add(panLoginHeader2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
             .add(dialogLoginLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(dialogLoginLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -204,7 +206,7 @@ public class MainFrame extends javax.swing.JFrame {
             dialogLoginLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(dialogLoginLayout.createSequentialGroup()
                 .add(panLoginHeader2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 57, Short.MAX_VALUE)
                 .add(labLoginError)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(dialogLoginLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
@@ -220,8 +222,9 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         dialogVaga.setTitle("Detalhes da vaga");
+        dialogVaga.setMaximumSize(new java.awt.Dimension(408, 290));
+        dialogVaga.setMinimumSize(new java.awt.Dimension(408, 290));
         dialogVaga.setResizable(false);
-        dialogVaga.setSize(new java.awt.Dimension(400, 276));
 
         tableCandidatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -352,12 +355,13 @@ public class MainFrame extends javax.swing.JFrame {
                 .add(dialogVagaLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(butVagaExcluirVaga)
                     .add(butVagaVoltar))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         dialogCandidato.setTitle("Visualização do candidato");
+        dialogCandidato.setMaximumSize(new java.awt.Dimension(587, 490));
+        dialogCandidato.setMinimumSize(new java.awt.Dimension(587, 490));
         dialogCandidato.setResizable(false);
-        dialogCandidato.setSize(new java.awt.Dimension(579, 477));
 
         labCandEmail.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         labCandEmail.setText("labCandEmail");
@@ -551,12 +555,14 @@ public class MainFrame extends javax.swing.JFrame {
                 .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 101, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(butCandVoltar)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("labori : Empresa");
         setLocationByPlatform(true);
+        setMaximumSize(new java.awt.Dimension(596, 564));
+        setMinimumSize(new java.awt.Dimension(596, 564));
         setName("frameLogin");
         setResizable(false);
 
@@ -592,7 +598,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelVagas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Suas vagas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 14))); // NOI18N
+        panelVagas.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Vagas disponíveis", 0, 0, new java.awt.Font("Lucida Grande", 0, 14))); // NOI18N
 
         tableVagas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -617,7 +623,6 @@ public class MainFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableVagas.setShowGrid(false);
         tableVagas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 clickTableVagas(evt);
@@ -665,12 +670,14 @@ public class MainFrame extends javax.swing.JFrame {
         panelVagasLayout.setVerticalGroup(
             panelVagasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panelVagasLayout.createSequentialGroup()
+                .addContainerGap()
                 .add(scrollPaneVagas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 111, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelVagasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(butVerCandidatos)
                     .add(butRefreshTableVagas)
-                    .add(butAdicionarVaga)))
+                    .add(butAdicionarVaga))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         labEmpresa2.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
@@ -721,7 +728,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .add(labNumCNPJ))
                 .add(20, 20, 20)
                 .add(panelVagas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(252, Short.MAX_VALUE))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
 
         pack();
@@ -733,7 +740,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void login(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login
         //company = companyBean.checkPass(inputLoginCNPJ.getText(), inputLoginPassword.getText());
-        company = companyBean.checkPass("52.422.498/0001-84", "1234");
+        company = companyBean.checkPass("33.468.532/0001-07", "tel666");
         if (company == null) {
             labLoginError.setVisible(true);
         } else {

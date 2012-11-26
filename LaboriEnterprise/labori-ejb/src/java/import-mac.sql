@@ -65,8 +65,12 @@ INSERT INTO UNIVERSITY (ID, NAME, ADDRESS, UF_ID) VALUES (1, 'Universidade de Sã
 INSERT INTO UNIVERSITY (ID, NAME, ADDRESS, UF_ID) VALUES (2, 'Universidade Presbiteriana Mackenzie', 'Rua da Consolação 930', 35);
 INSERT INTO UNIVERSITY (ID, NAME, ADDRESS, UF_ID) VALUES (3, 'Pontifícia Universidade Católica de São Paulo', 'Rua Marquês de São Vicente 225', 35);
 
-INSERT INTO COMPANY (ID, NAME, CNPJ) VALUES (3, 'Carrefour', '123123000112');
+INSERT INTO COMPANY (ID, NAME, CNPJ, PASSWORD) VALUES (3, 'Carrefour', '52.422.498/0001-84', '1234');
 
 INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID, SALARY, DESCRIPTION) VALUES (1, 'Auxiliar de administração', 3, 1, 56034, 'Primeira descrição');
 INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID, SALARY, DESCRIPTION) VALUES (2, 'Subauxiliar de administração', 3, 1, 32020, 'Segunda descrição');
 INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID, SALARY, DESCRIPTION) VALUES (3, 'Gerente do departamento de administração', 3, 1, 12150, 'Terceira descrição');
+
+INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (1, 'Cauê Thenório', 'Av São Paulo 1000', '<b>Linguagens:</b><br><ul><li>Inglês</li><li>Espanhol</li><li>Japonês</li></ul><b>Habilidades:<br></b><ul><li>Programação <i>(Python/Java)</i></li></ul>', '01319-010', 'São Paulo', 'cauelt@gmail.com', '1', '(11) 3212-1232', 1, 35);
+
+INSERT INTO JOBVACANCY_USERLABORI (APPLIEDUSERS_ID, APPLICATIONS_ID) VALUES (1, 1);
