@@ -13,8 +13,8 @@ import org.hibernate.annotations.Cascade;
 public class UserLabori implements Serializable {
 
     @Id
-    @GeneratedValue(generator = "Emp_Gen")
-    @SequenceGenerator(name = "Emp_Gen", allocationSize = 1)
+    @GeneratedValue(generator = "USER_SEQ")
+    @SequenceGenerator(name = "USER_SEQ", allocationSize=1)
     private Long id;
 
     @Column(unique = true, length = 64)

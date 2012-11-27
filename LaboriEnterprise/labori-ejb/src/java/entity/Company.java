@@ -7,8 +7,8 @@ import javax.persistence.*;
 public class Company implements Serializable {
 
     @Id
-    @GeneratedValue(generator = "Emp_Gen")
-    @SequenceGenerator(name = "Emp_Gen", allocationSize = 1)
+    @GeneratedValue(generator = "COMPANY_SEQ")
+    @SequenceGenerator(name = "COMPANY_SEQ", allocationSize=1)
     private Long id;
 
     @Column(length = 64)

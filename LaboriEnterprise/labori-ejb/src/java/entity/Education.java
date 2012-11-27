@@ -7,8 +7,8 @@ import javax.persistence.*;
 public class Education implements Serializable {
 
     @Id
-    @GeneratedValue(generator = "Emp_Gen")
-    @SequenceGenerator(name = "Emp_Gen", allocationSize = 1)
+    @GeneratedValue(generator = "EDUCATION_SEQ")
+    @SequenceGenerator(name = "EDUCATION_SEQ", allocationSize=1)
     private Long id;
 
     private Integer startYear;

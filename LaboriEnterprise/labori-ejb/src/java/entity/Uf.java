@@ -7,8 +7,8 @@ import javax.persistence.*;
 public class Uf implements Serializable {
 
     @Id
-    @GeneratedValue(generator = "Emp_Gen")
-    @SequenceGenerator(name = "Emp_Gen", allocationSize = 1)
+    @GeneratedValue(generator = "UF_SEQ")
+    @SequenceGenerator(name = "UF_SEQ", allocationSize=1)
     private Long id;
 
     @Column(unique = true, length=2)

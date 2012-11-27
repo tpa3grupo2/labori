@@ -27,7 +27,12 @@ public class CompanyBean implements CompanyBeanLocal {
 
     @Override
     public Company edit(Company company) {
-        em.merge(company);
+        return em.merge(company);
+    }
+
+    @Override
+    public Company create(Company company) {
+        em.persist(company);
         return company;
     }
 
@@ -52,6 +57,12 @@ public class CompanyBean implements CompanyBeanLocal {
         }
         return null;
 
+    }
+    
+    @Override
+    public JobVacancy createVacancy(JobVacancy vacancy) {
+        em.persist(vacancy);
+        return vacancy;
     }
 
     @Override

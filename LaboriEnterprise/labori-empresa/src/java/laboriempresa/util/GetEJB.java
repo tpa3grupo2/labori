@@ -1,6 +1,7 @@
 package laboriempresa.util;
 
 import ejb.stateless.CompanyBeanLocal;
+import ejb.stateless.FieldBeanLocal;
 import ejb.stateless.UserLaboriBeanLocal;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -23,6 +24,10 @@ public class GetEJB {
 
     public UserLaboriBeanLocal getUserLabori() throws NamingException {
         return (UserLaboriBeanLocal) ctx.lookup("ejb/userLabori");
+    }
+
+    public FieldBeanLocal getField() throws NamingException {
+        return (FieldBeanLocal) ctx.lookup("ejb/field");
     }
 
 }
