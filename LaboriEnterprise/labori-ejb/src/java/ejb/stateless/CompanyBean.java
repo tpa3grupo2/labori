@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-@Stateless(mappedName="ejb/company")
+@Stateless(mappedName = "ejb/company")
 public class CompanyBean implements CompanyBeanLocal {
 
     @PersistenceContext(unitName = "labori-warPU")
@@ -26,13 +26,17 @@ public class CompanyBean implements CompanyBeanLocal {
     }
 
     @Override
+    public Company edit(Company company) {
+        em.merge(company);
+        return company;
+    }
+
+    @Override
     public Company getByCNPJ(String cnpj) {
         Query query = em.createQuery("SELECT x FROM Company x WHERE x.cnpj = :cnpj");
 
         try {
-            Company c = (Company) query
-                    .setParameter("cnpj", cnpj)
-                    .getSingleResult();
+            Company c = (Company) query.setParameter("cnpj", cnpj).getSingleResult();
             return c;
         } catch (Exception e) {
             return null;
@@ -43,8 +47,9 @@ public class CompanyBean implements CompanyBeanLocal {
     public Company checkPass(String cnpj, String password) {
         Company companyMatched = getByCNPJ(cnpj);
 
-        if (companyMatched != null && companyMatched.getPassword().equals(password))
+        if (companyMatched != null && companyMatched.getPassword().equals(password)) {
             return companyMatched;
+        }
         return null;
 
     }
@@ -54,9 +59,7 @@ public class CompanyBean implements CompanyBeanLocal {
         Query query = em.createQuery("SELECT x FROM JobVacancy x WHERE x.company = :company");
 
         try {
-            return (List<JobVacancy>) query
-                    .setParameter("company", company)
-                    .getResultList();
+            return (List<JobVacancy>) query.setParameter("company", company).getResultList();
         } catch (Exception e) {
             return null;
         }
@@ -67,9 +70,7 @@ public class CompanyBean implements CompanyBeanLocal {
         Query query = em.createQuery("SELECT x FROM UserLabori x INNER JOIN x.applications j WHERE j = :jobvacancy");
 
         try {
-            return (List<UserLabori>) query
-                    .setParameter("jobvacancy", vacancy)
-                    .getResultList();
+            return (List<UserLabori>) query.setParameter("jobvacancy", vacancy).getResultList();
         } catch (Exception e) {
             return null;
         }
@@ -80,9 +81,7 @@ public class CompanyBean implements CompanyBeanLocal {
         Query query = em.createQuery("SELECT COUNT(x) FROM UserLabori x INNER JOIN x.applications j WHERE j = :jobvacancy");
 
         try {
-            return ((Long) query
-                    .setParameter("jobvacancy", vacancy)
-                    .getSingleResult()).longValue();
+            return ((Long) query.setParameter("jobvacancy", vacancy).getSingleResult()).longValue();
         } catch (Exception e) {
             return null;
         }
@@ -94,9 +93,8 @@ public class CompanyBean implements CompanyBeanLocal {
     }
 
     @Override
-    public void removeVavancy(JobVacancy vacancy) {
+    public void removeVacancy(JobVacancy vacancy) {
         vacancy = em.merge(vacancy);
         em.remove(vacancy);
     }
-
 }
