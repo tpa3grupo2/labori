@@ -9,6 +9,7 @@ public interface UserLaboriBeanLocal {
 
     public void create(UserLabori user);
     public List<UserLabori> getAll();
+    public List<UserLabori> getByField(Field field);
     public UserLabori getById(Long id);
     public UserLabori getByEmail(String email);
     public UserLabori edit(UserLabori user);

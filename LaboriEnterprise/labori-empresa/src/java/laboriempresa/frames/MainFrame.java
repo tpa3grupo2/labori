@@ -135,7 +135,7 @@ public class MainFrame extends javax.swing.JFrame {
         javax.swing.JButton butAdVagaCancelar = new javax.swing.JButton();
         comboAdVagaArea = new javax.swing.JComboBox();
         txtAdVagaSalario = new javax.swing.JFormattedTextField();
-        dialogListarProf = new javax.swing.JDialog();
+        dialogProfissionais = new javax.swing.JDialog();
         jScrollPane6 = new javax.swing.JScrollPane();
         tableProfissionais = new javax.swing.JTable();
         javax.swing.JLabel labProfArea = new javax.swing.JLabel();
@@ -273,7 +273,6 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         dialogVaga.setTitle("Detalhes da vaga");
-        dialogVaga.setMaximumSize(new java.awt.Dimension(408, 290));
         dialogVaga.setMinimumSize(new java.awt.Dimension(408, 290));
         dialogVaga.setResizable(false);
 
@@ -410,7 +409,6 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         dialogCandidato.setTitle("Visualização do candidato");
-        dialogCandidato.setMaximumSize(new java.awt.Dimension(587, 490));
         dialogCandidato.setMinimumSize(new java.awt.Dimension(587, 490));
         dialogCandidato.setResizable(false);
 
@@ -610,9 +608,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         dialogAdicionarVaga.setTitle("Adicionar vaga");
-        dialogAdicionarVaga.setMaximumSize(new java.awt.Dimension(406, 313));
         dialogAdicionarVaga.setMinimumSize(new java.awt.Dimension(406, 313));
-        dialogAdicionarVaga.setPreferredSize(new java.awt.Dimension(406, 313));
         dialogAdicionarVaga.setResizable(false);
 
         labAdVagaNomeFixed.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -694,6 +690,10 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(61, Short.MAX_VALUE))
         );
 
+        dialogProfissionais.setMaximumSize(new java.awt.Dimension(400, 258));
+        dialogProfissionais.setMinimumSize(new java.awt.Dimension(400, 258));
+        dialogProfissionais.setPreferredSize(new java.awt.Dimension(400, 248));
+
         tableProfissionais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -706,7 +706,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -720,48 +720,70 @@ public class MainFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tableProfissionais.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableProfissionaisMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(tableProfissionais);
         tableProfissionais.getColumnModel().getColumn(0).setMaxWidth(50);
 
         labProfArea.setText("Selecione a área:");
 
+        comboProfAreas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboProfAreasActionPerformed(evt);
+            }
+        });
+
         butProfVerCurriculo.setText("Ver currículo");
+        butProfVerCurriculo.setEnabled(false);
+        butProfVerCurriculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butProfVerCurriculoActionPerformed(evt);
+            }
+        });
 
         butProfVoltar.setText("Voltar");
+        butProfVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butProfVoltarActionPerformed(evt);
+            }
+        });
 
-        org.jdesktop.layout.GroupLayout dialogListarProfLayout = new org.jdesktop.layout.GroupLayout(dialogListarProf.getContentPane());
-        dialogListarProf.getContentPane().setLayout(dialogListarProfLayout);
-        dialogListarProfLayout.setHorizontalGroup(
-            dialogListarProfLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(dialogListarProfLayout.createSequentialGroup()
+        org.jdesktop.layout.GroupLayout dialogProfissionaisLayout = new org.jdesktop.layout.GroupLayout(dialogProfissionais.getContentPane());
+        dialogProfissionais.getContentPane().setLayout(dialogProfissionaisLayout);
+        dialogProfissionaisLayout.setHorizontalGroup(
+            dialogProfissionaisLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(dialogProfissionaisLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(dialogListarProfLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                .add(dialogProfissionaisLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jScrollPane6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .add(dialogListarProfLayout.createSequentialGroup()
-                        .add(labProfArea, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 89, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(dialogProfissionaisLayout.createSequentialGroup()
+                        .add(labProfArea, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 103, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(comboProfAreas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 203, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(0, 84, Short.MAX_VALUE))
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, dialogListarProfLayout.createSequentialGroup()
+                        .add(0, 0, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, dialogProfissionaisLayout.createSequentialGroup()
                         .add(butProfVerCurriculo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 140, Short.MAX_VALUE)
                         .add(butProfVoltar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        dialogListarProfLayout.setVerticalGroup(
-            dialogListarProfLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(dialogListarProfLayout.createSequentialGroup()
+        dialogProfissionaisLayout.setVerticalGroup(
+            dialogProfissionaisLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(dialogProfissionaisLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(dialogListarProfLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(dialogProfissionaisLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(labProfArea)
                     .add(comboProfAreas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jScrollPane6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(dialogListarProfLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                .add(dialogProfissionaisLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(butProfVoltar)
                     .add(butProfVerCurriculo))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1005,6 +1027,11 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         butVerProf.setText("Listar profissionais");
+        butVerProf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butVerProfActionPerformed(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1013,22 +1040,21 @@ public class MainFrame extends javax.swing.JFrame {
             .add(panHeader, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
             .add(layout.createSequentialGroup()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(layout.createSequentialGroup()
-                            .add(14, 14, 14)
-                            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                .add(labEmpresa2)
-                                .add(labCNPJ))
-                            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                .add(labNomeEmpresa)
-                                .add(layout.createSequentialGroup()
-                                    .add(labNumCNPJ)
-                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .add(butVerProf, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                        .add(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .add(butSair, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 117, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                    .add(layout.createSequentialGroup()
+                        .add(14, 14, 14)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                            .add(labEmpresa2)
+                            .add(labCNPJ))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(labNomeEmpresa)
+                            .add(layout.createSequentialGroup()
+                                .add(labNumCNPJ)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .add(butVerProf, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 148, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                    .add(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(butSair, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 117, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(layout.createSequentialGroup()
                         .addContainerGap()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -1202,6 +1228,41 @@ public class MainFrame extends javax.swing.JFrame {
         checkButsReferenciasStatus();
     }//GEN-LAST:event_butRefReprovarActionPerformed
 
+    private void butProfVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butProfVoltarActionPerformed
+        dialogProfissionais.setVisible(false);
+    }//GEN-LAST:event_butProfVoltarActionPerformed
+
+    private void butVerProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butVerProfActionPerformed
+        comboProfAreas.removeAll();
+        
+        List<Field> fieldList = fieldBean.getAll();
+        for (Field field : fieldList)
+            comboProfAreas.addItem(field);
+        comboProfAreas.setSelectedIndex(0);
+        loadTableProfissionais();
+
+        dialogProfissionais.setLocationRelativeTo(null);
+        dialogProfissionais.setVisible(true);
+    }//GEN-LAST:event_butVerProfActionPerformed
+
+    private void comboProfAreasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboProfAreasActionPerformed
+        loadTableProfissionais();
+    }//GEN-LAST:event_comboProfAreasActionPerformed
+
+    private void tableProfissionaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableProfissionaisMouseClicked
+        checkButsProfissionaisStatus();
+        if ( evt.getClickCount() == 2) {
+            workingCandidate = (UserLabori)tableProfissionais.getValueAt(tableProfissionais.getSelectedRow(), 1);
+            openCandidatoDialog();
+        }
+        
+    }//GEN-LAST:event_tableProfissionaisMouseClicked
+
+    private void butProfVerCurriculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butProfVerCurriculoActionPerformed
+        workingCandidate = (UserLabori)tableProfissionais.getValueAt(tableProfissionais.getSelectedRow(), 1);
+        openCandidatoDialog();
+    }//GEN-LAST:event_butProfVerCurriculoActionPerformed
+
     private void checkButVerCandidatoStatus() {
         if (tableCandidatos.getSelectedRow() == -1)
             butVagaVerCandidato.setEnabled(false);
@@ -1227,6 +1288,13 @@ public class MainFrame extends javax.swing.JFrame {
             butRefReprovar.setEnabled(true);
             butRefDetalhesUsuario.setEnabled(true);
         }
+    }
+    
+    private void checkButsProfissionaisStatus() {
+        if (tableProfissionais.getSelectedRow() == -1)
+            butProfVerCurriculo.setEnabled(false);
+        else
+            butProfVerCurriculo.setEnabled(true);
     }
 
     private void openCandidatoDialog() {
@@ -1296,7 +1364,6 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
 
-
     private void loadTableCandidatos() {
 
         DefaultTableModel model = (DefaultTableModel) tableCandidatos.getModel();
@@ -1358,6 +1425,26 @@ public class MainFrame extends javax.swing.JFrame {
             model.addRow(vector);
         }
         checkButsReferenciasStatus();
+    }
+    
+    public void loadTableProfissionais() {
+        DefaultTableModel model = (DefaultTableModel) tableProfissionais.getModel();
+
+        Integer totalToRemover = model.getRowCount();
+        for (int i=0; i<totalToRemover; i++)
+            model.removeRow(0);
+
+        List<UserLabori> users = userBean.getByField((Field)comboProfAreas.getSelectedItem());
+        for (UserLabori u : users) {
+
+            Vector<Object> vector = new Vector<Object>();
+            vector.add(u.getId());
+            vector.add(u);
+            vector.add(u.getCity());
+            vector.add(u.getPhone());
+            model.addRow(vector);
+        }
+        checkButsProfissionaisStatus();
     }
 
 
@@ -1425,8 +1512,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox comboProfAreas;
     private javax.swing.JDialog dialogAdicionarVaga;
     private javax.swing.JDialog dialogCandidato;
-    private javax.swing.JDialog dialogListarProf;
     private javax.swing.JDialog dialogLogin;
+    private javax.swing.JDialog dialogProfissionais;
     private javax.swing.JDialog dialogVaga;
     private javax.swing.JEditorPane editAdVagaDetalhes;
     private javax.swing.JEditorPane editCandInfo;

@@ -1,9 +1,6 @@
 package ejb.stateless;
 
-import entity.Education;
-import entity.JobVacancy;
-import entity.UserLabori;
-import entity.WorkExperience;
+import entity.*;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -151,6 +148,11 @@ public class UserLaboriBean implements UserLaboriBeanLocal {
         UserLabori user = em.merge(workExperience.getUser());
         user.removeWorkExperience(workExperience);
         em.merge(user);
+    }
+
+    @Override
+    public List<UserLabori> getByField(Field field) {
+        return em.createQuery("select x from UserLabori x WHERE x.field = :field").setParameter("field", field).getResultList();
     }
 }
 
