@@ -13,19 +13,33 @@ Requisitos
 1. NetBeans 7.1.2
 2. GlassFIsh Server 3.1.2 (vem com o NetBeans)
 3. Apache Derby 10.3.1.4 (vem com o NetBeans)
-4. OmniFaces 1.1
+4. Hibernate 3.5 (vem com o NetBeans)
+5. OmniFaces 1.1
 
 Como rodar o projeto
 --------------------
 
 1. Clone o projeto a partir de seu repositório
 2. Abra o repositório local no NetBeans 7.1.2 (não foi testado em outras versões)
-3. Inicie o Derby a partir da aba `Services` no NetBeans
-4. Ainda no `Derby`, crie o banco `labori` e o usuário `admin` com senha `admin`
-5. Execute o arquivo `main.Main.java` (ele criará e preencherá as tabelas necessárias para a execução do projeto)
-6. Baixe o arquivo [http://omnifaces.googlecode.com/files/omnifaces-1.1.jar](http://omnifaces.googlecode.com/files/omnifaces-1.1.jar) e salve-o na pasta `LaboriEnterprise/labori-war/web/WEB-INF/lib` (crie-o se não existir)
-7. Execute o projeto no NetBeans (ele iniciará o GlassFish e fará o Deploy automaticamente)
-8. Acesse a página inicial no [http://localhost:8080/](http://localhost:8080/)
+3. Abra individualmente todos os projetos (`labori-ejb`, `labori-war`, `labori-empresa` e `labori-desktop`) para que o NetBeans atualize os XMLs de compilação de cada projeto
+4. Inicie o Derby a partir da aba `Services` no NetBeans
+5. Ainda no `Derby`, crie o banco `labori` e o usuário `admin` com senha `admin`
+6. Baixe o arquivo [http://omnifaces.googlecode.com/files/omnifaces-1.1.jar](http://omnifaces.googlecode.com/files/omnifaces-1.1.jar) e salve-o na pasta `LaboriEnterprise/labori-war/web/WEB-INF/lib` (crie a pasta se não existir)
+7. Baixe o arquivo DERBYCLIENT
+8. Execute o projeto `LaboriEnterprise` no NetBeans (ele iniciará o GlassFish e fará o Deploy automaticamente)
+8. Acesse a página inicial no [http://localhost:8080/labori-war/](http://localhost:8080/labori-war/)
+
+Organização dos projetos
+------------------------
+
+Os projetos estão organizados da seguinte maneira:
+
+* `LaboriEnterprise`
+* `LaboriEnterprise/labori-ejb`
+* `LaboriEnterprise/labori-war`
+* `LaboriEnterprise/labori-empresa`
+* `labori-desktop`
+
 
 Projetos utilizados
 -------------------
