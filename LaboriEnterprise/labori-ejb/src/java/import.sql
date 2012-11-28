@@ -82,10 +82,21 @@ INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID, SALARY, DESCRIPTION) VAL
 
 INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (100, 'Cauê Thenório', 'Av São Paulo 1000', '<b>Linguagens:</b><br><ul><li>Inglês</li><li>Espanhol</li><li>Japonês</li></ul><b>Habilidades:<br></b><ul><li>Programação <i>(Python/Java)</i></li></ul>', '01319-010', 'São Paulo', 'cauelt@gmail.com', '1', '(11) 3212-1232', 1000, 35);
 INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (200, 'Rony Clay', 'Rua dos Ipês 200 - Ap 127', '<b>Linguagens:</b><br><ul><li>Inglês</li><li>Italiano</li><li>Russo</li></ul><b>Habilidades:<br></b><ul><li>Programação <i>(C#/Java/Hibernate)</i></li><li>Se equilibrar num pé só</li></ul>', '0100-111', 'São Paulo', 'ronyclayaa@gmail.com', 'rony99', '(11) 99872-1232', 1020, 35);
-INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (300, 'Rodrigo Octavio', 'Av Paulista 1030', '', '12345-010', 'São Paulo', 'rodrigogomes@gmail.com', 'jag987', '(11) 3212-1232', 1008, 35);
-INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (400, 'Monica Dutra', 'Rua Celso Garcia 560 ', '', '111111-012', 'Sorocaba', 'ica_selima@hotmail.com', 'mooo112233', '(11) 3212-1232', 1020, 35);
-INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (500, 'Julio Cesar', 'Rua Ferreira 108', '', '01456-000', 'São José dos Campos', 'julio@globo.com', 'r0ma', '(11) 3212-1232', 1013, 35);
-INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (600, 'Victor Araujo', 'Rua Secundino Veiga 530', '', '10000-000', 'São Paulo', 'victor@yahoo.com', 'c4ch4ç4', '(11) 3212-1232', 1000, 35);
+INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (300, 'Rodrigo Octavio', 'Av Paulista 1030', '<b>Experiência em:<br></b><ol><li>Vendas casadas<b></b></li><li>Vendas ilegais</li><li>Venda por ameaças</li></ol>Falo fluentemente <i>inglês</i>, <i>espanhol</i> e <i>italiano.</i><br>', '12345-010', 'São Paulo', 'rodrigogomes@gmail.com', 'jag987', '(11) 3212-1232', 1008, 35);
+INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (400, 'Monica Dutra', 'Rua Celso Garcia 560 ', '<b>Conhecimentos:<br></b><ul><li>Design patterns</li><li>Diagramas UML</li><li>Análise de requisitos</li></ul>', '111111-012', 'Sorocaba', 'ica_selima@hotmail.com', 'mooo112233', '(11) 3212-1232', 1020, 35);
+INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (500, 'Julio Cesar', 'Rua Ferreira 108', '<b>Tenho muita experiência na área!<br><br>Conhecimentos em:<br></b><ol><li>Apuração de Impostos PIS/COFINS/CSLL/IRPJ</li><li>Emissão de Notas Fiscais</li><li>Contabilidade</li><li>Livro Razão</li><li>Faturamento<br></li></ol>', '01456-000', 'São José dos Campos', 'julio@globo.com', 'r0ma', '(11) 3212-1232', 1013, 35);
+INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (600, 'Victor Araujo', 'Rua Secundino Veiga 530', 'Ainda sem experiência na área, procuro um <b>estágio</b>.', '10000-000', 'São Paulo', 'victor@yahoo.com', 'c4ch4ç4', '(11) 3212-1232', 1000, 35);
+
+INSERT INTO WORKEXPERIENCE (ID, COMPANY_ID, USER_ID, CONFIRMED, POSITION, STARTYEAR, ENDYEAR) VALUES (1000, 200, 100, 'OK', 'Programador júnior', 2005, 2007);
+INSERT INTO WORKEXPERIENCE (ID, COMPANY_ID, USER_ID, CONFIRMED, POSITION, STARTYEAR, ENDYEAR) VALUES (1001, 300, 100, 'Pendente', 'Programador sênior', 2007, 2008);
+INSERT INTO WORKEXPERIENCE (ID, COMPANY_ID, USER_ID, CONFIRMED, POSITION, STARTYEAR, ENDYEAR) VALUES (1002, 100, 100, 'OK', 'Técnico em manutenção de hardware', 2004, 2005);
+
+INSERT INTO EDUCATION (ID, USER_ID, UNIVERSITY_ID, CURSE, STARTYEAR, ENDYEAR) VALUES (1000, 100, 2000, 'Administração', 2009, 2013);
+INSERT INTO EDUCATION (ID, USER_ID, UNIVERSITY_ID, CURSE, STARTYEAR, ENDYEAR) VALUES (1001, 200, 2000, 'Sistemas de Informação', 2010, 2014);
+INSERT INTO EDUCATION (ID, USER_ID, UNIVERSITY_ID, CURSE, STARTYEAR, ENDYEAR) VALUES (1002, 300, 2000, 'Administração', 2010, 2014);
+INSERT INTO EDUCATION (ID, USER_ID, UNIVERSITY_ID, CURSE, STARTYEAR, ENDYEAR) VALUES (1003, 400, 2000, 'Sistemas de Informação', 2010, 2014);
+INSERT INTO EDUCATION (ID, USER_ID, UNIVERSITY_ID, CURSE, STARTYEAR, ENDYEAR) VALUES (1004, 500, 1000, 'Ciências contábeis', 2003, 2007);
+INSERT INTO EDUCATION (ID, USER_ID, UNIVERSITY_ID, CURSE, STARTYEAR, ENDYEAR) VALUES (1005, 600, 3000, 'Ciência da computação', 2008, 2012);
 
 INSERT INTO JOBVACANCY_USERLABORI (APPLIEDUSERS_ID, APPLICATIONS_ID) VALUES (100, 100);
 INSERT INTO JOBVACANCY_USERLABORI (APPLIEDUSERS_ID, APPLICATIONS_ID) VALUES (200, 400);
