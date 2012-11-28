@@ -18,13 +18,13 @@
         <link href="#{request.contextPath}/assets/css/general.css" rel="stylesheet" />
         <ui:insert name="extra_css"></ui:insert>
 
-        <!--[if IE 7]>
+        <f:verbatim><!--[if IE 7]>
             <link rel="stylesheet" href="#{request.contextPath}/assets/css/thirdparty/font-awesome/font-awesome-ie7.css" />
         <![endif]-->
         <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+        <![endif]--></f:verbatim>
 
         <!-- Le fav and touch icons -->
 	<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/assets/images/favicon.ico"/>
@@ -84,10 +84,28 @@
     <div class="menu-background">
         <div class="container">
             <div id="main-menu">
+                <ui:fragment rendered="#{!userBean.logged}">
+                    <li><h:link value="Cadastre-se e anuncie seu currículo!" styleClass="first" outcome="/signup" /></li>
+                    <li><h:link outcome="/stats"><i class="icon-bar-chart"></i> Estatísticas</h:link></li>
+                </ui:fragment>
+                <ui:fragment rendered="#{userBean.logged}">
+                    
+                    <li><h:link outcome="/user/vacancies" styleClass="first" rendered="#{not empty userBean.user.field}">
+                        <i class="icon-search"></i> Procurar vagas
+                        </h:link></li>
+                    <li><h:link outcome="/user/applications" rendered="#{not empty userBean.user.field}">
+                        <i class="icon-star"></i> Minhas candidaturas
+                    </h:link></li>
+                    <li><h:link outcome="/user/fill-cv">
+                        <i class="icon-edit"></i> Editar currículo
+                        </h:link></li>
+                    <li><h:link outcome="/stats"><i class="icon-bar-chart"></i> Estatísticas</h:link></li>
+                    <li><h:link outcome="/user/logout">
+                        <i class="icon-signout"></i> Sair
+                        </h:link></li>
+                </ui:fragment>
                 <ul class="unstyled">
-                    <li><a href="" class="first">Anuncie seu currículo</a></li>
-                    <li><a href="">Anuncie vagas</a></li>
-                    <li><a href="">Estatísticas</a></li>
+                    
                 </ul>
             </div>
         </div>
