@@ -34,19 +34,15 @@ Os projetos estão organizados da seguinte maneira:
 
 * `LaboriEnterprise`
   Container dos projetos, deve ser usado para o deploy.
-
 * `LaboriEnterprise/labori-ejb`
   Projeto que contém os modelos e os EJBs utilizados pelos clientes.
  * Para rodar: Faça o deploy do `LaboriEnterprise`.
-
 * `LaboriEnterprise/labori-war`
   Projeto web com a interface para os usuários que estão procurando emprego.
  * Para rodar: Faça o deploy do `LaboriEnterprise` e acesse `http://localhost:8080/labori-war`
-
 * `LaboriEnterprise/labori-empresa`
   Cliente desktop para que a empresa gerencie suas vagas, candidatos e referências profissionais.
  * Para rodar: Execute o projeto `LaboriEnterprise/labori-empresa`
-
 * `labori-desktop`
   Cliente administrativo do sistema, onde são gerenciados elementos como campos de atuação e universidades.
  * Para rodar: Execute o projeto `labori-desktop`
