@@ -24,10 +24,8 @@ Como rodar o projeto
 3. Abra individualmente todos os projetos (`labori-ejb`, `labori-war`, `labori-empresa` e `labori-desktop`) para que o NetBeans atualize os XMLs de compilação de cada projeto
 4. Inicie o Derby a partir da aba `Services` no NetBeans
 5. Ainda no `Derby`, crie o banco `labori` e o usuário `admin` com senha `admin`
-6. Baixe o arquivo [http://omnifaces.googlecode.com/files/omnifaces-1.1.jar](http://omnifaces.googlecode.com/files/omnifaces-1.1.jar) e salve-o na pasta `LaboriEnterprise/labori-war/web/WEB-INF/lib` (crie a pasta se não existir)
-7. Baixe o arquivo DERBYCLIENT
-8. Execute o projeto `LaboriEnterprise` no NetBeans (ele iniciará o GlassFish e fará o Deploy automaticamente)
-8. Acesse a página inicial no [http://localhost:8080/labori-war/](http://localhost:8080/labori-war/)
+6. Execute o projeto `LaboriEnterprise` no NetBeans (ele iniciará o GlassFish e fará o Deploy automaticamente)
+7. Acesse a página inicial no [http://localhost:8080/labori-war/](http://localhost:8080/labori-war/)
 
 Organização dos projetos
 ------------------------
@@ -35,11 +33,47 @@ Organização dos projetos
 Os projetos estão organizados da seguinte maneira:
 
 * `LaboriEnterprise`
-* `LaboriEnterprise/labori-ejb`
-* `LaboriEnterprise/labori-war`
-* `LaboriEnterprise/labori-empresa`
-* `labori-desktop`
+  Container dos projetos, deve ser usado para o deploy.
 
+* `LaboriEnterprise/labori-ejb`
+  Projeto que contém os modelos e os EJBs utilizados pelos clientes.
+ * Para rodar: Faça o deploy do `LaboriEnterprise`.
+
+* `LaboriEnterprise/labori-war`
+  Projeto web com a interface para os usuários que estão procurando emprego.
+ * Para rodar: Faça o deploy do `LaboriEnterprise` e acesse `http://localhost:8080/labori-war`
+
+* `LaboriEnterprise/labori-empresa`
+  Cliente desktop para que a empresa gerencie suas vagas, candidatos e referências profissionais.
+ * Para rodar: Execute o projeto `LaboriEnterprise/labori-empresa`
+
+* `labori-desktop`
+  Cliente administrativo do sistema, onde são gerenciados elementos como campos de atuação e universidades.
+ * Para rodar: Execute o projeto `labori-desktop`
+
+Credenciais de acesso
+---------------------
+
+Quando as tabelas do sistema são criadas, o banco é populado com alguns dados de acesso. Esses dados podem ser usados para efetuar o login nas aplicações.
+
+Para acessar os sistemas, siga as instruções abaixo:
+
+* `LaboriEnterprise/labori-war`
+  * Para acessar o sistema, uma conta pode ser criada diretamente do site ou uma das credencias abaixo pode ser usada:
+     * Usuário `cauelt@gmai.com`, senha `1`
+     * Usuário `ronyclayaa@gmail.com`, senha `rony99`
+     * Usuário `rodrigogomes@gmail.com`, senha `jag987`
+     * Usuário `ica_selima@hotmail.com`, senha `mooo112233`
+     * Usuário `julio@globo.com`, senha `r0ma`
+* `LaboriEnterprise/labori-empresa`
+  * Para acessar esse sistema, uma nova empresa deve ser criada pelo `labori-desktop` e seus dados devem ser utilizados no login, ou então uma das credenciais abaixo pode ser usada:
+     * CNPJ: `52.422.498/0001-84`, senha `car123`
+     * CNPJ: `23.837.043/0001-21`, senha `petr$`
+     * CNPJ: `33.468.532/0001-07`, senha `tel666`
+* `labori-desktop`
+  * Esse sistema não necessita de login, pois ficará instalado diretamente na máquina dos administradores do site.
+
+Os objetos que são inseridos automaticamente no deploy podem ser consultados no arquivo `LaboriEnterprise/labori-ejb/src/java/import.sql`.
 
 Projetos utilizados
 -------------------
