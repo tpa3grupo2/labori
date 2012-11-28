@@ -135,6 +135,13 @@ public class MainFrame extends javax.swing.JFrame {
         javax.swing.JButton butAdVagaCancelar = new javax.swing.JButton();
         comboAdVagaArea = new javax.swing.JComboBox();
         txtAdVagaSalario = new javax.swing.JFormattedTextField();
+        dialogListarProf = new javax.swing.JDialog();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tableProfissionais = new javax.swing.JTable();
+        javax.swing.JLabel labProfArea = new javax.swing.JLabel();
+        comboProfAreas = new javax.swing.JComboBox();
+        butProfVerCurriculo = new javax.swing.JButton();
+        javax.swing.JButton butProfVoltar = new javax.swing.JButton();
         javax.swing.JPanel panHeader = new javax.swing.JPanel();
         javax.swing.JLabel labEmpresa = new javax.swing.JLabel();
         javax.swing.JLabel labLogo = new javax.swing.JLabel();
@@ -156,6 +163,7 @@ public class MainFrame extends javax.swing.JFrame {
         javax.swing.JButton butRefreshTableReferencias = new javax.swing.JButton();
         butRefDetalhesUsuario = new javax.swing.JButton();
         javax.swing.JButton butSair = new javax.swing.JButton();
+        javax.swing.JButton butVerProf = new javax.swing.JButton();
 
         dialogLogin.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         dialogLogin.setTitle("Login");
@@ -686,6 +694,76 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(61, Short.MAX_VALUE))
         );
 
+        tableProfissionais.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nome", "Cidade", "Telefone"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane6.setViewportView(tableProfissionais);
+        tableProfissionais.getColumnModel().getColumn(0).setMaxWidth(50);
+
+        labProfArea.setText("Selecione a área:");
+
+        butProfVerCurriculo.setText("Ver currículo");
+
+        butProfVoltar.setText("Voltar");
+
+        org.jdesktop.layout.GroupLayout dialogListarProfLayout = new org.jdesktop.layout.GroupLayout(dialogListarProf.getContentPane());
+        dialogListarProf.getContentPane().setLayout(dialogListarProfLayout);
+        dialogListarProfLayout.setHorizontalGroup(
+            dialogListarProfLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(dialogListarProfLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(dialogListarProfLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jScrollPane6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .add(dialogListarProfLayout.createSequentialGroup()
+                        .add(labProfArea, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 89, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(comboProfAreas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 203, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(0, 84, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, dialogListarProfLayout.createSequentialGroup()
+                        .add(butProfVerCurriculo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(butProfVoltar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        dialogListarProfLayout.setVerticalGroup(
+            dialogListarProfLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(dialogListarProfLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(dialogListarProfLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(labProfArea)
+                    .add(comboProfAreas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jScrollPane6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(dialogListarProfLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(butProfVoltar)
+                    .add(butProfVerCurriculo))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("labori : Empresa");
         setLocationByPlatform(true);
@@ -726,7 +804,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelVagas.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Vagas disponíveis", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 14))); // NOI18N
+        panelVagas.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Vagas disponíveis", 0, 0, new java.awt.Font("Lucida Grande", 0, 14))); // NOI18N
 
         tableVagas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -824,7 +902,7 @@ public class MainFrame extends javax.swing.JFrame {
         labNumCNPJ.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         labNumCNPJ.setText("labNumCNPJ");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Referências profissionais pendentes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Referências profissionais pendentes", 0, 0, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
         tableReferencias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -926,6 +1004,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        butVerProf.setText("Listar profissionais");
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -933,21 +1013,22 @@ public class MainFrame extends javax.swing.JFrame {
             .add(panHeader, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
             .add(layout.createSequentialGroup()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(layout.createSequentialGroup()
-                                .add(14, 14, 14)
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                    .add(labEmpresa2)
-                                    .add(labCNPJ))
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(labNomeEmpresa)
-                                    .add(labNumCNPJ)))
-                            .add(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(butSair, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 117, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                        .add(0, 0, Short.MAX_VALUE))
+                    .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                        .add(layout.createSequentialGroup()
+                            .add(14, 14, 14)
+                            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                .add(labEmpresa2)
+                                .add(labCNPJ))
+                            .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                            .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                .add(labNomeEmpresa)
+                                .add(layout.createSequentialGroup()
+                                    .add(labNumCNPJ)
+                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(butVerProf, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                        .add(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .add(butSair, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 117, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                     .add(layout.createSequentialGroup()
                         .addContainerGap()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -960,14 +1041,19 @@ public class MainFrame extends javax.swing.JFrame {
             .add(layout.createSequentialGroup()
                 .add(panHeader, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(labEmpresa2)
-                    .add(labNomeEmpresa))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(labCNPJ)
-                    .add(labNumCNPJ))
-                .add(20, 20, 20)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(layout.createSequentialGroup()
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(labEmpresa2)
+                            .add(labNomeEmpresa))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                            .add(labCNPJ)
+                            .add(labNumCNPJ))
+                        .add(20, 20, 20))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(butVerProf)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
                 .add(panelVagas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -1329,14 +1415,17 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton butCandVoltar;
+    private javax.swing.JButton butProfVerCurriculo;
     private javax.swing.JButton butRefAprovar;
     private javax.swing.JButton butRefDetalhesUsuario;
     private javax.swing.JButton butRefReprovar;
     private javax.swing.JButton butVagaVerCandidato;
     private javax.swing.JButton butVerCandidatos;
     private javax.swing.JComboBox comboAdVagaArea;
+    private javax.swing.JComboBox comboProfAreas;
     private javax.swing.JDialog dialogAdicionarVaga;
     private javax.swing.JDialog dialogCandidato;
+    private javax.swing.JDialog dialogListarProf;
     private javax.swing.JDialog dialogLogin;
     private javax.swing.JDialog dialogVaga;
     private javax.swing.JEditorPane editAdVagaDetalhes;
@@ -1348,6 +1437,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JLabel labCandCEP;
     private javax.swing.JLabel labCandCidade;
     private javax.swing.JLabel labCandEmail;
@@ -1363,6 +1453,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTable tableCandEducation;
     private javax.swing.JTable tableCandWorkExperience;
     private javax.swing.JTable tableCandidatos;
+    private javax.swing.JTable tableProfissionais;
     private javax.swing.JTable tableReferencias;
     private javax.swing.JTable tableVagas;
     private javax.swing.JTextField txtAdVagaNome;
