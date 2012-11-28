@@ -26,4 +26,7 @@ public interface UserLaboriBeanLocal {
 
     public List<JobVacancy> getAvailableVacancies(UserLabori user);
     public List<JobVacancy> getAppliedVacancies(UserLabori user);
+    
+    public void approveWorkExperience(WorkExperience workExperience);
+    public void reproveWorkExperience(WorkExperience workExperience);
 }

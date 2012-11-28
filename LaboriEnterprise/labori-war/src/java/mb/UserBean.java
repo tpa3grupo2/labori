@@ -32,6 +32,11 @@ public class UserBean implements Serializable {
         user = null;
         logged = false;
     }
+    
+    public void refresh() {
+        if (user != null)
+            user = userLaboriEJB.getById(user.getId());
+    }
 
     public boolean login(String email, String password) {
 

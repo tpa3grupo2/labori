@@ -1,9 +1,9 @@
 package ejb.stateless;
 
-import entity.Company;
-import entity.JobVacancy;
-import entity.UserLabori;
+import entity.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Remote;
 
 @Remote
@@ -22,4 +22,6 @@ public interface CompanyBeanLocal {
     public Long getVacancyCandidatesCount(JobVacancy vacancy);
 
     public JobVacancy getJobVacancyById(Long id);
+    public List<WorkExperience> getPendingWorkExperiences(Company company);
+    public Map<String, Double> getStatsByField(Field field);
 }

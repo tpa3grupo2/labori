@@ -13,6 +13,9 @@ public class WorkExperience implements Serializable {
 
     private Integer startYear;
     private Integer endYear;
+    
+    @Column(length=32)
+    private String confirmed;
 
     @Column(unique=true, length=64)
     private String position;
@@ -71,6 +74,14 @@ public class WorkExperience implements Serializable {
         return user;
     }
 
+    public String getConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(String confirmed) {
+        this.confirmed = confirmed;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

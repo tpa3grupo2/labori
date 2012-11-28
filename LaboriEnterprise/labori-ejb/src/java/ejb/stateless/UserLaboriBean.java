@@ -1,6 +1,9 @@
 package ejb.stateless;
 
-import entity.*;
+import entity.Education;
+import entity.JobVacancy;
+import entity.UserLabori;
+import entity.WorkExperience;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -58,7 +61,7 @@ public class UserLaboriBean implements UserLaboriBeanLocal {
 
     @Override
     public List<JobVacancy> getAvailableVacancies (UserLabori user) {
-        Query query = em.createQuery("SELECT DISTINCT j FROM JobVacancy j LEFT OUTER JOIN j.appliedUsers u WHERE j.field = :field AND (u IS NULL OR u IS NOT :user)");
+        Query query = em.createQuery("SELECT DISTINCT j FROM JobVacancy j WHERE j.field = :field AND (SELECT COUNT(u) FROM j.appliedUsers u WHERE u IS :user) = 0");
         try {
             return (List<JobVacancy>) query
                     .setParameter("field", user.getField())
@@ -135,6 +138,19 @@ public class UserLaboriBean implements UserLaboriBeanLocal {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @Override
+    public void approveWorkExperience(WorkExperience workExperience) {
+        workExperience.setConfirmed("OK");
+        em.merge(workExperience);
+    }
+
+    @Override
+    public void reproveWorkExperience(WorkExperience workExperience) {
+        UserLabori user = em.merge(workExperience.getUser());
+        user.removeWorkExperience(workExperience);
+        em.merge(user);
     }
 }
 

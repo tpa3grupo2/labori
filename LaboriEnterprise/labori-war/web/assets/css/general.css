@@ -93,3 +93,11 @@ table.table th {
     width:30%;
     text-align:right;
 }
+
+span.big {
+    font-size:1.3em;
+}
+
+td.number, th.number, div.number_aligned {
+    text-align:right;
+}

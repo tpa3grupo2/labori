@@ -1,9 +1,10 @@
 package ejb.stateless;
 
-import entity.Company;
-import entity.JobVacancy;
-import entity.UserLabori;
+import entity.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -108,4 +109,70 @@ public class CompanyBean implements CompanyBeanLocal {
         vacancy = em.merge(vacancy);
         em.remove(vacancy);
     }
+
+    @Override
+    public List<WorkExperience> getPendingWorkExperiences(Company company) {
+        Query query = em.createQuery("SELECT x FROM WorkExperience x WHERE x.company = :company AND confirmed = 'Pendente'");
+
+        try {
+            return query.setParameter("company", company).getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Map<String, Double> getStatsByField(Field field) {
+        
+        Map<String, Double> returnHash = new HashMap<String, Double>();
+        Query query;
+        
+        query = em.createQuery("SELECT COUNT(x) FROM JobVacancy x WHERE x.field = :field");
+        Double vagas = ((Long) query.setParameter("field", field).getSingleResult()).doubleValue();
+        
+        query = em.createQuery("SELECT COUNT(x) FROM JobVacancy x");
+        Double vagas_tot = ((Long) query.getSingleResult()).doubleValue();
+        
+        returnHash.put("vagas", vagas);
+        returnHash.put("tot_vagas", vagas_tot);
+        returnHash.put("perc_vagas", vagas/vagas_tot*100);
+        
+        query = em.createQuery("SELECT COUNT(x) FROM UserLabori x WHERE x.field = :field");
+        Double usuarios = ((Long) query.setParameter("field", field).getSingleResult()).doubleValue();
+        
+        query = em.createQuery("SELECT COUNT(x) FROM UserLabori x");
+        Double usuarios_tot = ((Long) query.getSingleResult()).doubleValue();
+
+        returnHash.put("usuarios", usuarios);
+        returnHash.put("tot_usuarios", usuarios_tot);
+        returnHash.put("perc_usuarios", usuarios/usuarios_tot*100);
+
+        query = em.createQuery("SELECT COUNT(c) FROM JobVacancy x JOIN x.appliedUsers c WHERE x.field = :field");
+        Double candidaturas = ((Long) query.setParameter("field", field).getSingleResult()).doubleValue();
+        
+        query = em.createQuery("SELECT COUNT(c) FROM JobVacancy x JOIN x.appliedUsers c");
+        Double candidaturas_tot = ((Long) query.getSingleResult()).doubleValue();
+        
+        returnHash.put("candidaturas", candidaturas);
+        returnHash.put("tot_candidaturas", candidaturas_tot);
+        returnHash.put("perc_candidaturas", candidaturas/candidaturas_tot*100);
+
+        query = em.createQuery("SELECT DISTINCT c FROM JobVacancy x JOIN x.company c WHERE x.field = :field");
+        Double empresas = ((Integer) query.setParameter("field", field).getResultList().size()).doubleValue();
+        
+        query = em.createQuery("SELECT COUNT(x) FROM Company x");
+        Double empresas_tot = ((Long) query.getSingleResult()).doubleValue();
+        
+        returnHash.put("empresas", empresas);
+        returnHash.put("tot_empresas", empresas_tot);
+        
+        if (vagas != 0)
+            returnHash.put("rel_cand_vagas", usuarios/vagas);
+        else
+            returnHash.put("rel_cand_vagas", 0.0);
+        returnHash.put("perc_empresas", empresas/empresas_tot*100);
+
+        return returnHash;
+    }
+
 }

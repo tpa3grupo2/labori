@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.Cascade;
@@ -77,6 +78,11 @@ public class UserLabori implements Serializable {
             org.hibernate.annotations.CascadeType.PERSIST,
             org.hibernate.annotations.CascadeType.DELETE_ORPHAN})
     private Set<WorkExperience> workExperienceRecords  = new HashSet<WorkExperience>();
+    
+    @Override
+    public String toString() {
+        return getName();
+    }
 
 
     public String getName() {
@@ -185,6 +191,17 @@ public class UserLabori implements Serializable {
 
     public Set<WorkExperience> getWorkExperienceRecords() {
         return workExperienceRecords;
+    }
+    
+    public Set<WorkExperience> getConfirmedWorkExperienceRecords() {
+    
+        Set<WorkExperience> confirmedWorkExperiences = new HashSet<WorkExperience>(getWorkExperienceRecords());
+        for (Iterator<WorkExperience> it = getWorkExperienceRecords().iterator(); it.hasNext();) {
+            WorkExperience we = it.next();
+            if (we.getConfirmed().equals("Pendente"))
+                confirmedWorkExperiences.remove(we);
+        }
+        return confirmedWorkExperiences;
     }
 
     public void addWorkExperience(WorkExperience workExperience) {

@@ -5,9 +5,7 @@ import ejb.stateless.UniversityBeanLocal;
 import ejb.stateless.UserLaboriBeanLocal;
 import entity.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -85,6 +83,7 @@ public class CurriculumBean implements Serializable {
     }
 
     public void addWorkExperience() {
+        workExperience.setConfirmed("Pendente");
         userBean.setUser(userLaboriEJB.addWorkExperience(userBean.getUser(), workExperience));
         workExperience = new WorkExperience();
     }
@@ -115,5 +114,19 @@ public class CurriculumBean implements Serializable {
 
     public void removeApplyToJobVacancy(JobVacancy jobVacancy) {
         userBean.setUser(userLaboriEJB.removeApplyToJobVacancy(userBean.getUser(), jobVacancy));
+    }
+    
+    public String getWorkExperienceRowClasses() {
+        Set<WorkExperience> workExperiences = userBean.getUser().getWorkExperienceRecords();
+        String classes = "";
+        
+        for (Iterator<WorkExperience> it = workExperiences.iterator(); it.hasNext();) {
+            WorkExperience we = it.next();
+            if (we.getConfirmed().equals("Pendente"))
+                classes += "warning,";
+            else
+                classes += "success,";
+        }
+        return classes;
     }
 }

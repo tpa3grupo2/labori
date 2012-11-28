@@ -9,6 +9,7 @@ import ejb.stateless.FieldBeanLocal;
 import ejb.stateless.UserLaboriBeanLocal;
 import entity.*;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
@@ -141,12 +142,20 @@ public class MainFrame extends javax.swing.JFrame {
         javax.swing.JScrollPane scrollPaneVagas = new javax.swing.JScrollPane();
         tableVagas = new javax.swing.JTable();
         butVerCandidatos = new javax.swing.JButton();
-        butRefreshTableVagas = new javax.swing.JButton();
-        butAdicionarVaga = new javax.swing.JButton();
+        javax.swing.JButton butRefreshTableVagas = new javax.swing.JButton();
+        javax.swing.JButton butAdicionarVaga = new javax.swing.JButton();
         javax.swing.JLabel labEmpresa2 = new javax.swing.JLabel();
         javax.swing.JLabel labCNPJ = new javax.swing.JLabel();
         labNomeEmpresa = new javax.swing.JLabel();
         labNumCNPJ = new javax.swing.JLabel();
+        javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tableReferencias = new javax.swing.JTable();
+        butRefAprovar = new javax.swing.JButton();
+        butRefReprovar = new javax.swing.JButton();
+        javax.swing.JButton butRefreshTableReferencias = new javax.swing.JButton();
+        butRefDetalhesUsuario = new javax.swing.JButton();
+        javax.swing.JButton butSair = new javax.swing.JButton();
 
         dialogLogin.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         dialogLogin.setTitle("Login");
@@ -154,10 +163,10 @@ public class MainFrame extends javax.swing.JFrame {
         dialogLogin.setMinimumSize(new java.awt.Dimension(330, 245));
         dialogLogin.setResizable(false);
         dialogLogin.addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
                 quitProgram(evt);
             }
-            public void windowClosed(java.awt.event.WindowEvent evt) {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
                 quitProgram(evt);
             }
         });
@@ -262,20 +271,20 @@ public class MainFrame extends javax.swing.JFrame {
 
         tableCandidatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "ID", "Nome"
+                "ID", "Nome", "Telefone"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -292,7 +301,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         scrollPaneCandidatos.setViewportView(tableCandidatos);
-        tableCandidatos.getColumnModel().getColumn(0).setMaxWidth(30);
+        tableCandidatos.getColumnModel().getColumn(0).setMaxWidth(50);
 
         labVagaVaga.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labVagaVaga.setText("Vaga:");
@@ -705,7 +714,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .add(labLogo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 178, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(labEmpresa, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 406, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         panHeaderLayout.setVerticalGroup(
             panHeaderLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -721,7 +730,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         tableVagas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Nome da vaga", "Área de atuação", "Candidatos"
@@ -748,12 +757,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         scrollPaneVagas.setViewportView(tableVagas);
-        tableVagas.getColumnModel().getColumn(0).setMaxWidth(30);
+        tableVagas.getColumnModel().getColumn(0).setMaxWidth(50);
         tableVagas.getColumnModel().getColumn(1).setPreferredWidth(140);
         tableVagas.getColumnModel().getColumn(2).setPreferredWidth(120);
         tableVagas.getColumnModel().getColumn(3).setMaxWidth(80);
 
-        butVerCandidatos.setText("Ver candidatos");
+        butVerCandidatos.setText("Gerenciar vaga");
         butVerCandidatos.setEnabled(false);
         butVerCandidatos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -782,19 +791,18 @@ public class MainFrame extends javax.swing.JFrame {
             .add(panelVagasLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(panelVagasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, scrollPaneVagas)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, panelVagasLayout.createSequentialGroup()
+                    .add(panelVagasLayout.createSequentialGroup()
                         .add(butRefreshTableVagas)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(butAdicionarVaga)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(butVerCandidatos)))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 262, Short.MAX_VALUE)
+                        .add(butVerCandidatos))
+                    .add(scrollPaneVagas, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelVagasLayout.setVerticalGroup(
             panelVagasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(panelVagasLayout.createSequentialGroup()
-                .addContainerGap()
                 .add(scrollPaneVagas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 111, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(panelVagasLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
@@ -816,26 +824,135 @@ public class MainFrame extends javax.swing.JFrame {
         labNumCNPJ.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         labNumCNPJ.setText("labNumCNPJ");
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Referências profissionais pendentes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+
+        tableReferencias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nome", "Cargo descrito", "Entrada", "Saída"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableReferencias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableReferenciasMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tableReferencias);
+
+        butRefAprovar.setText("Aprovar");
+        butRefAprovar.setEnabled(false);
+        butRefAprovar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butRefAprovarActionPerformed(evt);
+            }
+        });
+
+        butRefReprovar.setText("Reprovar");
+        butRefReprovar.setEnabled(false);
+        butRefReprovar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butRefReprovarActionPerformed(evt);
+            }
+        });
+
+        butRefreshTableReferencias.setText("Atualizar");
+        butRefreshTableReferencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butRefreshTableReferenciasActionPerformed(evt);
+            }
+        });
+
+        butRefDetalhesUsuario.setText("Detalhes do usuário");
+        butRefDetalhesUsuario.setEnabled(false);
+        butRefDetalhesUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butRefDetalhesUsuarioActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(jScrollPane5)
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(butRefreshTableReferencias)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(butRefReprovar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 104, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(butRefAprovar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 104, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(butRefDetalhesUsuario)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel1Layout.createSequentialGroup()
+                .add(6, 6, 6)
+                .add(jScrollPane5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 91, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(butRefAprovar)
+                    .add(butRefReprovar)
+                    .add(butRefreshTableReferencias)
+                    .add(butRefDetalhesUsuario))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        butSair.setText("Sair");
+        butSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butSairActionPerformed(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(panHeader, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+            .add(panHeader, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
             .add(layout.createSequentialGroup()
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(panelVagas, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(layout.createSequentialGroup()
-                        .add(14, 14, 14)
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                            .add(labEmpresa2)
-                            .add(labCNPJ))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(labNomeEmpresa)
-                            .add(labNumCNPJ))
-                        .add(0, 0, Short.MAX_VALUE)))
+                            .add(layout.createSequentialGroup()
+                                .add(14, 14, 14)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                                    .add(labEmpresa2)
+                                    .add(labCNPJ))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(labNomeEmpresa)
+                                    .add(labNumCNPJ)))
+                            .add(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(butSair, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 117, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(0, 0, Short.MAX_VALUE))
+                    .add(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(panelVagas, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -852,7 +969,11 @@ public class MainFrame extends javax.swing.JFrame {
                     .add(labNumCNPJ))
                 .add(20, 20, 20)
                 .add(panelVagas, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(231, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jPanel1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(butSair)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -863,8 +984,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_quitProgram
 
     private void login(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login
-        //company = companyBean.checkPass(inputLoginCNPJ.getText(), inputLoginPassword.getText());
-        company = companyBean.checkPass("33.468.532/0001-07", "tel666");
+        company = companyBean.checkPass(inputLoginCNPJ.getText(), inputLoginPassword.getText());
+        //company = companyBean.checkPass("33.468.532/0001-07", "tel666");
         if (company == null) {
             labLoginError.setVisible(true);
         } else {
@@ -874,6 +995,7 @@ public class MainFrame extends javax.swing.JFrame {
             labNumCNPJ.setText(company.getCnpj());
 
             loadTableVagas();
+            loadTableReferencias();
             this.setVisible(true);
         }
     }//GEN-LAST:event_login
@@ -910,11 +1032,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void clickTableCandidatos(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clickTableCandidatos
         checkButVerCandidatoStatus();
-        if ( evt.getClickCount() == 2)
+        if ( evt.getClickCount() == 2) {
+            workingCandidate = userBean.getById((Long)tableCandidatos.getValueAt(tableCandidatos.getSelectedRow(), 0));
             openCandidatoDialog();
+        }
     }//GEN-LAST:event_clickTableCandidatos
 
     private void butVagaVerCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butVagaVerCandidatoActionPerformed
+        workingCandidate = userBean.getById((Long)tableCandidatos.getValueAt(tableCandidatos.getSelectedRow(), 0));
         openCandidatoDialog();
     }//GEN-LAST:event_butVagaVerCandidatoActionPerformed
 
@@ -937,7 +1062,6 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_butAdicionarVagaActionPerformed
 
     private void butAdVagaCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butAdVagaCancelarActionPerformed
-        JOptionPane.showMessageDialog(null, comboAdVagaArea.getSelectedItem(), null, WIDTH);
         dialogAdicionarVaga.setVisible(false);
     }//GEN-LAST:event_butAdVagaCancelarActionPerformed
 
@@ -959,6 +1083,39 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_butAdVagaSalvarActionPerformed
 
+    private void butSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_butSairActionPerformed
+
+    private void butRefreshTableReferenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butRefreshTableReferenciasActionPerformed
+        loadTableReferencias();
+    }//GEN-LAST:event_butRefreshTableReferenciasActionPerformed
+
+    private void butRefDetalhesUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butRefDetalhesUsuarioActionPerformed
+        workingCandidate = (UserLabori)tableReferencias.getValueAt(tableReferencias.getSelectedRow(), 0);
+        openCandidatoDialog();
+    }//GEN-LAST:event_butRefDetalhesUsuarioActionPerformed
+
+    private void tableReferenciasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableReferenciasMouseClicked
+        checkButsReferenciasStatus();
+        if ( evt.getClickCount() == 2 ) {
+            workingCandidate = (UserLabori)tableReferencias.getValueAt(tableReferencias.getSelectedRow(), 0);
+            openCandidatoDialog();
+        }
+    }//GEN-LAST:event_tableReferenciasMouseClicked
+
+    private void butRefAprovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butRefAprovarActionPerformed
+        userBean.approveWorkExperience(pendingWorkExperiences.get(tableReferencias.getSelectedRow()));
+        loadTableReferencias();
+        checkButsReferenciasStatus();
+    }//GEN-LAST:event_butRefAprovarActionPerformed
+
+    private void butRefReprovarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butRefReprovarActionPerformed
+        userBean.reproveWorkExperience(pendingWorkExperiences.get(tableReferencias.getSelectedRow()));
+        loadTableReferencias();
+        checkButsReferenciasStatus();
+    }//GEN-LAST:event_butRefReprovarActionPerformed
+
     private void checkButVerCandidatoStatus() {
         if (tableCandidatos.getSelectedRow() == -1)
             butVagaVerCandidato.setEnabled(false);
@@ -972,9 +1129,21 @@ public class MainFrame extends javax.swing.JFrame {
         else
             butVerCandidatos.setEnabled(true);
     }
+    
+    private void checkButsReferenciasStatus() {
+        if (tableReferencias.getSelectedRow() == -1) {
+            butRefAprovar.setEnabled(false);
+            butRefReprovar.setEnabled(false);
+            butRefDetalhesUsuario.setEnabled(false);
+            
+        } else {
+            butRefAprovar.setEnabled(true);
+            butRefReprovar.setEnabled(true);
+            butRefDetalhesUsuario.setEnabled(true);
+        }
+    }
 
     private void openCandidatoDialog() {
-        workingCandidate = userBean.getById((Long)tableCandidatos.getValueAt(tableCandidatos.getSelectedRow(), 0));
 
         labCandNome.setText(workingCandidate.getName());
         labCandEmail.setText(workingCandidate.getEmail());
@@ -1009,7 +1178,7 @@ public class MainFrame extends javax.swing.JFrame {
         for (int i=0; i<totalToRemover; i++)
             model.removeRow(0);
 
-        Set<WorkExperience> workExperienceRecords = workingCandidate.getWorkExperienceRecords();
+        Set<WorkExperience> workExperienceRecords = workingCandidate.getConfirmedWorkExperienceRecords();
 
         for (WorkExperience workExperience : workExperienceRecords) {
             Vector<Object> vector = new Vector<Object>();
@@ -1055,6 +1224,7 @@ public class MainFrame extends javax.swing.JFrame {
             Vector<Object> vector = new Vector<Object>();
             vector.add(candidato.getId());
             vector.add(candidato.getName());
+            vector.add(candidato.getPhone());
             model.addRow(vector);
         }
         checkButVerCandidatoStatus();
@@ -1079,6 +1249,29 @@ public class MainFrame extends javax.swing.JFrame {
             model.addRow(vector);
         }
         checkButVerCandidatosStatus();
+    }
+    
+    public void loadTableReferencias() {
+        DefaultTableModel model = (DefaultTableModel) tableReferencias.getModel();
+
+        pendingWorkExperiences.clear();
+        Integer totalToRemover = model.getRowCount();
+        for (int i=0; i<totalToRemover; i++)
+            model.removeRow(0);
+
+        List<WorkExperience> workExperiences = companyBean.getPendingWorkExperiences(company); // = companyBean.getAllVacancies(company);
+        for (WorkExperience we : workExperiences) {
+
+            Vector<Object> vector = new Vector<Object>();
+            vector.add(we.getUser());
+            vector.add(we.getPosition());
+            vector.add(we.getStartYear());
+            vector.add(we.getEndYear());
+            
+            pendingWorkExperiences.add(we);
+            model.addRow(vector);
+        }
+        checkButsReferenciasStatus();
     }
 
 
@@ -1132,11 +1325,13 @@ public class MainFrame extends javax.swing.JFrame {
     private Company company;
     private JobVacancy workingVaga;
     private UserLabori workingCandidate;
+    private List<WorkExperience> pendingWorkExperiences = new ArrayList<WorkExperience>();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton butAdicionarVaga;
     private javax.swing.JButton butCandVoltar;
-    private javax.swing.JButton butRefreshTableVagas;
+    private javax.swing.JButton butRefAprovar;
+    private javax.swing.JButton butRefDetalhesUsuario;
+    private javax.swing.JButton butRefReprovar;
     private javax.swing.JButton butVagaVerCandidato;
     private javax.swing.JButton butVerCandidatos;
     private javax.swing.JComboBox comboAdVagaArea;
@@ -1152,6 +1347,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel labCandCEP;
     private javax.swing.JLabel labCandCidade;
     private javax.swing.JLabel labCandEmail;
@@ -1167,6 +1363,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTable tableCandEducation;
     private javax.swing.JTable tableCandWorkExperience;
     private javax.swing.JTable tableCandidatos;
+    private javax.swing.JTable tableReferencias;
     private javax.swing.JTable tableVagas;
     private javax.swing.JTextField txtAdVagaNome;
     private javax.swing.JFormattedTextField txtAdVagaSalario;

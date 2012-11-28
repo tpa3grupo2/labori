@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="body">
+            <h1>Estatísticas</h1>
+            <div class="row">
+                <div class="span12">
+                    <h:form>
+                        <div class="row">
+                            <div class="span6">
+                                <h:outputLabel for="field" value="Selecione a área de atuação" styleClass="control-label" />
+                                <h:selectOneMenu value="#{utilsBean.field}" required="true" id="field" styleClass="span4" converter="fieldConverter">
+                                    <f:selectItem itemValue="" itemLabel="--" />
+                                    <f:selectItems value="#{signupBean.fields}" var="field" itemValue="#{field}" itemLabel="#{field.name}" />
+                                    <f:ajax event="change" render="stats relcandvaga" listener="#{utilsBean.getStatsByField}" />
+                                </h:selectOneMenu>
+                                <h:message id="fieldMessage" for="field" styleClass="help-block error" />
+
+                            </div>
+                            <h:panelGroup id="relcandvaga">
+                                <h:panelGroup rendered="#{utilsBean.field != null}">
+                                    <div class="span6 number_aligned"><br />
+                                        <p class="lead">Relação candidato/vaga na área:
+                                            <b><h:outputText styleClass="big" value='#{utilsBean.realFormat(utilsBean.stats.get("rel_cand_vagas"))}'/></b></p>
+                                    </div>
+                                </h:panelGroup></h:panelGroup>
+                        </div>                        
+                        <h:panelGroup id="stats">
+                            <h:panelGroup rendered="#{utilsBean.field != null}">
+                                <table class="stats table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Informação</th>
+                                            <th class="number">Nessa área</th>
+                                            <th class="number">Em relação ao total</th>
+                                            <th class="number">No total</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><p class="lead">Vagas disponíveis</p></td>
+                                            <td class="number"><p class="lead">#{utilsBean.simpleFormat(utilsBean.stats.get("vagas"))}</p></td>
+                                            <td class="number"><p class="lead">#{utilsBean.realFormat(utilsBean.stats.get("perc_vagas"))} %</p></td>
+                                            <td class="number"><p class="lead">#{utilsBean.simpleFormat(utilsBean.stats.get("tot_vagas"))}</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td><p class="lead">Candidatos cadastrados</p></td>
+                                            <td class="number"><p class="lead">#{utilsBean.simpleFormat(utilsBean.stats.get("usuarios"))}</p></td>
+                                            <td class="number"><p class="lead">#{utilsBean.realFormat(utilsBean.stats.get("perc_usuarios"))} %</p></td>
+                                            <td class="number"><p class="lead">#{utilsBean.simpleFormat(utilsBean.stats.get("tot_usuarios"))}</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td><p class="lead">Candidaturas efetuadas em vagas</p></td>
+                                            <td class="number"><p class="lead">#{utilsBean.simpleFormat(utilsBean.stats.get("candidaturas"))}</p></td>
+                                            <td class="number"><p class="lead">#{utilsBean.realFormat(utilsBean.stats.get("perc_candidaturas"))} %</p></td>
+                                            <td class="number"><p class="lead">#{utilsBean.simpleFormat(utilsBean.stats.get("tot_candidaturas"))}</p></td>
+                                        </tr>
+                                        <tr>
+                                            <td><p class="lead">Empresas cadastradas com vagas</p></td>
+                                            <td class="number"><p class="lead">#{utilsBean.simpleFormat(utilsBean.stats.get("empresas"))}</p></td>
+                                            <td class="number"><p class="lead">#{utilsBean.realFormat(utilsBean.stats.get("perc_empresas"))} %</p></td>
+                                            <td class="number"><p class="lead">#{utilsBean.simpleFormat(utilsBean.stats.get("tot_empresas"))}</p></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </h:form>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>
+

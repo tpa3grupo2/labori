@@ -72,8 +72,28 @@ INSERT INTO COMPANY (ID, NAME, CNPJ, PASSWORD) VALUES (300, 'TelefÙnica', '33.46
 INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID, SALARY, DESCRIPTION) VALUES (100, 'Auxiliar de administraÁ„o', 100, 1000, 56034, 'Primeira descriÁ„o');
 INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID, SALARY, DESCRIPTION) VALUES (200, 'Subauxiliar de administraÁ„o', 100, 1000, 32020, 'Segunda descriÁ„o');
 INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID, SALARY, DESCRIPTION) VALUES (300, 'Gerente do departamento de administraÁ„o', 100, 1000, 12150, 'Terceira descriÁ„o');
+INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID, SALARY, DESCRIPTION) VALUES (400, 'TÈcnico em Informatica', 300, 1020, 2500, 'Conhecimentos em manutenÁ„o de microcomputadores');
+INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID, SALARY, DESCRIPTION) VALUES (450, 'Programador sÍnior JAVA', 200, 1020, 5010.20, 'Trabalho em regime CLT\nCom vale-transporte, vale-alimentaÁ„o e auxÌlio-mÈdico\nDe segunda a s·bado\nS„o exigidos conhecimentos em Java EE, EJB 3.0, Hibernate, JSF, Assembly, Javascript, manutenÁ„o de computadores, Excel, Word e portas lÛgicas.');
+INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID, SALARY, DESCRIPTION) VALUES (500, 'Analista Financeiro', 300, 1013, 4250, 'Respons·vel pelas an·lises de aprovaÁıes orÁament·rias');
+INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID, SALARY, DESCRIPTION) VALUES (600, 'Advogado', 300, 1021, 4320, 'Respons·vel pela ·rea jurÌdica');
+INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID, SALARY, DESCRIPTION) VALUES (700, 'TÈcnico de logÌstica de transporte j˙nior ', 200, 1008, 2100, 'Conhecimentos em manutenÁ„o de microcomputadores');
+INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID, SALARY, DESCRIPTION) VALUES (800, 'GeofÌsico j˙nior ñ geologia', 200, 1024, 3980, 'Estudos de regiıes para exploraÁıes de petrÛleo');
+INSERT INTO JOBVACANCY (ID, NAME, COMPANY_ID, FIELD_ID, SALARY, DESCRIPTION) VALUES (900, 'TÈcnico de contabilidade j˙nior', 200, 1013, 2700, 'Auxiliar na contabilidade');
 
 INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (100, 'CauÍ ThenÛrio', 'Av S„o Paulo 1000', '<b>Linguagens:</b><br><ul><li>InglÍs</li><li>Espanhol</li><li>JaponÍs</li></ul><b>Habilidades:<br></b><ul><li>ProgramaÁ„o <i>(Python/Java)</i></li></ul>', '01319-010', 'S„o Paulo', 'cauelt@gmail.com', '1', '(11) 3212-1232', 1000, 35);
-INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (200, 'Rony Clay', 'Rua dos IpÍs 200 - Ap 127', '<b>Linguagens:</b><br><ul><li>InglÍsê</li><li>Italiano</li><li>Russo</li></ul><b>Habilidades:<br></b><ul><li>ProgramaÁ„o <i>(C#/Java/Hibernate)</i></li><li>Se equilibrar num pÈ sÛ</li></ul>', '0100-111', 'S„o Paulo', 'ronyclayaa@gmail.com', 'rony99', '(11) 99872-1232', 1020, 35);
+INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (200, 'Rony Clay', 'Rua dos IpÍs 200 - Ap 127', '<b>Linguagens:</b><br><ul><li>InglÍs</li><li>Italiano</li><li>Russo</li></ul><b>Habilidades:<br></b><ul><li>ProgramaÁ„o <i>(C#/Java/Hibernate)</i></li><li>Se equilibrar num pÈ sÛ</li></ul>', '0100-111', 'S„o Paulo', 'ronyclayaa@gmail.com', 'rony99', '(11) 99872-1232', 1020, 35);
+INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (300, 'Rodrigo Octavio', 'Av Paulista 1030', '', '12345-010', 'S„o Paulo', 'rodrigogomes@gmail.com', 'jag987', '(11) 3212-1232', 1008, 35);
+INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (400, 'Monica Dutra', 'Rua Celso Garcia 560 ', '', '111111-012', 'Sorocaba', 'ica_selima@hotmail.com', 'mooo112233', '(11) 3212-1232', 1020, 35);
+INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (500, 'Julio Cesar', 'Rua Ferreira 108', '', '01456-000', 'S„o JosÈ dos Campos', 'julio@globo.com', 'r0ma', '(11) 3212-1232', 1013, 35);
+INSERT INTO USERLABORI (ID, NAME, ADDRESS, ADDITIONALINFORMATION, CEP, CITY, EMAIL, PASSWORD, PHONE, FIELD_ID, UF_ID) VALUES (600, 'Victor Araujo', 'Rua Secundino Veiga 530', '', '10000-000', 'S„o Paulo', 'victor@yahoo.com', 'c4ch4Á4', '(11) 3212-1232', 1000, 35);
 
 INSERT INTO JOBVACANCY_USERLABORI (APPLIEDUSERS_ID, APPLICATIONS_ID) VALUES (100, 100);
+INSERT INTO JOBVACANCY_USERLABORI (APPLIEDUSERS_ID, APPLICATIONS_ID) VALUES (200, 400);
+INSERT INTO JOBVACANCY_USERLABORI (APPLIEDUSERS_ID, APPLICATIONS_ID) VALUES (200, 450);
+INSERT INTO JOBVACANCY_USERLABORI (APPLIEDUSERS_ID, APPLICATIONS_ID) VALUES (300, 700);
+INSERT INTO JOBVACANCY_USERLABORI (APPLIEDUSERS_ID, APPLICATIONS_ID) VALUES (400, 450);
+INSERT INTO JOBVACANCY_USERLABORI (APPLIEDUSERS_ID, APPLICATIONS_ID) VALUES (500, 500);
+INSERT INTO JOBVACANCY_USERLABORI (APPLIEDUSERS_ID, APPLICATIONS_ID) VALUES (500, 900);
+INSERT INTO JOBVACANCY_USERLABORI (APPLIEDUSERS_ID, APPLICATIONS_ID) VALUES (600, 100);
+INSERT INTO JOBVACANCY_USERLABORI (APPLIEDUSERS_ID, APPLICATIONS_ID) VALUES (600, 200);
+INSERT INTO JOBVACANCY_USERLABORI (APPLIEDUSERS_ID, APPLICATIONS_ID) VALUES (600, 300);

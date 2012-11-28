@@ -24,7 +24,7 @@ public class LoginFilter implements Filter {
         if (userBean != null && userBean.isLogged())
             chain.doFilter(request, response);
         else {
-            messageBean.addMessage("Você precisa estar logado para acessar a página requisitada!", "error");
+            //messageBean.addMessage("Você precisa estar logado para acessar a página requisitada!", "error");
             res.sendRedirect(req.getContextPath() + "/index.xhtml");
         }
     }
